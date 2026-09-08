@@ -1,0 +1,27 @@
+src/app/
+├── login/
+│   └── page.tsx
+│
+├── animes/
+│   ├── page.tsx              ← アニメ一覧
+│   └── [id]/
+│       └── page.tsx          ← アニメ詳細・エピソード
+│
+├── mypage/
+│   ├── page.tsx              ← マイページ
+│   │
+│   ├── requests/
+│   │   └── page.tsx          ← user：リクエスト登録
+│   │
+│   └── admin/
+│       └── requests/
+│           └── page.tsx      ← admin：リクエスト一覧
+│
+└── admin/
+    ├── animes/
+    │   └── new/
+    │       └── page.tsx      ← アニメ登録
+    │
+    └── episodes/
+        └── new/
+            └── page.tsx      ← エピソード登録

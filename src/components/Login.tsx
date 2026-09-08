@@ -1,17 +1,19 @@
 'use client'
 
 import { useState } from 'react'
+import { useRouter } from 'next/navigation'
 import { login } from '@/app/login/actions'
 
 export default function Login() {
   const [name, setName] = useState('')
   const [message, setMessage] = useState('')
+  const router = useRouter()
 
   const handleLogin = async () => {
     const result = await login(name)
 
     if (result.success) {
-      setMessage(`${result.name}さん、ログイン成功！`)
+      router.push(`/animes?role=${result.role}`)
     } else {
       setMessage('ユーザーが見つかりません')
     }

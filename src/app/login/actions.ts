@@ -19,5 +19,6 @@ export async function login(name: string) {
     success: true,
     name: user.name,
     userId: user.id,
+    role: user.role,
   }
 }
