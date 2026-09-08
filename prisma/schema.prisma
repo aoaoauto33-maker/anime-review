@@ -15,58 +15,83 @@ datasource db {
 
 
 model User{
-  id            
-  name
-  age
-  gender
-  role
-  created_at
-  updated_at
+  id            Int         @id @default(autoincrement())
+  name          String
+  age           Int?        
+  gender        String?     
+  role          String      @default("user")
+  created_at    DateTime    @default(now())
+  updated_at    DateTime    @updatedAt
+
+  reviews       Review[]
+  requests      Request[]
 }
 
 model Genre{
-  id
-  name
+  id            Int         @id @default(autoincrement())
+  name          String      @unique
+
+  taggings      Tagging[]
 }
 
 model Anime{
-  id
-  name
-  image_url
-  description
-  release_year
+  id            String      @id
+  name          String      @unique
+  image_url     String      @default("default_anime.png")
+  description   String?      
+  release_year  Int
+
+  taggings      Tagging[]
+  episodes      Episode[]
 }
 
 model Tagging{
-  genreId
-  animeId
+  genreId       Int        
+  animeId       String    
+
+  genre         Genre      @relation(fields:[genreId], references:[id])
+  anime         Anime      @relation(fields:[animeId], references:[id])
+
+  @@id([genreId, animeId])
 }
 
 model Episode{
-  id
-  animeId
-  episode_number
-  title
-  description
-  release_date
+  id             Int       @id @default(autoincrement())
+  animeId        String
+  episode_number Int       
+  title          String
+  description    String
+  release_date   DateTime
+
+  anime          Anime     @relation(fields:[animeId], references:[id])
+  reviews        Review[]
+
+  @@unique([animeId, episode_number])
 }
 
 model Review{
-  id
-  userId
-  episodeId
-  rating
-  comment
-  created_at
-  updated_at
+  id             Int       @id @default(autoincrement())      
+  userId         Int        
+  episodeId      Int
+  rating         Int
+  comment        String?
+  created_at     DateTime  @default(now())
+  updated_at     DateTime  @updatedAt
+
+  user           User      @relation(fields:[userId], references:[id])
+  episode        Episode   @relation(fields:[episodeId], references:[id])
+
+  @@unique([userId, episodeId])
 }
 
 model Request{
-  id
-  userId
-  new_anime_name
-  reason
-  status
-  created_at
-  processed_at
+  id              Int      @id @default(autoincrement())
+  userId          Int
+  new_anime_name  String
+  reason          String
+  status          String   @default("pending")
+  created_at      DateTime @default(now())
+  processed_at    DateTime?
+
+  user           User      @relation(fields:[userId], references:[id])
 }
