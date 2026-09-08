@@ -35,7 +35,7 @@ model Genre{
 }
 
 model Anime{
-  id            String      @id
+  id            Int         @id @default(autoincrement())
   name          String      @unique
   image_url     String      @default("default_anime.png")
   description   String?      
@@ -47,7 +47,7 @@ model Anime{
 
 model Tagging{
   genreId       Int        
-  animeId       String    
+  animeId       Int    
 
   genre         Genre      @relation(fields:[genreId], references:[id])
   anime         Anime      @relation(fields:[animeId], references:[id])
@@ -57,7 +57,7 @@ model Tagging{
 
 model Episode{
   id             Int       @id @default(autoincrement())
-  animeId        String
+  animeId        Int
   episode_number Int       
   title          String
   description    String
