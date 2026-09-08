@@ -1,0 +1,72 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+// Get a free hosted Postgres database in seconds: `npx create-db`
+
+generator client {
+  provider = "prisma-client"
+  output   = "../src/generated/prisma"
+}
+
+datasource db {
+  provider = "postgresql"
+}
+
+
+
+model User{
+  id            
+  name
+  age
+  gender
+  role
+  created_at
+  updated_at
+}
+
+model Genre{
+  id
+  name
+}
+
+model Anime{
+  id
+  name
+  image_url
+  description
+  release_year
+}
+
+model Tagging{
+  genreId
+  animeId
+}
+
+model Episode{
+  id
+  animeId
+  episode_number
+  title
+  description
+  release_date
+}
+
+model Review{
+  id
+  userId
+  episodeId
+  rating
+  comment
+  created_at
+  updated_at
+}
+
+model Request{
+  id
+  userId
+  new_anime_name
+  reason
+  status
+  created_at
+  processed_at
+}

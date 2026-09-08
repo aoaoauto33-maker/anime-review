@@ -1,0 +1,25 @@
+services:
+  app:
+    build: .
+    container_name: anime-review
+    volumes:
+      - .:/app
+      - node_modules:/app/node_modules
+    working_dir: /app
+    ports:
+      - "3000:3000"
+    command: sleep infinity
+
+  db:
+    image: postgres:16
+    container_name: anime-review-db
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+      POSTGRES_DB: anime_review
+    volumes:
+      - db-data:/var/lib/postgresql/data
+
+volumes:
+  node_modules:
+  db-data:
