@@ -1,6 +1,7 @@
 'use client'
 
 import { useState } from 'react'
+import { useRouter } from 'next/navigation'
 import Link from 'next/link'
 import { createReview } from '@/app/animes/[id]/episodes/[episodeId]/reviews/actions'
 // reviews/actions.tsで登録したレビュー投稿をimport
@@ -16,6 +17,7 @@ export default function ReviewForm({ id, userId, role, episodeId }: Props) {
   const [rating, setRating] = useState(5)
   const [comment, setComment] = useState('')
   const [message, setMessage] = useState('')
+  const router = useRouter()
 
   const handleSubmit = async () => {
     const result = await createReview(userId, episodeId, rating, comment)
@@ -23,9 +25,9 @@ export default function ReviewForm({ id, userId, role, episodeId }: Props) {
     // サーバー側の操作なのでawaitで待ってあげる
 
     if (result.success) {
-      setMessage('レビューを投稿しました')
-      setComment('')
-      // 投稿し終わったら入力欄を空にする
+      router.push(
+        `/animes/${id}/episodes/${episodeId}?role=${role}&userId=${userId}`
+      )
     } else {
       setMessage(result.message)
     }

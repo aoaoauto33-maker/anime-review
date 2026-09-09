@@ -3,8 +3,12 @@
 import { useState } from 'react'
 import { useRouter } from 'next/navigation'
 import { updateReview } from '@/app/animes/[id]/episodes/[episodeId]/reviews/actions'
+import Link from 'next/link'
 
 type Props = {
+  id: number
+  episodeId: number
+  role?: string
   reviewId: number
   userId: number
   rating: number
@@ -12,6 +16,9 @@ type Props = {
 }
 
 export default function ReviewEditForm({
+  id,
+  episodeId,
+  role,
   reviewId,
   userId,
   rating: initialRating,
@@ -30,10 +37,13 @@ export default function ReviewEditForm({
       comment,
     )
 
-    setMessage(result.message)
-
     if (result.success) {
-      router.back()
+      router.push(
+        `/animes/${id}/episodes/${episodeId}?role=${role}&userId=${userId}`
+      )
+      // 更新成功したらエピソード詳細画面に戻る
+    } else {
+      setMessage(result.message)
     }
   }
 
@@ -52,15 +62,29 @@ export default function ReviewEditForm({
         <option value={5}>★★★★★</option>
       </select>
 
+      <br />
+
       <textarea
         value={comment}
         onChange={(e) => setComment(e.target.value)}
         placeholder="レビューを入力してください"
       />
 
-      <button onClick={handleSubmit}>更新する</button>
+      <br />
+
+      <button onClick={handleSubmit}>
+        更新する
+      </button>
 
       <p>{message}</p>
+
+      <br />
+
+      <Link
+        href={`/animes/${id}/episodes/${episodeId}?role=${role}&userId=${userId}`}
+      >
+        キャンセル
+      </Link>
     </div>
   )
 }
