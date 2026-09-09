@@ -8,12 +8,14 @@ export default function Login() {
   const [name, setName] = useState('')
   const [message, setMessage] = useState('')
   const router = useRouter()
+  // useRouter...Nextのページ遷移機能
 
   const handleLogin = async () => {
     const result = await login(name)
 
     if (result.success) {
       router.push(`/animes?role=${result.role}`)
+      // アニメ一覧に移動
     } else {
       setMessage('ユーザーが見つかりません')
     }

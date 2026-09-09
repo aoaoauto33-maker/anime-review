@@ -10,12 +10,11 @@ src/app/
 ├── mypage/
 │   ├── page.tsx              ← マイページ
 │   │
-│   ├── requests/
-│   │   └── page.tsx          ← user：リクエスト登録
+│   ├── request-apply/
+│   │   └── page.tsx        ← user：リクエスト申請
 │   │
-│   └── admin/
-│       └── requests/
-│           └── page.tsx      ← admin：リクエスト一覧
+│   └── request-approval/
+│       └── page.tsx        ← admin：リクエスト許可
 │
 └── admin/
     ├── animes/
