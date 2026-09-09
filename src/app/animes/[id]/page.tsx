@@ -32,9 +32,32 @@ export default async function AnimeDetailPage({
     return <p>アニメが見つかりません</p>
   }
 
+
+  // [id]に該当するアニメのレビュー投稿を全て取得
+  const reviews = await prisma.review.findMany({
+    where: {
+      episode: {
+        animeId: Number(id),
+      },
+    },
+  })
+
+  // なんか計算してる だるいからあとで調べて
+  const averageRating =
+    reviews.length > 0
+      ? reviews.reduce((sum, review) => sum + review.rating, 0) /
+        reviews.length
+      : 0
+
+  const totalRating = Math.round((averageRating / 5) * 100)
+
+
   return (
     <main>
       <h1>{anime.name}</h1>
+
+      <h2>総合評価</h2>
+      <p>{totalRating}点 / 100点</p>
 
       <p>{anime.description}</p>
       <p>{anime.release_year}年</p>
@@ -51,9 +74,11 @@ export default async function AnimeDetailPage({
       <h2>エピソード</h2>
       {anime.episodes.map((episode) => (
         <div key={episode.id}>
-          <p>{episode.episode_number}話</p>
-          <p>{episode.title}</p>
-          <p>{episode.description}</p>
+          <Link
+            href={`/animes/${anime.id}/episodes/${episode.id}?role=${role}`}
+          >
+            {episode.episode_number}話：{episode.title}
+          </Link>
         </div>
       ))}
 

@@ -27,8 +27,6 @@ export default function AnimeList({ animes, role }: Props) {
             {/* animes/[id]/page.tsxにidとroleを渡す */}
           </h2>
 
-          <p>{anime.description}</p>
-          <p>{anime.release_year}年</p>
         </div>
       ))}
     </div>
