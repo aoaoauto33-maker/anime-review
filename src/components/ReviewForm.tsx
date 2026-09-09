@@ -1,19 +1,21 @@
 'use client'
 
 import { useState } from 'react'
+import Link from 'next/link'
 import { createReview } from '@/app/animes/[id]/episodes/[episodeId]/reviews/actions'
 // reviews/actions.tsで登録したレビュー投稿をimport
 
 type Props = {
+  id: number
   userId: number
+  role?: string
   episodeId: number
 }
 
-export default function ReviewForm({ userId, episodeId }: Props) {
+export default function ReviewForm({ id, userId, role, episodeId }: Props) {
   const [rating, setRating] = useState(5)
   const [comment, setComment] = useState('')
   const [message, setMessage] = useState('')
-
 
   const handleSubmit = async () => {
     const result = await createReview(userId, episodeId, rating, comment)
@@ -27,7 +29,6 @@ export default function ReviewForm({ userId, episodeId }: Props) {
     } else {
       setMessage(result.message)
     }
-
   }
 
   return (
@@ -56,6 +57,12 @@ export default function ReviewForm({ userId, episodeId }: Props) {
       </button>
 
       <p>{message}</p>
+
+      <Link
+        href={`/animes/${id}/episodes/${episodeId}?role=${role}&userId=${userId}`}
+      >
+        キャンセル
+      </Link>
     </div>
   )
 }

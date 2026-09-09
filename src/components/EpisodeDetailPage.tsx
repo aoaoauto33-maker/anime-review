@@ -1,0 +1,93 @@
+import Link from 'next/link'
+
+type Props = {
+  id: string
+  episodeId: string
+  role?: string
+  userId?: string
+  episode: {
+    id: number
+    episode_number: number
+    title: string
+    description: string
+    release_date: Date
+    anime: {
+      name: string
+    }
+  }
+  reviews: {
+    id: number
+    userId: number
+    rating: number
+    comment: string | null
+    user: {
+      name: string
+    }
+  }[]
+}
+
+export default function EpisodeDetail({
+  id,
+  episodeId,
+  role,
+  userId,
+  episode,
+  reviews,
+}: Props) {
+  return (
+    <main>
+      <h1>{episode.anime.name}</h1>
+
+      <h2>
+        {episode.episode_number}話：{episode.title}
+      </h2>
+
+      <p>{episode.description}</p>
+
+      <p>
+        公開日：{episode.release_date.toLocaleDateString('ja-JP')}
+      </p>
+
+      <h2>レビュー</h2>
+
+      {reviews.length === 0 ? (
+        <p>まだレビューがありません</p>
+      ) : (
+        reviews.map((review) => (
+          <div key={review.id}>
+            <p>{review.user.name}</p>
+
+            <p>
+              評価：{'★'.repeat(review.rating)}
+              {'☆'.repeat(5 - review.rating)}
+            </p>
+
+            <p>{review.comment}</p>
+
+            {review.userId === Number(userId) && (
+              <Link
+                href={`/animes/${id}/episodes/${episodeId}/reviews/${review.id}/edit?role=${role}&userId=${userId}`}
+              >
+                編集
+              </Link>
+            )}
+          </div>
+        ))
+      )}
+
+      <br />
+
+     <Link
+        href={`/animes/${id}/episodes/${episodeId}/reviews/new?role=${role}&userId=${userId}`}
+     >
+        レビューを書く
+     </Link>
+
+      <br />
+
+      <Link href={`/animes/${id}?role=${role}&userId=${userId}`}>
+        アニメ詳細に戻る
+      </Link>
+    </main>
+  )
+}

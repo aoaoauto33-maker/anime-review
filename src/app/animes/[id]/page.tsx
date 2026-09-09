@@ -82,7 +82,7 @@ export default async function AnimeDetailPage({
         </div>
       ))}
 
-      <Link href={`/animes?role=${role}`}>
+      <Link href={`/animes?role=${role}&userId=${userId}`}>
         アニメ一覧に戻る
       </Link>
     </main>
