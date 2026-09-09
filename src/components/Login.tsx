@@ -14,7 +14,7 @@ export default function Login() {
     const result = await login(name)
 
     if (result.success) {
-      router.push(`/animes?role=${result.role}`)
+      router.push(`/animes?role=${result.role}&userId=${result.userId}`)
       // アニメ一覧に移動
     } else {
       setMessage('ユーザーが見つかりません')

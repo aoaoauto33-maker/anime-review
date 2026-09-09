@@ -11,16 +11,17 @@ type Anime = {
 type Props = {
   animes: Anime[]
   role?: string
+  userId?: string
 }
 
-export default function AnimeList({ animes, role }: Props) {
+export default function AnimeList({ animes, role, userId }: Props) {
   return (
     <div>
       {animes.map((anime) => (
         // もらってきたアニメ情報を1件ずつ表示
         <div key={anime.id}>
           <h2>
-            <Link href={`/animes/${anime.id}?role=${role}`}>
+            <Link href={`/animes/${anime.id}?role=${role}&userId=${userId}`}>
               {anime.name}
             </Link>
             {/* アニメ名をLinkにして、そこから詳細ページに飛べるようにする */}

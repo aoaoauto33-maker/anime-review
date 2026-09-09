@@ -3,11 +3,14 @@ import AnimeList from '@/components/AnimeList'
 import Link from 'next/link'
 
 type Props = {
-  searchParams: Promise<{ role?: string }>
+  searchParams: Promise<{
+    role?: string
+    userId?: string
+  }>
 }
 
 export default async function AnimePage({ searchParams }: Props) {
-  const { role } = await searchParams
+  const { role, userId } = await searchParams
 
   const animes = await prisma.anime.findMany({
     orderBy: {
@@ -23,11 +26,15 @@ export default async function AnimePage({ searchParams }: Props) {
       {role === 'admin' && <p>管理者としてログインしています</p>}
       {role === 'user' && <p>ユーザーとしてログインしています</p>}
 
-      <Link href={`/mypage?role=${role}`}>
+      <Link href={`/mypage?role=${role}&userId=${userId}`}>
         マイページ
       </Link>
 
-      <AnimeList animes={animes} role={role} />
+      <AnimeList
+        animes={animes}
+        role={role}
+        userId={userId}
+      />      
       {/* AnimeListにDBからもらってきたanimesとLoginからもらってきたroleを渡す */}
     </main>
 

@@ -23,13 +23,12 @@ export default async function ReviewNewPage({
   }
 
   return (
-    <main>
-      <h1>レビューを書く</h1>
+    <div>
 
       <ReviewForm
         userId={Number(userId)}
         episodeId={Number(episodeId)}
       />
-    </main>
+    </div>
   )
 }

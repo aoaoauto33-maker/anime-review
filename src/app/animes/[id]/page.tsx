@@ -3,7 +3,7 @@ import { prisma } from '@/lib/prisma'
 
 type Props = {
   params: Promise<{ id: string }>
-  searchParams: Promise<{ role?: string }>
+  searchParams: Promise<{ role?: string, userId?: string}>
 }
 
 export default async function AnimeDetailPage({
@@ -11,7 +11,7 @@ export default async function AnimeDetailPage({
   searchParams,
 }: Props) {
   const { id } = await params
-  const { role } = await searchParams
+  const { role, userId } = await searchParams
 
   // 貰ってきたidを使って該当するアニメを検索
   const anime = await prisma.anime.findUnique({
@@ -75,7 +75,7 @@ export default async function AnimeDetailPage({
       {anime.episodes.map((episode) => (
         <div key={episode.id}>
           <Link
-            href={`/animes/${anime.id}/episodes/${episode.id}?role=${role}`}
+            href={`/animes/${anime.id}/episodes/${episode.id}?role=${role}&userId=${userId}`}
           >
             {episode.episode_number}話：{episode.title}
           </Link>
