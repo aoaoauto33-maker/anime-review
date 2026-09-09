@@ -1,7 +1,7 @@
 'use client'
 
 import { useState } from 'react'
-import { createReview } from '@/app/reviews/actions'
+import { createReview } from '@/app/animes/[id]/episodes/[episodeId]/reviews/actions'
 // reviews/actions.tsで登録したレビュー投稿をimport
 
 type Props = {
@@ -32,7 +32,7 @@ export default function ReviewForm({ userId, episodeId }: Props) {
 
   return (
     <div>
-      <h3>レビューを書く</h3>
+      <h2>レビューを書く</h2>
 
       <select
         value={rating}

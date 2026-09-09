@@ -8,6 +8,7 @@ type Props = {
   }>
   searchParams: Promise<{
     role?: string
+    userId?: string,
   }>
 }
 
@@ -16,7 +17,7 @@ export default async function EpisodeDetailPage({
   searchParams,
 }: Props) {
   const { id, episodeId } = await params
-  const { role } = await searchParams
+  const { role, userId } = await searchParams
 
   // エピソードIDを使って該当するエピソードを検索
   const episode = await prisma.episode.findUnique({
@@ -57,7 +58,6 @@ export default async function EpisodeDetailPage({
       <p>公開日：{episode.release_date.toLocaleDateString('ja-JP')}</p>
 
       <h2>レビュー</h2>
-
       {reviews.length === 0 ? (
         <p>まだレビューがありません</p>
       ) : (
@@ -72,6 +72,15 @@ export default async function EpisodeDetailPage({
           </div>
         ))
       )}
+
+      {/*  */}
+      <Link
+        href={`/animes/${id}/episodes/${episodeId}/reviews/new?userId=${userId}`}
+      >
+        レビューを書く
+      </Link>
+
+      <br />
 
       <Link href={`/animes/${id}?role=${role}`}>
         アニメ詳細に戻る
