@@ -3,7 +3,6 @@
 import { prisma } from '@/lib/prisma'
 
 // レビュー登録
-// ユーザーがブラウザ側で入力した値を受け取る
 export async function createReview(
   userId: number,
   episodeId: number,
@@ -11,7 +10,6 @@ export async function createReview(
   comment: string,
 ) {
   try {
-    // 新規レビューをDBに登録
     await prisma.review.create({
       data: {
         userId,
@@ -32,9 +30,6 @@ export async function createReview(
     }
   }
 }
-
-
-
 
 // レビュー編集
 export async function updateReview(
@@ -78,6 +73,49 @@ export async function updateReview(
     return {
       success: false,
       message: 'レビューの編集に失敗しました',
+    }
+  }
+}
+
+// レビュー削除
+export async function deleteReview(
+  reviewId: number,
+  userId: number,
+  role?: string,
+) {
+  try {
+    // 一般ユーザーの場合は自分のレビューだけ削除できる
+    if (role !== 'admin') {
+      const review = await prisma.review.findFirst({
+        where: {
+          id: reviewId,
+          userId: userId,
+        },
+      })
+
+      if (!review) {
+        return {
+          success: false,
+          message: 'このレビューを削除する権限がありません',
+        }
+      }
+    }
+
+    // 管理者ならどのレビューでも削除できる
+    await prisma.review.delete({
+      where: {
+        id: reviewId,
+      },
+    })
+
+    return {
+      success: true,
+      message: 'レビューを削除しました',
+    }
+  } catch {
+    return {
+      success: false,
+      message: 'レビューの削除に失敗しました',
     }
   }
 }

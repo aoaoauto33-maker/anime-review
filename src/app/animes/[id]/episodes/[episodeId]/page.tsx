@@ -1,5 +1,5 @@
 import { prisma } from '@/lib/prisma'
-import EpisodeDetail from '@/components/EpisodeDetailPage'
+import EpisodeDetail from '@/components/EpisodeDetail'
 
 type Props = {
   params: Promise<{

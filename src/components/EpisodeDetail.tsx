@@ -1,4 +1,8 @@
+'use client'
+
 import Link from 'next/link'
+import { useRouter } from 'next/navigation'
+import { deleteReview } from '@/app/animes/[id]/episodes/[episodeId]/reviews/actions'
 
 type Props = {
   id: string
@@ -34,6 +38,22 @@ export default function EpisodeDetail({
   episode,
   reviews,
 }: Props) {
+  const router = useRouter()
+
+  const handleDelete = async (reviewId: number) => {
+    const result = await deleteReview(
+      reviewId,
+      Number(userId),
+      role,
+    )
+
+    if (result.success) {
+      router.refresh()
+    } else {
+      alert(result.message)
+    }
+  }
+
   return (
     <main>
       <h1>{episode.anime.name}</h1>
@@ -64,24 +84,43 @@ export default function EpisodeDetail({
 
             <p>{review.comment}</p>
 
+            {/* 自分のレビューなら編集・削除できる */}
             {review.userId === Number(userId) && (
-              <Link
-                href={`/animes/${id}/episodes/${episodeId}/reviews/${review.id}/edit?role=${role}&userId=${userId}`}
-              >
-                編集
-              </Link>
+              <>
+                <Link
+                  href={`/animes/${id}/episodes/${episodeId}/reviews/${review.id}/edit?role=${role}&userId=${userId}`}
+                >
+                  編集
+                </Link>
+
+                <button
+                  onClick={() => handleDelete(review.id)}
+                >
+                  削除
+                </button>
+              </>
             )}
+
+            {/* 管理者なら他人のレビューも削除できる */}
+            {role === 'admin' &&
+              review.userId !== Number(userId) && (
+                <button
+                  onClick={() => handleDelete(review.id)}
+                >
+                  削除
+                </button>
+              )}
           </div>
         ))
       )}
 
       <br />
 
-     <Link
+      <Link
         href={`/animes/${id}/episodes/${episodeId}/reviews/new?role=${role}&userId=${userId}`}
-     >
+      >
         レビューを書く
-     </Link>
+      </Link>
 
       <br />
 
