@@ -17,17 +17,24 @@ type Props = {
 export default function AnimeList({ animes, role, userId }: Props) {
   return (
     <div>
+      <h1>アニメ一覧</h1>
+
+      {role === 'admin' && <p>管理者としてログインしています</p>}
+      {role === 'user' && <p>ユーザーとしてログインしています</p>}
+
+      {role === 'admin' && (
+        <Link href={`/animes/admin/new-anime?role=${role}&userId=${userId}`}>
+          新規アニメを登録する
+        </Link>
+      )}
+
       {animes.map((anime) => (
-        // もらってきたアニメ情報を1件ずつ表示
         <div key={anime.id}>
           <h2>
             <Link href={`/animes/${anime.id}?role=${role}&userId=${userId}`}>
               {anime.name}
             </Link>
-            {/* アニメ名をLinkにして、そこから詳細ページに飛べるようにする */}
-            {/* animes/[id]/page.tsxにidとroleを渡す */}
           </h2>
-
         </div>
       ))}
     </div>

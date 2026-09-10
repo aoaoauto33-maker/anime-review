@@ -29,6 +29,26 @@
 
 
 
+src/app/animes/
+├── admin/
+│   ├── new-anime/
+│   │   └── page.tsx　　　今ここ
+│   │
+│   └── edit-anime/
+│       ├── page.tsx
+│       │
+│       └── [id]/
+│           ├── page.tsx
+│           │
+│           └── edit-episode/
+│               ├── page.tsx
+│               ├── new-episode/
+│               │   └── page.tsx
+│               └── [episodeId]/
+│                   └── edit/
+│                       └── page.tsx
+
+
 アニメ詳細画面
 │
 ├─ アニメ情報

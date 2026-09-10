@@ -21,11 +21,6 @@ export default async function AnimePage({ searchParams }: Props) {
 
   return (
     <main>
-      <h1>アニメ一覧</h1>
-
-      {role === 'admin' && <p>管理者としてログインしています</p>}
-      {role === 'user' && <p>ユーザーとしてログインしています</p>}
-
       <Link href={`/mypage?role=${role}&userId=${userId}`}>
         マイページ
       </Link>
@@ -34,9 +29,7 @@ export default async function AnimePage({ searchParams }: Props) {
         animes={animes}
         role={role}
         userId={userId}
-      />      
-      {/* AnimeListにDBからもらってきたanimesとLoginからもらってきたroleを渡す */}
+      />
     </main>
-
   )
 }
