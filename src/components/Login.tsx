@@ -22,21 +22,25 @@ export default function Login() {
   }
 
   return (
-    <main>
-      <h1>ログイン</h1>
+    <main className="flex justify-center px-8 py-12">
+      <div className="card w-full max-w-md p-6 text-center">
+        <h1>ログイン</h1>
 
-      <input
-        type="text"
-        placeholder="名前"
-        value={name}
-        onChange={(e) => setName(e.target.value)}
-      />
+        <div className="flex flex-col gap-4">
+          <input
+            type="text"
+            placeholder="名前"
+            value={name}
+            onChange={(e) => setName(e.target.value)}
+          />
 
-      <button onClick={handleLogin}>
-        ログイン
-      </button>
+          <button onClick={handleLogin}>
+            ログイン
+          </button>
 
-      <p>{message}</p>
+          <p>{message}</p>
+        </div>
+      </div>
     </main>
   )
 }

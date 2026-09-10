@@ -1,45 +1,35 @@
 @import "tailwindcss";
 
-/* ====================
-   全体
-==================== */
-
 body {
   margin: 0;
-  padding: 0;
+  padding: 32px 32px;
   background-color: #f8fafc;
   color: #1e293b;
   font-family: Arial, sans-serif;
 }
-
-main {
-  max-width: 1000px;
-  margin: 0 auto;
-  padding: 32px;
-}
-
 
 /* ====================
    見出し
 ==================== */
 
 h1 {
-  font-size: 2rem;
+  font-size: 1.8rem;
   font-weight: bold;
   color: #1e3a8a;
-  margin-bottom: 24px;
+  margin-top: 0;
+  margin-bottom: 8px;
 }
 
 h2 {
-  font-size: 1.5rem;
+  font-size: 1.3rem;
   font-weight: bold;
   color: #1e40af;
-  margin-top: 24px;
-  margin-bottom: 16px;
+  margin-top: 20px;
+  margin-bottom: 8px;
 }
 
 h3 {
-  font-size: 1.25rem;
+  font-size: 1rem;
   font-weight: bold;
   color: #2563eb;
   margin-top: 16px;
@@ -47,7 +37,8 @@ h3 {
 }
 
 p {
-  margin-bottom: 8px;
+  margin-top: 2px;
+  margin-bottom: 2px;
 }
 
 
@@ -58,9 +49,7 @@ p {
 .card {
   background-color: white;
   border: 1px solid #cbd5e1;
-  border-radius: 8px;
-  padding: 20px;
-  margin-bottom: 20px;
+  border-radius: 5px;
 }
 
 
@@ -68,40 +57,20 @@ p {
    リンク
 ==================== */
 
-a {
+.link {
   color: #2563eb;
   text-decoration: none;
 }
 
-a:hover {
+.link:hover {
   text-decoration: underline;
-}
-
-
-/* ====================
-   フォーム
-==================== */
-
-input,
-textarea,
-select {
-  border: 1px solid #cbd5e1;
-  border-radius: 6px;
-  padding: 8px 12px;
-  margin-top: 4px;
-}
-
-input:focus,
-textarea:focus,
-select:focus {
-  outline: 2px solid #93c5fd;
-  border-color: #2563eb;
 }
 
 
 /* ====================
    ボタン
 ==================== */
+
 
 button {
   background-color: #2563eb;
@@ -114,15 +83,4 @@ button {
 
 button:hover {
   background-color: #1d4ed8;
-}
-
-
-/* ====================
-   区切り線
-==================== */
-
-hr {
-  border: none;
-  border-top: 1px solid #cbd5e1;
-  margin: 24px 0;
 }

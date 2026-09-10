@@ -54,10 +54,11 @@ export default function EpisodeDetail({
     }
   }
 
-  return (
-    <main>
-      <h1>{episode.anime.name}</h1>
+return (
+  <main className="max-w-4xl">
+    <h1>{episode.anime.name}</h1>
 
+    <div className="card p-6">
       <h2>
         {episode.episode_number}話：{episode.title}
       </h2>
@@ -69,74 +70,85 @@ export default function EpisodeDetail({
       </p>
 
       {role === 'admin' && (
-        <>
+        <div className="mt-4">
           <Link
+            className="inline-block rounded bg-blue-600 px-4 py-2 !text-white hover:bg-blue-700"
             href={`/animes/admin/edit-anime/${id}/edit-episode/${episodeId}/edit?role=${role}&userId=${userId}`}
           >
             エピソードを編集する
           </Link>
-
-          <br />
-        </>
+        </div>
       )}
+    </div>
 
+    <div className="mt-6">
       <h2>レビュー</h2>
 
       {reviews.length === 0 ? (
         <p>まだレビューがありません</p>
       ) : (
-        reviews.map((review) => (
-          <div key={review.id}>
-            <p>{review.user.name}</p>
+        <div className="flex flex-col gap-4">
+          {reviews.map((review) => (
+            <div key={review.id} className="card p-5">
+              <p className="font-bold">{review.user.name}</p>
 
-            <p>
-              評価：{'★'.repeat(review.rating)}
-              {'☆'.repeat(5 - review.rating)}
-            </p>
+              <p>
+                評価：{'★'.repeat(review.rating)}
+                {'☆'.repeat(5 - review.rating)}
+              </p>
 
-            <p>{review.comment}</p>
+              <p>{review.comment}</p>
 
-            {review.userId === Number(userId) && (
-              <>
-                <Link
-                  href={`/animes/${id}/episodes/${episodeId}/reviews/${review.id}/edit?role=${role}&userId=${userId}`}
-                >
-                  編集
-                </Link>
+              {review.userId === Number(userId) && (
+                <div className="mt-3 flex gap-3">
+                  <Link
+                    className="inline-block rounded bg-blue-600 px-4 py-2 !text-white hover:bg-blue-700"
+                    href={`/animes/${id}/episodes/${episodeId}/reviews/${review.id}/edit?role=${role}&userId=${userId}`}
+                  >
+                    編集
+                  </Link>
 
-                <button
-                  onClick={() => handleDelete(review.id)}
-                >
-                  削除
-                </button>
-              </>
-            )}
-
-            {role === 'admin' &&
-              review.userId !== Number(userId) && (
-                <button
-                  onClick={() => handleDelete(review.id)}
-                >
-                  削除
-                </button>
+                  <button
+                    onClick={() => handleDelete(review.id)}
+                  >
+                    削除
+                  </button>
+                </div>
               )}
-          </div>
-        ))
+
+              {role === 'admin' &&
+                review.userId !== Number(userId) && (
+                  <div className="mt-3">
+                    <button
+                      onClick={() => handleDelete(review.id)}
+                    >
+                      削除
+                    </button>
+                  </div>
+                )}
+            </div>
+          ))}
+        </div>
       )}
 
-      <br />
+      <div className="mt-6">
+        <Link
+          className="inline-block rounded bg-blue-600 px-4 py-2 !text-white hover:bg-blue-700"
+          href={`/animes/${id}/episodes/${episodeId}/reviews/new?role=${role}&userId=${userId}`}
+        >
+          レビューを書く
+        </Link>
+      </div>
 
-      <Link
-        href={`/animes/${id}/episodes/${episodeId}/reviews/new?role=${role}&userId=${userId}`}
-      >
-        レビューを書く
-      </Link>
-
-      <br />
-
-      <Link href={`/animes/${id}?role=${role}&userId=${userId}`}>
-        アニメ詳細に戻る
-      </Link>
-    </main>
-  )
+      <div className="mt-4">
+        <Link
+          className="link"
+          href={`/animes/${id}?role=${role}&userId=${userId}`}
+        >
+          アニメ詳細に戻る
+        </Link>
+      </div>
+    </div>
+  </main>
+)
 }

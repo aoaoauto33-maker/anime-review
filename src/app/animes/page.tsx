@@ -21,7 +21,10 @@ export default async function AnimePage({ searchParams }: Props) {
 
   return (
     <main>
-      <Link href={`/mypage?role=${role}&userId=${userId}`}>
+      <Link
+        className="link"
+        href={`/mypage?role=${role}&userId=${userId}`}
+      >
         マイページ
       </Link>
 

@@ -3,7 +3,7 @@ import { prisma } from '@/lib/prisma'
 
 type Props = {
   params: Promise<{ id: string }>
-  searchParams: Promise<{ role?: string, userId?: string}>
+  searchParams: Promise<{ role?: string, userId?: string }>
 }
 
 export default async function AnimeDetailPage({
@@ -32,7 +32,6 @@ export default async function AnimeDetailPage({
     return <p>アニメが見つかりません</p>
   }
 
-
   // [id]に該当するアニメのレビュー投稿を全て取得
   const reviews = await prisma.review.findMany({
     where: {
@@ -42,7 +41,6 @@ export default async function AnimeDetailPage({
     },
   })
 
-  // なんか計算してる だるいからあとで調べて
   const averageRating =
     reviews.length > 0
       ? reviews.reduce((sum, review) => sum + review.rating, 0) /
@@ -51,60 +49,73 @@ export default async function AnimeDetailPage({
 
   const totalRating = Math.round((averageRating / 5) * 100)
 
-
   return (
     <main>
       <h1>{anime.name}</h1>
 
-      <h2>総合評価</h2>
-      <p>{totalRating}点 / 100点</p>
+      <div className="card p-4">
+        <h2>総合評価</h2>
+        <p>{totalRating}点 / 100点</p>
 
-      <p>{anime.description}</p>
-      <p>{anime.release_year}年</p>
+        <p>{anime.description}</p>
+        <p>{anime.release_year}年</p>
 
-      {/* ジャンルは複数あるのでmapで1件ずつ表示 */}
-      <h2>ジャンル</h2>
-      {anime.taggings.map((tagging) => (
-        <p key={tagging.genreId}>
-          {tagging.genre.name}
-        </p>
-      ))}
-
-       {role === 'admin' && (
-        <>
-          <br />
-          <Link
-            href={`/animes/admin/edit-anime/${id}?role=${role}&userId=${userId}`}
-          >
-            アニメ情報を編集する
-          </Link>
-        </>
-      )}
-
-      <div>
-      {/* エピソードも複数あるのでmapで1件ずつ表示 */}
-      <h2>エピソード</h2>
-      {anime.episodes.map((episode) => (
-        <div key={episode.id}>
-          <Link
-            href={`/animes/${anime.id}/episodes/${episode.id}?role=${role}&userId=${userId}`}
-          >
-            {episode.episode_number}話：{episode.title}
-          </Link>
+        <h2>ジャンル</h2>
+        <div className="flex flex-wrap gap-2">
+          {anime.taggings.map((tagging) => (
+            <p key={tagging.genreId} className="rounded border px-2 py-1">
+              {tagging.genre.name}
+            </p>
+          ))}
         </div>
-      ))}
 
-      <Link
-        href={`/animes/admin/edit-anime/${id}/edit-episode/new-episode?role=${role}&userId=${userId}`}
-      >
-        エピソードを追加する
-      </Link>
+        {role === 'admin' && (
+          <div className="mt-4">
+            <Link
+              className="inline-block rounded bg-blue-600 px-4 py-2 !text-white hover:bg-blue-700"
+              href={`/animes/admin/edit-anime/${id}?role=${role}&userId=${userId}`}
+            >
+              アニメ情報を編集する
+            </Link>
+          </div>
+        )}
       </div>
 
+      <div className="card mt-6 p-4">
+        <h2>エピソード</h2>
 
-      <Link href={`/animes?role=${role}&userId=${userId}`}>
-        アニメ一覧に戻る
-      </Link>
+        <div className="flex flex-col gap-2">
+          {anime.episodes.map((episode) => (
+            <Link
+              key={episode.id}
+              className="link"
+              href={`/animes/${anime.id}/episodes/${episode.id}?role=${role}&userId=${userId}`}
+            >
+              {episode.episode_number}話：{episode.title}
+            </Link>
+          ))}
+        </div>
+
+        {role === 'admin' && (
+          <div className="mt-4">
+            <Link
+              className="inline-block rounded bg-blue-600 px-4 py-2 !text-white hover:bg-blue-700"
+              href={`/animes/admin/edit-anime/${id}/edit-episode/new-episode?role=${role}&userId=${userId}`}
+            >
+              エピソードを追加する
+            </Link>
+          </div>
+        )}
+      </div>
+
+      <div className="mt-6">
+        <Link
+          className="link"
+          href={`/animes?role=${role}&userId=${userId}`}
+        >
+          アニメ一覧に戻る
+        </Link>
+      </div>
     </main>
   )
 }
