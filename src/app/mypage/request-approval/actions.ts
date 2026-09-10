@@ -1,6 +1,7 @@
 'use server'
 
 import { prisma } from '@/lib/prisma'
+import { revalidatePath } from 'next/cache'
 
 // リクエスト一覧を取得
 export async function getRequests() {
@@ -27,6 +28,8 @@ export async function approveRequest(requestId: number) {
       },
     })
 
+    revalidatePath('/mypage/request-approval')
+
     return {
       success: true,
       message: 'リクエストを承認しました',
@@ -52,6 +55,8 @@ export async function rejectRequest(requestId: number) {
       },
     })
 
+    revalidatePath('/mypage/request-approval')
+
     return {
       success: true,
       message: 'リクエストを却下しました',
@@ -60,6 +65,33 @@ export async function rejectRequest(requestId: number) {
     return {
       success: false,
       message: 'リクエストの却下に失敗しました',
+    }
+  }
+}
+
+// リクエストを未承認に戻す
+export async function resetRequest(requestId: number) {
+  try {
+    await prisma.request.update({
+      where: {
+        id: requestId,
+      },
+      data: {
+        status: 'pending',
+        processed_at: null,
+      },
+    })
+
+    revalidatePath('/mypage/request-approval')
+
+    return {
+      success: true,
+      message: 'リクエストを未承認に戻しました',
+    }
+  } catch {
+    return {
+      success: false,
+      message: 'リクエストの更新に失敗しました',
     }
   }
 }

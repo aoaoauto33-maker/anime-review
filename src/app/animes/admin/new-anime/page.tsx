@@ -1,7 +1,7 @@
 'use client'
 
 import { useEffect, useState } from 'react'
-import { useRouter, useSearchParams } from 'next/navigation'
+import { useSearchParams } from 'next/navigation'
 import Link from 'next/link'
 import {
   getApprovedRequests,
@@ -24,7 +24,6 @@ type Anime = {
 
 export default function NewAnimePage() {
   const searchParams = useSearchParams()
-  const router = useRouter()
 
   const role = searchParams.get('role')
   const userId = searchParams.get('userId')
@@ -103,7 +102,18 @@ export default function NewAnimePage() {
 
         <br />
 
-        <Link href={`/animes?role=${role}&userId=${userId}`}>
+        <Link
+          href={`/mypage/request-approval?role=${role}&userId=${userId}`}
+        >
+          リクエスト管理に戻る
+        </Link>
+
+        <br />
+        <br />
+
+        <Link
+          href={`/animes?role=${role}&userId=${userId}`}
+        >
           アニメ一覧に戻る
         </Link>
       </main>
@@ -191,8 +201,19 @@ export default function NewAnimePage() {
 
       <br />
 
-      <Link href={`/animes?role=${role}&userId=${userId}`}>
-        キャンセル
+      <Link
+        href={`/mypage/request-approval?role=${role}&userId=${userId}`}
+      >
+        リクエスト管理に戻る
+      </Link>
+
+      <br />
+      <br />
+
+      <Link
+        href={`/animes?role=${role}&userId=${userId}`}
+      >
+        アニメ一覧に戻る
       </Link>
     </main>
   )
