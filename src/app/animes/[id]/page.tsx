@@ -70,6 +70,18 @@ export default async function AnimeDetailPage({
         </p>
       ))}
 
+       {role === 'admin' && (
+        <>
+          <br />
+          <Link
+            href={`/animes/admin/edit-anime/${id}?role=${role}&userId=${userId}`}
+          >
+            アニメ情報を編集する
+          </Link>
+        </>
+      )}
+
+
       {/* エピソードも複数あるのでmapで1件ずつ表示 */}
       <h2>エピソード</h2>
       {anime.episodes.map((episode) => (

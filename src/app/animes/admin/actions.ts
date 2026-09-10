@@ -62,3 +62,43 @@ export async function deleteRequest(requestId: number) {
     }
   }
 }
+
+// アニメ情報を取得
+export async function getAnime(id: number) {
+  return await prisma.anime.findUnique({
+    where: {
+      id,
+    },
+  })
+}
+
+// アニメ情報を更新
+export async function updateAnime(
+  id: number,
+  name: string,
+  description: string,
+  releaseYear: number,
+) {
+  try {
+    await prisma.anime.update({
+      where: {
+        id,
+      },
+      data: {
+        name,
+        description,
+        release_year: releaseYear,
+      },
+    })
+
+    return {
+      success: true,
+      message: 'アニメ情報を更新しました',
+    }
+  } catch {
+    return {
+      success: false,
+      message: 'アニメ情報の更新に失敗しました',
+    }
+  }
+}
