@@ -68,6 +68,18 @@ export default function EpisodeDetail({
         公開日：{episode.release_date.toLocaleDateString('ja-JP')}
       </p>
 
+      {role === 'admin' && (
+        <>
+          <Link
+            href={`/animes/admin/edit-anime/${id}/edit-episode/${episodeId}/edit?role=${role}&userId=${userId}`}
+          >
+            エピソードを編集する
+          </Link>
+
+          <br />
+        </>
+      )}
+
       <h2>レビュー</h2>
 
       {reviews.length === 0 ? (
@@ -84,7 +96,6 @@ export default function EpisodeDetail({
 
             <p>{review.comment}</p>
 
-            {/* 自分のレビューなら編集・削除できる */}
             {review.userId === Number(userId) && (
               <>
                 <Link
@@ -101,7 +112,6 @@ export default function EpisodeDetail({
               </>
             )}
 
-            {/* 管理者なら他人のレビューも削除できる */}
             {role === 'admin' &&
               review.userId !== Number(userId) && (
                 <button

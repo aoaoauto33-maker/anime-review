@@ -81,7 +81,7 @@ export default async function AnimeDetailPage({
         </>
       )}
 
-
+      <div>
       {/* エピソードも複数あるのでmapで1件ずつ表示 */}
       <h2>エピソード</h2>
       {anime.episodes.map((episode) => (
@@ -93,6 +93,14 @@ export default async function AnimeDetailPage({
           </Link>
         </div>
       ))}
+
+      <Link
+        href={`/animes/admin/edit-anime/${id}/edit-episode/new-episode?role=${role}&userId=${userId}`}
+      >
+        エピソードを追加する
+      </Link>
+      </div>
+
 
       <Link href={`/animes?role=${role}&userId=${userId}`}>
         アニメ一覧に戻る

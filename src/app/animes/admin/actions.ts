@@ -102,3 +102,76 @@ export async function updateAnime(
     }
   }
 }
+
+// エピソード情報を取得
+export async function getEpisode(episodeId: number) {
+  return await prisma.episode.findUnique({
+    where: {
+      id: episodeId,
+    },
+  })
+}
+
+// エピソード情報を更新
+export async function updateEpisode(
+  episodeId: number,
+  episodeNumber: number,
+  title: string,
+  description: string,
+  releaseDate: string,
+) {
+  try {
+    await prisma.episode.update({
+      where: {
+        id: episodeId,
+      },
+      data: {
+        episode_number: episodeNumber,
+        title,
+        description,
+        release_date: new Date(releaseDate),
+      },
+    })
+
+    return {
+      success: true,
+      message: 'エピソード情報を更新しました',
+    }
+  } catch {
+    return {
+      success: false,
+      message: 'エピソード情報の更新に失敗しました',
+    }
+  }
+}
+
+// エピソード登録
+export async function createEpisode(
+  animeId: number,
+  episodeNumber: number,
+  title: string,
+  description: string,
+  releaseDate: string,
+) {
+  try {
+    await prisma.episode.create({
+      data: {
+        animeId,
+        episode_number: episodeNumber,
+        title,
+        description,
+        release_date: new Date(releaseDate),
+      },
+    })
+
+    return {
+      success: true,
+      message: 'エピソードを登録しました',
+    }
+  } catch {
+    return {
+      success: false,
+      message: 'エピソードの登録に失敗しました',
+    }
+  }
+}
