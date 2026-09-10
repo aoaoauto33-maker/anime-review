@@ -17,10 +17,11 @@ type Props = {
 export default function AnimeList({ animes, role, userId }: Props) {
   return (
     <div>
-      <h1>アニメ一覧</h1>
 
       {role === 'admin' && <p>管理者としてログインしています</p>}
       {role === 'user' && <p>ユーザーとしてログインしています</p>}
+
+      <h1>アニメ一覧</h1>
 
       {role === 'admin' && (
         <Link href={`/animes/admin/new-anime?role=${role}&userId=${userId}`}>

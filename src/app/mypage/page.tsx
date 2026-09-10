@@ -1,5 +1,5 @@
 import Link from 'next/link'
-import { prisma } from '@/lib/prisma'
+import { getMyReviews } from './actions'
 
 type Props = {
   searchParams: Promise<{
@@ -8,71 +8,88 @@ type Props = {
   }>
 }
 
-export default async function MyPage({ searchParams }: Props) {
+export default async function MyPage({
+  searchParams,
+}: Props) {
   const { role, userId } = await searchParams
 
-  if (!userId) {
-    return <p>ユーザー情報がありません</p>
-  }
-
-  const user = await prisma.user.findUnique({
-    where: {
-      id: Number(userId),
-    },
-  })
-
-  if (!user) {
-    return <p>ユーザーが見つかりません</p>
-  }
+  const reviews =
+    userId
+      ? await getMyReviews(Number(userId))
+      : []
 
   return (
     <main>
       <h1>マイページ</h1>
 
-      <h2>ユーザー情報</h2>
-
-      <p>名前：{user.name}</p>
-      <p>年齢：{user.age ?? '未設定'}</p>
-      <p>性別：{user.gender ?? '未設定'}</p>
-
-      <h2>メニュー</h2>
-
-      <Link href={`/animes?role=${role}&userId=${userId}`}>
-        レビューを見る
-      </Link>
-
-      <br />
-
-      {role === 'user' && (
-        <Link
-          href={`/mypage/user/request-apply?role=${role}&userId=${userId}`}
-        >
-          アニメ追加リクエスト
-        </Link>
-      )}
-
       {role === 'admin' && (
         <>
+          <p>管理者としてログインしています</p>
+
           <Link
-            href={`/mypage/admin/request-approval?role=${role}&userId=${userId}`}
+            href={`/mypage/request-approval?role=${role}&userId=${userId}`}
           >
             リクエスト管理
           </Link>
 
           <br />
-
-          <Link
-            href={`/mypage/admin/admin-animes?role=${role}&userId=${userId}`}
-          >
-            アニメ管理
-          </Link>
+          <br />
         </>
       )}
 
-      <br />
-      <br />
+      {role === 'user' && (
+        <>
+          <h2>自分のレビュー</h2>
 
-      <Link href={`/animes?role=${role}&userId=${userId}`}>
+          {reviews.length === 0 ? (
+            <p>まだレビューがありません</p>
+          ) : (
+            reviews.map((review) => (
+              <div key={review.id}>
+                <h3>
+                  {review.episode.anime.name}
+                </h3>
+
+                <p>
+                  {review.episode.episode_number}話：
+                  {review.episode.title}
+                </p>
+
+                <p>
+                  評価：{review.rating} / 5
+                </p>
+
+                <p>
+                  コメント：{review.comment}
+                </p>
+
+                <Link
+                  href={`/animes/${review.episode.anime.id}/episodes/${review.episode.id}?role=${role}&userId=${userId}`}
+                >
+                  エピソード詳細を見る
+                </Link>
+
+                <hr />
+              </div>
+            ))
+          )}
+
+          <h2>アニメ追加リクエスト</h2>
+
+          <Link
+            href={`/mypage/request-apply?role=${role}&userId=${userId}`}
+          >
+            アニメ追加リクエストを送る
+          </Link>
+
+          <br />
+          <br />
+        </>
+      )}
+
+      <Link
+        href={`/animes?role=${role}&userId=${userId}`}
+      >
         アニメ一覧に戻る
       </Link>
     </main>

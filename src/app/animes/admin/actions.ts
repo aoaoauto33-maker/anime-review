@@ -175,3 +175,28 @@ export async function createEpisode(
     }
   }
 }
+
+
+// リクエストを登録済みに変更
+export async function markRequestAdded(requestId: number) {
+  try {
+    await prisma.request.update({
+      where: {
+        id: requestId,
+      },
+      data: {
+        status: 'added',
+      },
+    })
+
+    return {
+      success: true,
+      message: 'リクエストを登録済みに変更しました',
+    }
+  } catch {
+    return {
+      success: false,
+      message: 'リクエストの更新に失敗しました',
+    }
+  }
+}

@@ -6,7 +6,7 @@ import Link from 'next/link'
 import {
   getApprovedRequests,
   createAnime,
-  deleteRequest,
+  markRequestAdded,
 } from '@/app/animes/admin/actions'
 
 type Request = {
@@ -70,28 +70,24 @@ export default function NewAnimePage() {
       Number(releaseYear),
     )
 
-    if (result.success && result.anime) {
-      setRegisteredAnime(result.anime)
-      setMessage('以下の情報が追加されました')
-    } else {
+    if (!result.success || !result.anime) {
       setMessage(result.message)
-    }
-  }
-
-  const handleDeleteRequest = async () => {
-    if (!requestId) {
-      setMessage('削除するリクエストがありません')
       return
     }
 
-    const result = await deleteRequest(Number(requestId))
+    if (requestId) {
+      const requestResult = await markRequestAdded(
+        Number(requestId),
+      )
 
-    if (result.success) {
-      setMessage('リクエストを削除しました')
-      router.push(`/animes?role=${role}&userId=${userId}`)
-    } else {
-      setMessage(result.message)
+      if (!requestResult.success) {
+        setMessage(requestResult.message)
+        return
+      }
     }
+
+    setRegisteredAnime(result.anime)
+    setMessage('以下の情報が追加されました')
   }
 
   if (registeredAnime) {
@@ -105,13 +101,6 @@ export default function NewAnimePage() {
         <p>説明：{registeredAnime.description}</p>
         <p>放送年：{registeredAnime.release_year}年</p>
 
-        <br />
-
-        <button onClick={handleDeleteRequest}>
-          リクエストを削除する
-        </button>
-
-        <br />
         <br />
 
         <Link href={`/animes?role=${role}&userId=${userId}`}>
