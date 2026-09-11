@@ -1,7 +1,6 @@
 'use client'
 
 import { useEffect, useState } from 'react'
-import { useSearchParams } from 'next/navigation'
 import Link from 'next/link'
 import {
   getApprovedRequests,
@@ -23,11 +22,6 @@ type Anime = {
 }
 
 export default function NewAnimePage() {
-  const searchParams = useSearchParams()
-
-  const role = searchParams.get('role')
-  const userId = searchParams.get('userId')
-
   const [requests, setRequests] = useState<Request[]>([])
   const [requestId, setRequestId] = useState('')
   const [name, setName] = useState('')
@@ -106,14 +100,14 @@ export default function NewAnimePage() {
           <div className="mt-6 flex flex-col gap-3">
             <Link
               className="link"
-              href={`/mypage/request-approval?role=${role}&userId=${userId}`}
+              href="/mypage/request-approval"
             >
               リクエスト管理に戻る
             </Link>
 
             <Link
               className="link"
-              href={`/animes?role=${role}&userId=${userId}`}
+              href="/animes"
             >
               アニメ一覧に戻る
             </Link>
@@ -205,14 +199,14 @@ export default function NewAnimePage() {
       <div className="mt-6 flex flex-col gap-3">
         <Link
           className="link"
-          href={`/mypage/request-approval?role=${role}&userId=${userId}`}
+          href="/mypage/request-approval"
         >
           リクエスト管理に戻る
         </Link>
 
         <Link
           className="link"
-          href={`/animes?role=${role}&userId=${userId}`}
+          href="/animes"
         >
           アニメ一覧に戻る
         </Link>

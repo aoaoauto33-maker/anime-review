@@ -8,8 +8,6 @@ import {
 
 type Props = {
   searchParams: Promise<{
-    role?: string
-    userId?: string
     status?: string
   }>
 }
@@ -17,7 +15,7 @@ type Props = {
 export default async function RequestApprovalPage({
   searchParams,
 }: Props) {
-  const { role, userId, status } = await searchParams
+  const { status } = await searchParams
 
   const requests = await getRequests()
 
@@ -33,7 +31,7 @@ export default async function RequestApprovalPage({
       <div className="mb-6">
         <Link
           className="inline-block rounded bg-blue-600 px-4 py-2 !text-white hover:bg-blue-700"
-          href={`/animes/admin/new-anime?role=${role}&userId=${userId}`}
+          href="/animes/admin/new-anime"
         >
           新規アニメを登録する
         </Link>
@@ -45,35 +43,35 @@ export default async function RequestApprovalPage({
         <div className="flex flex-wrap gap-4">
           <Link
             className="link"
-            href={`/mypage/request-approval?role=${role}&userId=${userId}&status=all`}
+            href="/mypage/request-approval?status=all"
           >
             すべて
           </Link>
 
           <Link
             className="link"
-            href={`/mypage/request-approval?role=${role}&userId=${userId}&status=pending`}
+            href="/mypage/request-approval?status=pending"
           >
             未承認
           </Link>
 
           <Link
             className="link"
-            href={`/mypage/request-approval?role=${role}&userId=${userId}&status=approved`}
+            href="/mypage/request-approval?status=approved"
           >
             承認済み
           </Link>
 
           <Link
             className="link"
-            href={`/mypage/request-approval?role=${role}&userId=${userId}&status=rejected`}
+            href="/mypage/request-approval?status=rejected"
           >
             却下済み
           </Link>
 
           <Link
             className="link"
-            href={`/mypage/request-approval?role=${role}&userId=${userId}&status=added`}
+            href="/mypage/request-approval?status=added"
           >
             追加済み
           </Link>
@@ -191,7 +189,7 @@ export default async function RequestApprovalPage({
       <div className="mt-6">
         <Link
           className="link"
-          href={`/mypage?role=${role}&userId=${userId}`}
+          href="/mypage"
         >
           マイページに戻る
         </Link>

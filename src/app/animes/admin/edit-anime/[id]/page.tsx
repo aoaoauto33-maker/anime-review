@@ -1,18 +1,15 @@
 'use client'
 
 import { useEffect, useState } from 'react'
-import { useParams, useSearchParams, useRouter } from 'next/navigation'
+import { useParams, useRouter } from 'next/navigation'
 import Link from 'next/link'
 import { getAnime, updateAnime } from '@/app/animes/admin/actions'
 
 export default function EditAnimePage() {
   const params = useParams()
-  const searchParams = useSearchParams()
   const router = useRouter()
 
   const id = params.id as string
-  const role = searchParams.get('role')
-  const userId = searchParams.get('userId')
 
   const [name, setName] = useState('')
   const [description, setDescription] = useState('')
@@ -47,9 +44,7 @@ export default function EditAnimePage() {
     setMessage(result.message)
 
     if (result.success) {
-      router.push(
-        `/animes/${id}?role=${role}&userId=${userId}`
-      )
+      router.push(`/animes/${id}`)
     }
   }
 
@@ -100,7 +95,7 @@ export default function EditAnimePage() {
       <div className="mt-6">
         <Link
           className="link"
-          href={`/animes/${id}?role=${role}&userId=${userId}`}
+          href={`/animes/${id}`}
         >
           アニメ詳細に戻る
         </Link>

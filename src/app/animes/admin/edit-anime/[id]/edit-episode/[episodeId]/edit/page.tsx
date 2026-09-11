@@ -1,7 +1,7 @@
 'use client'
 
 import { useEffect, useState } from 'react'
-import { useParams, useSearchParams, useRouter } from 'next/navigation'
+import { useParams, useRouter } from 'next/navigation'
 import Link from 'next/link'
 import {
   getEpisode,
@@ -10,14 +10,10 @@ import {
 
 export default function EditEpisodePage() {
   const params = useParams()
-  const searchParams = useSearchParams()
   const router = useRouter()
 
   const id = params.id as string
   const episodeId = params.episodeId as string
-
-  const role = searchParams.get('role')
-  const userId = searchParams.get('userId')
 
   const [episodeNumber, setEpisodeNumber] = useState('')
   const [title, setTitle] = useState('')
@@ -59,7 +55,7 @@ export default function EditEpisodePage() {
       setMessage(result.message)
 
       router.push(
-        `/animes/${id}/episodes/${episodeId}?role=${role}&userId=${userId}`
+        `/animes/${id}/episodes/${episodeId}`
       )
     } else {
       setMessage(result.message)
@@ -123,7 +119,7 @@ export default function EditEpisodePage() {
       <div className="mt-6">
         <Link
           className="link"
-          href={`/animes/${id}/episodes/${episodeId}?role=${role}&userId=${userId}`}
+          href={`/animes/${id}/episodes/${episodeId}`}
         >
           エピソード詳細に戻る
         </Link>

@@ -1,16 +1,16 @@
 'use client'
 
 import { useState } from 'react'
-import { useSearchParams, useRouter } from 'next/navigation'
+import { useRouter } from 'next/navigation'
 import Link from 'next/link'
+import { useAtomValue } from 'jotai'
+import { userIdAtom } from '@/store/user'
 import { createRequest } from './actions'
 
 export default function RequestApplyPage() {
-  const searchParams = useSearchParams()
   const router = useRouter()
 
-  const role = searchParams.get('role')
-  const userId = searchParams.get('userId')
+  const userId = useAtomValue(userIdAtom)
 
   const [newAnimeName, setNewAnimeName] = useState('')
   const [reason, setReason] = useState('')
@@ -28,7 +28,7 @@ export default function RequestApplyPage() {
     }
 
     const result = await createRequest(
-      Number(userId),
+      userId,
       newAnimeName,
       reason,
     )
@@ -36,7 +36,7 @@ export default function RequestApplyPage() {
     setMessage(result.message)
 
     if (result.success) {
-      router.push(`/mypage?role=${role}&userId=${userId}`)
+      router.push('/mypage')
     }
   }
 
@@ -74,7 +74,7 @@ export default function RequestApplyPage() {
 
           <Link
             className="link"
-            href={`/mypage?role=${role}&userId=${userId}`}
+            href="/mypage"
           >
             マイページに戻る
           </Link>
