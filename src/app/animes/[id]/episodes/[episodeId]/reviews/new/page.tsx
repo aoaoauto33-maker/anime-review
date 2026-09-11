@@ -6,29 +6,15 @@ type Props = {
     id: string
     episodeId: string
   }>
-  searchParams: Promise<{
-    role?: string
-    userId?: string
-  }>
 }
 
-export default async function ReviewNewPage({
-  params,
-  searchParams,
-}: Props) {
+export default async function ReviewNewPage({ params }: Props) {
   const { id, episodeId } = await params
-  const { role, userId } = await searchParams
-
-  if (!userId) {
-    return <p>ユーザー情報がありません</p>
-  }
 
   return (
     <div>
       <ReviewForm
         id={Number(id)}
-        userId={Number(userId)}
-        role={role}
         episodeId={Number(episodeId)}
       />
     </div>

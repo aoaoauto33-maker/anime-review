@@ -1,4 +1,8 @@
+'use client'
+
 import Link from 'next/link'
+import { useAtomValue } from 'jotai'
+import { roleAtom } from '@/store/user'
 
 type Anime = {
   id: number
@@ -10,11 +14,11 @@ type Anime = {
 
 type Props = {
   animes: Anime[]
-  role?: string
-  userId?: string
 }
 
-export default function AnimeList({ animes, role, userId }: Props) {
+export default function AnimeList({ animes }: Props) {
+  const role = useAtomValue(roleAtom)
+
   return (
     <div>
       {role === 'admin' && <p>※管理者としてログインしています</p>}
@@ -26,7 +30,7 @@ export default function AnimeList({ animes, role, userId }: Props) {
         <div className="mb-6">
           <Link
             className="inline-block rounded bg-blue-600 px-4 py-2 !text-white hover:bg-blue-700"
-            href={`/animes/admin/new-anime?role=${role}&userId=${userId}`}
+            href="/animes/admin/new-anime"
           >
             新規アニメを登録する
           </Link>
@@ -39,7 +43,7 @@ export default function AnimeList({ animes, role, userId }: Props) {
             <p className="m-0 truncate">
               <Link
                 className="link"
-                href={`/animes/${anime.id}?role=${role}&userId=${userId}`}
+                href={`/animes/${anime.id}`}
               >
                 {anime.name}
               </Link>

@@ -2,20 +2,11 @@ import { prisma } from '@/lib/prisma'
 import AnimeList from '@/components/AnimeList'
 import Link from 'next/link'
 
-type Props = {
-  searchParams: Promise<{
-    role?: string
-    userId?: string
-  }>
-}
-
-export default async function AnimePage({ searchParams }: Props) {
-  const { role, userId } = await searchParams
-
+export default async function AnimePage() {
   const animes = await prisma.anime.findMany({
     orderBy: {
       id: 'asc',
-      // とりあえずid順でいいや 後で人気順や五十音順を追加(React側でやるべき？)
+      // とりあえずid順でいいや 後で人気順や五十音順を追加
     },
   })
 
@@ -23,16 +14,12 @@ export default async function AnimePage({ searchParams }: Props) {
     <main>
       <Link
         className="link"
-        href={`/mypage?role=${role}&userId=${userId}`}
+        href="/mypage"
       >
         マイページ
       </Link>
 
-      <AnimeList
-        animes={animes}
-        role={role}
-        userId={userId}
-      />
+      <AnimeList animes={animes} />
     </main>
   )
 }

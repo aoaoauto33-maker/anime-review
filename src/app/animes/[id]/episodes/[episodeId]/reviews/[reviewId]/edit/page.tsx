@@ -7,22 +7,10 @@ type Props = {
     episodeId: string
     reviewId: string
   }>
-  searchParams: Promise<{
-    role?: string
-    userId?: string
-  }>
 }
 
-export default async function ReviewEditPage({
-  params,
-  searchParams,
-}: Props) {
+export default async function ReviewEditPage({ params }: Props) {
   const { id, episodeId, reviewId } = await params
-  const { role, userId } = await searchParams
-
-  if (!userId) {
-    return <p>ユーザー情報がありません</p>
-  }
 
   const review = await prisma.review.findUnique({
     where: {
@@ -34,19 +22,13 @@ export default async function ReviewEditPage({
     return <p>レビューが見つかりません</p>
   }
 
-  if (review.userId !== Number(userId)) {
-    return <p>このレビューを編集する権限がありません</p>
-  }
-
   return (
     <div>
-
       <ReviewEditForm
         id={Number(id)}
         episodeId={Number(episodeId)}
-        role={role}
         reviewId={review.id}
-        userId={review.userId}
+        reviewUserId={review.userId}
         rating={review.rating}
         comment={review.comment ?? ''}
       />

@@ -2,15 +2,16 @@
 
 import { useState } from 'react'
 import { useRouter } from 'next/navigation'
-import { updateReview } from '@/app/animes/[id]/episodes/[episodeId]/reviews/actions'
 import Link from 'next/link'
+import { useAtomValue } from 'jotai'
+import { userIdAtom } from '@/store/user'
+import { updateReview } from '@/app/animes/[id]/episodes/[episodeId]/reviews/actions'
 
 type Props = {
   id: number
   episodeId: number
-  role?: string
   reviewId: number
-  userId: number
+  reviewUserId: number
   rating: number
   comment: string
 }
@@ -18,9 +19,8 @@ type Props = {
 export default function ReviewEditForm({
   id,
   episodeId,
-  role,
   reviewId,
-  userId,
+  reviewUserId,
   rating: initialRating,
   comment: initialComment,
 }: Props) {
@@ -29,7 +29,19 @@ export default function ReviewEditForm({
   const [message, setMessage] = useState('')
   const router = useRouter()
 
+  const userId = useAtomValue(userIdAtom)
+
   const handleSubmit = async () => {
+    if (!userId) {
+      setMessage('ユーザー情報がありません')
+      return
+    }
+
+    if (userId !== reviewUserId) {
+      setMessage('このレビューを編集する権限がありません')
+      return
+    }
+
     const result = await updateReview(
       reviewId,
       userId,
@@ -38,9 +50,7 @@ export default function ReviewEditForm({
     )
 
     if (result.success) {
-      router.push(
-        `/animes/${id}/episodes/${episodeId}?role=${role}&userId=${userId}`
-      )
+      router.push(`/animes/${id}/episodes/${episodeId}`)
       // 更新成功したらエピソード詳細画面に戻る
     } else {
       setMessage(result.message)
@@ -87,7 +97,7 @@ export default function ReviewEditForm({
 
           <Link
             className="link"
-            href={`/animes/${id}/episodes/${episodeId}?role=${role}&userId=${userId}`}
+            href={`/animes/${id}/episodes/${episodeId}`}
           >
             キャンセル
           </Link>

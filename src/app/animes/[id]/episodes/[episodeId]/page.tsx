@@ -1,23 +1,17 @@
+// エピソード詳細ページ
 import { prisma } from '@/lib/prisma'
 import EpisodeDetail from '@/components/EpisodeDetail'
 
+// 受け取るのはanimeIdとepisodeIdだけ
 type Props = {
   params: Promise<{
     id: string
     episodeId: string
   }>
-  searchParams: Promise<{
-    role?: string
-    userId?: string,
-  }>
 }
 
-export default async function EpisodeDetailPage({
-  params,
-  searchParams,
-}: Props) {
+export default async function EpisodeDetailPage({ params }: Props) {
   const { id, episodeId } = await params
-  const { role, userId } = await searchParams
 
   // エピソードIDを使って該当するエピソードを検索
   const episode = await prisma.episode.findUnique({
@@ -50,8 +44,6 @@ export default async function EpisodeDetailPage({
     <EpisodeDetail
       id={id}
       episodeId={episodeId}
-      role={role}
-      userId={userId}
       episode={episode}
       reviews={reviews}
     />

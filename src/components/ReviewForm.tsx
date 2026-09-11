@@ -3,31 +3,36 @@
 import { useState } from 'react'
 import { useRouter } from 'next/navigation'
 import Link from 'next/link'
+import { useAtomValue } from 'jotai'
+import { userIdAtom } from '@/store/user'
 import { createReview } from '@/app/animes/[id]/episodes/[episodeId]/reviews/actions'
 // reviews/actions.tsで登録したレビュー投稿をimport
 
 type Props = {
   id: number
-  userId: number
-  role?: string
   episodeId: number
 }
 
-export default function ReviewForm({ id, userId, role, episodeId }: Props) {
+export default function ReviewForm({ id, episodeId }: Props) {
   const [rating, setRating] = useState(5)
   const [comment, setComment] = useState('')
   const [message, setMessage] = useState('')
   const router = useRouter()
 
+  const userId = useAtomValue(userIdAtom)
+
   const handleSubmit = async () => {
+    if (!userId) {
+      setMessage('ユーザー情報がありません')
+      return
+    }
+
     const result = await createReview(userId, episodeId, rating, comment)
     // createReviewに入力した値を送ってる
     // サーバー側の操作なのでawaitで待ってあげる
 
     if (result.success) {
-      router.push(
-        `/animes/${id}/episodes/${episodeId}?role=${role}&userId=${userId}`
-      )
+      router.push(`/animes/${id}/episodes/${episodeId}`)
     } else {
       setMessage(result.message)
     }
@@ -73,7 +78,7 @@ export default function ReviewForm({ id, userId, role, episodeId }: Props) {
 
           <Link
             className="link"
-            href={`/animes/${id}/episodes/${episodeId}?role=${role}&userId=${userId}`}
+            href={`/animes/${id}/episodes/${episodeId}`}
           >
             キャンセル
           </Link>

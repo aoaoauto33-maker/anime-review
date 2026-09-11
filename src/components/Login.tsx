@@ -2,20 +2,27 @@
 
 import { useState } from 'react'
 import { useRouter } from 'next/navigation'
+import { useSetAtom } from 'jotai'
+import { userIdAtom, roleAtom } from '@/store/user'
 import { login } from '@/app/login/actions'
 
 export default function Login() {
   const [name, setName] = useState('')
   const [message, setMessage] = useState('')
   const router = useRouter()
-  // useRouter...Nextのページ遷移機能
+
+  const setUserId = useSetAtom(userIdAtom)
+  const setRole = useSetAtom(roleAtom)
 
   const handleLogin = async () => {
     const result = await login(name)
 
     if (result.success) {
-      router.push(`/animes?role=${result.role}&userId=${result.userId}`)
-      // アニメ一覧に移動
+      setUserId(result.userId)
+      setRole(result.role)
+
+      router.push('/animes')
+      // Jotaiを入れたことによってuserIdとroleをurlで渡す必要がなくなった
     } else {
       setMessage('ユーザーが見つかりません')
     }
