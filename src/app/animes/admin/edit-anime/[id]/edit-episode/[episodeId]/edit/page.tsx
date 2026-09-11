@@ -67,69 +67,67 @@ export default function EditEpisodePage() {
   }
 
   return (
-    <main>
+    <main className="max-w-4xl">
       <h1>エピソード情報を編集</h1>
 
-      <div>
-        <label>話数</label>
-        <br />
-        <input
-          type="number"
-          value={episodeNumber}
-          onChange={(e) => setEpisodeNumber(e.target.value)}
-        />
+      <div className="card p-6">
+        <div className="flex flex-col gap-5">
+          <div>
+            <label className="font-bold">話数</label>
+            <input
+              className="mt-2 w-full rounded border border-slate-300 px-3 py-2"
+              type="number"
+              value={episodeNumber}
+              onChange={(e) => setEpisodeNumber(e.target.value)}
+            />
+          </div>
+
+          <div>
+            <label className="font-bold">タイトル</label>
+            <input
+              className="mt-2 w-full rounded border border-slate-300 px-3 py-2"
+              type="text"
+              value={title}
+              onChange={(e) => setTitle(e.target.value)}
+            />
+          </div>
+
+          <div>
+            <label className="font-bold">説明</label>
+            <textarea
+              className="mt-2 w-full rounded border border-slate-300 p-3"
+              rows={5}
+              value={description}
+              onChange={(e) => setDescription(e.target.value)}
+            />
+          </div>
+
+          <div>
+            <label className="font-bold">公開日</label>
+            <input
+              className="mt-2 w-full rounded border border-slate-300 px-3 py-2"
+              type="date"
+              value={releaseDate}
+              onChange={(e) => setReleaseDate(e.target.value)}
+            />
+          </div>
+
+          <button onClick={handleSubmit}>
+            更新する
+          </button>
+
+          <p>{message}</p>
+        </div>
       </div>
 
-      <br />
-
-      <div>
-        <label>タイトル</label>
-        <br />
-        <input
-          type="text"
-          value={title}
-          onChange={(e) => setTitle(e.target.value)}
-        />
+      <div className="mt-6">
+        <Link
+          className="link"
+          href={`/animes/${id}/episodes/${episodeId}?role=${role}&userId=${userId}`}
+        >
+          エピソード詳細に戻る
+        </Link>
       </div>
-
-      <br />
-
-      <div>
-        <label>説明</label>
-        <br />
-        <textarea
-          value={description}
-          onChange={(e) => setDescription(e.target.value)}
-        />
-      </div>
-
-      <br />
-
-      <div>
-        <label>公開日</label>
-        <br />
-        <input
-          type="date"
-          value={releaseDate}
-          onChange={(e) => setReleaseDate(e.target.value)}
-        />
-      </div>
-
-      <br />
-
-      <button onClick={handleSubmit}>
-        更新する
-      </button>
-
-      <p>{message}</p>
-
-      <br />
-
-      <Link
-        href={`/animes/${id}/episodes/${episodeId}?role=${role}&userId=${userId}`}
-      >
-        エピソード詳細に戻る
-      </Link>
     </main>
   )
 }

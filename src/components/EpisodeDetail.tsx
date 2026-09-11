@@ -148,6 +148,15 @@ return (
           アニメ詳細に戻る
         </Link>
       </div>
+
+      <div className="mt-4">
+        <Link
+          className="link"
+          href={`/mypage?role=${role}&userId=${userId}`}
+        >
+          マイページに戻る
+        </Link>
+      </div>
     </div>
   </main>
 )

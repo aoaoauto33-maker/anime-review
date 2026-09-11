@@ -100,7 +100,7 @@ export default async function AnimeDetailPage({
           <div className="mt-4">
             <Link
               className="inline-block rounded bg-blue-600 px-4 py-2 !text-white hover:bg-blue-700"
-              href={`/animes/admin/edit-anime/${id}/edit-episode/new-episode?role=${role}&userId=${userId}`}
+             href={`/animes/admin/edit-anime/${id}/edit-episode/new-episode?role=${role}&userId=${userId}`}
             >
               エピソードを追加する
             </Link>

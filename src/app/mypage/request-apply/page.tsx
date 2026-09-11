@@ -41,43 +41,45 @@ export default function RequestApplyPage() {
   }
 
   return (
-    <main>
-      <h1>アニメ追加リクエスト</h1>
+    <main className="max-w-4xl">
+      <div className="card p-6">
+        <h1>アニメ追加リクエスト</h1>
 
-      <div>
-        <label>アニメ名</label>
-        <br />
-        <input
-          type="text"
-          value={newAnimeName}
-          onChange={(e) => setNewAnimeName(e.target.value)}
-        />
+        <div className="flex flex-col gap-5">
+          <div>
+            <p className="font-bold">アニメ名</p>
+            <input
+              className="w-full rounded border border-slate-300 px-3 py-2"
+              type="text"
+              value={newAnimeName}
+              onChange={(e) => setNewAnimeName(e.target.value)}
+            />
+          </div>
+
+          <div>
+            <p className="font-bold">リクエスト理由</p>
+            <textarea
+              className="w-full rounded border border-slate-300 p-3"
+              rows={5}
+              value={reason}
+              onChange={(e) => setReason(e.target.value)}
+            />
+          </div>
+
+          <button onClick={handleSubmit}>
+            リクエストを送信する
+          </button>
+
+          <p>{message}</p>
+
+          <Link
+            className="link"
+            href={`/mypage?role=${role}&userId=${userId}`}
+          >
+            マイページに戻る
+          </Link>
+        </div>
       </div>
-
-      <br />
-
-      <div>
-        <label>リクエスト理由</label>
-        <br />
-        <textarea
-          value={reason}
-          onChange={(e) => setReason(e.target.value)}
-        />
-      </div>
-
-      <br />
-
-      <button onClick={handleSubmit}>
-        リクエストを送信する
-      </button>
-
-      <p>{message}</p>
-
-      <br />
-
-      <Link href={`/mypage?role=${role}&userId=${userId}`}>
-        マイページに戻る
-      </Link>
     </main>
   )
 }

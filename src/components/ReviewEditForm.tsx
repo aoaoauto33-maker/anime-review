@@ -48,43 +48,51 @@ export default function ReviewEditForm({
   }
 
   return (
-    <div>
-      <h2>レビューを編集</h2>
+    <main className="max-w-4xl">
+      <div className="card p-6">
+        <h1>レビューを編集</h1>
 
-      <select
-        value={rating}
-        onChange={(e) => setRating(Number(e.target.value))}
-      >
-        <option value={1}>★☆☆☆☆</option>
-        <option value={2}>★★☆☆☆</option>
-        <option value={3}>★★★☆☆</option>
-        <option value={4}>★★★★☆</option>
-        <option value={5}>★★★★★</option>
-      </select>
+        <div className="flex flex-col gap-4">
+          <div>
+            <p className="font-bold">評価</p>
+            <select
+              className="rounded border border-slate-300 px-3 py-2"
+              value={rating}
+              onChange={(e) => setRating(Number(e.target.value))}
+            >
+              <option value={1}>★☆☆☆☆</option>
+              <option value={2}>★★☆☆☆</option>
+              <option value={3}>★★★☆☆</option>
+              <option value={4}>★★★★☆</option>
+              <option value={5}>★★★★★</option>
+            </select>
+          </div>
 
-      <br />
+          <div>
+            <p className="font-bold">コメント</p>
+            <textarea
+              className="w-full rounded border border-slate-300 p-3"
+              rows={5}
+              value={comment}
+              onChange={(e) => setComment(e.target.value)}
+              placeholder="レビューを入力してください"
+            />
+          </div>
 
-      <textarea
-        value={comment}
-        onChange={(e) => setComment(e.target.value)}
-        placeholder="レビューを入力してください"
-      />
+          <button onClick={handleSubmit}>
+            更新する
+          </button>
 
-      <br />
+          <p>{message}</p>
 
-      <button onClick={handleSubmit}>
-        更新する
-      </button>
-
-      <p>{message}</p>
-
-      <br />
-
-      <Link
-        href={`/animes/${id}/episodes/${episodeId}?role=${role}&userId=${userId}`}
-      >
-        キャンセル
-      </Link>
-    </div>
+          <Link
+            className="link"
+            href={`/animes/${id}/episodes/${episodeId}?role=${role}&userId=${userId}`}
+          >
+            キャンセル
+          </Link>
+        </div>
+      </div>
+    </main>
   )
 }

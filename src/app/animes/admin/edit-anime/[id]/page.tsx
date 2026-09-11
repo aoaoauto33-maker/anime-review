@@ -54,57 +54,57 @@ export default function EditAnimePage() {
   }
 
   return (
-    <main>
+    <main className="max-w-4xl">
       <h1>アニメ情報を編集</h1>
 
-      <div>
-        <label>アニメ名</label>
-        <br />
-        <input
-          type="text"
-          value={name}
-          onChange={(e) => setName(e.target.value)}
-        />
+      <div className="card p-6">
+        <div className="flex flex-col gap-5">
+          <div>
+            <label className="font-bold">アニメ名</label>
+            <input
+              className="mt-2 w-full rounded border border-slate-300 px-3 py-2"
+              type="text"
+              value={name}
+              onChange={(e) => setName(e.target.value)}
+            />
+          </div>
+
+          <div>
+            <label className="font-bold">説明</label>
+            <textarea
+              className="mt-2 w-full rounded border border-slate-300 p-3"
+              rows={5}
+              value={description}
+              onChange={(e) => setDescription(e.target.value)}
+            />
+          </div>
+
+          <div>
+            <label className="font-bold">放送年</label>
+            <input
+              className="mt-2 w-full rounded border border-slate-300 px-3 py-2"
+              type="number"
+              value={releaseYear}
+              onChange={(e) => setReleaseYear(e.target.value)}
+            />
+          </div>
+
+          <button onClick={handleSubmit}>
+            更新する
+          </button>
+
+          <p>{message}</p>
+        </div>
       </div>
 
-      <br />
-
-      <div>
-        <label>説明</label>
-        <br />
-        <textarea
-          value={description}
-          onChange={(e) => setDescription(e.target.value)}
-        />
+      <div className="mt-6">
+        <Link
+          className="link"
+          href={`/animes/${id}?role=${role}&userId=${userId}`}
+        >
+          アニメ詳細に戻る
+        </Link>
       </div>
-
-      <br />
-
-      <div>
-        <label>放送年</label>
-        <br />
-        <input
-          type="number"
-          value={releaseYear}
-          onChange={(e) => setReleaseYear(e.target.value)}
-        />
-      </div>
-
-      <br />
-
-      <button onClick={handleSubmit}>
-        更新する
-      </button>
-
-      <p>{message}</p>
-
-      <br />
-
-      <Link
-        href={`/animes/${id}?role=${role}&userId=${userId}`}
-      >
-        アニメ詳細に戻る
-      </Link>
     </main>
   )
 }
