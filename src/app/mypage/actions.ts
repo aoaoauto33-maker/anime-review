@@ -1,3 +1,5 @@
+// マイページ画面に関するprisma操作
+
 'use server'
 
 import { prisma } from '@/lib/prisma'
@@ -17,6 +19,18 @@ export async function getMyReviews(userId: number) {
           anime: true,
         },
       },
+    },
+  })
+}
+
+// 自分のアニメ追加リクエストを取得
+export async function getMyRequests(userId: number) {
+  return await prisma.request.findMany({
+    where: {
+      userId,
+    },
+    orderBy: {
+      id: 'desc',
     },
   })
 }

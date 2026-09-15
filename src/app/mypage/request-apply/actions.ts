@@ -1,3 +1,4 @@
+// アニメ追加リクエストに関するprisma操作
 'use server'
 
 import { prisma } from '@/lib/prisma'

@@ -1,3 +1,5 @@
+// アニメ追加リクエスト画面(ルーティング&クライアント)
+// ルーティングとクライアントをまとめたのは、この画面にこれ以上機能が増えないと思ったから
 'use client'
 
 import { useState } from 'react'
@@ -9,30 +11,31 @@ import { createRequest } from './actions'
 
 export default function RequestApplyPage() {
   const router = useRouter()
-
   const userId = useAtomValue(userIdAtom)
-
   const [newAnimeName, setNewAnimeName] = useState('')
   const [reason, setReason] = useState('')
   const [message, setMessage] = useState('')
 
+  // リクエストを送信するを押すと実行される関数
   const handleSubmit = async () => {
+    // バリデーション
     if (!newAnimeName || !reason) {
       setMessage('アニメ名とリクエスト理由を入力してください')
       return
     }
-
     if (!userId) {
       setMessage('ユーザー情報が取得できません')
       return
     }
 
+    // actions.tsから呼び出した関数に値を入れてる
     const result = await createRequest(
       userId,
       newAnimeName,
       reason,
     )
 
+    // これページ遷移するから意味ない
     setMessage(result.message)
 
     if (result.success) {
