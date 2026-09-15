@@ -1,3 +1,4 @@
+// リクエスト承認に関するprisma操作
 'use server'
 
 import { prisma } from '@/lib/prisma'
@@ -28,6 +29,9 @@ export async function approveRequest(requestId: number) {
       },
     })
 
+    // そのページのキャッシュを無効にして、次に表示するときに最新のデータを取り直すようにする
+    // 何度もDBにアクセスすると効率が悪いため、通常最初に取得した時点でデータを一時保存しておく
+    // 値を変更したのでそれを消すメソッド
     revalidatePath('/mypage/request-approval')
 
     return {

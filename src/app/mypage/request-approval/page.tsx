@@ -1,4 +1,8 @@
+// リクエスト管理画面(ルーティング＆クライアント)
+// ルーティングとクライアントをまとめたのは、この画面にこれ以上機能が増えないと思ったから
+// あと途中でuse serverにしてたりするから
 import Link from 'next/link'
+// actions.tsからさまざまなリクエスト操作の関数をimport
 import {
   getRequests,
   approveRequest,
@@ -6,6 +10,9 @@ import {
   resetRequest,
 } from './actions'
 
+// リクエストのstatus状況をurlからpropsとして受け取る
+// (return内の未承認、承認済み、却下済み、追加済み)
+// 表示切り替えのときに使う
 type Props = {
   searchParams: Promise<{
     status?: string
