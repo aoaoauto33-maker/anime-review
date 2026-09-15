@@ -1,3 +1,5 @@
+// アニメ一覧ページ
+
 import { prisma } from '@/lib/prisma'
 import AnimeList from '@/components/AnimeList'
 import Link from 'next/link'

@@ -1,3 +1,4 @@
+// アニメ一覧ページ
 'use client'
 
 import Link from 'next/link'

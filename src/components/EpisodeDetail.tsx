@@ -1,17 +1,19 @@
+// エピソード詳細ページ
 'use client'
 
 import Link from 'next/link'
-// useRouter...この処理が実行されたら移動
+// useRouter...この処理が実行されたら移動、link...このリンクをクリックしたら移動
 import { useRouter } from 'next/navigation'
 import { useAtomValue } from 'jotai'
 import { userIdAtom, roleAtom } from '@/store/user'
 // レビューを削除する関数を持ってきている
 import { deleteReview } from '@/app/animes/[id]/episodes/[episodeId]/reviews/actions'
 
-// 
 type Props = {
+  // 下三つはurlから受け取ったid
   id: string
   episodeId: string
+  // prismaからDBのEPデータとして取得したid、episode={episode}の中身
   episode: {
     id: number
     episode_number: number
@@ -22,6 +24,7 @@ type Props = {
       name: string
     }
   }
+  // reviews={reviews}の中身
   reviews: {
     id: number
     userId: number
@@ -40,12 +43,13 @@ export default function EpisodeDetail({
   reviews,
 }: Props) {
   const router = useRouter()
-
   const userId = useAtomValue(userIdAtom)
   const role = useAtomValue(roleAtom)
 
+  // importしたactions.tsの関数を呼び出す
   const handleDelete = async (reviewId: number) => {
     const result = await deleteReview(
+      // どのreviewIdを削除するかはクリックしたときに初めてわかる
       reviewId,
       userId!,
       role!,
@@ -53,6 +57,7 @@ export default function EpisodeDetail({
     )
 
     if (result.success) {
+      // router.refresh()...今表示しているページのデータをもう一度取得して、画面を更新する
       router.refresh()
     } else {
       alert(result.message)
@@ -146,23 +151,14 @@ export default function EpisodeDetail({
         </div>
 
         <div className="mt-4">
-          <Link
-            className="link"
-            href={`/animes/${id}`}
-          >
-            アニメ詳細に戻る
-          </Link>
-        </div>
-
-        <div className="mt-4">
-          <Link
-            className="link"
-            href="/mypage"
-          >
-            マイページに戻る
-          </Link>
-        </div>
+        <Link
+          className="link"
+          href={`/animes/${id}`}
+        >
+          アニメ詳細に戻る
+        </Link>
       </div>
+     </div>
     </main>
   )
 }

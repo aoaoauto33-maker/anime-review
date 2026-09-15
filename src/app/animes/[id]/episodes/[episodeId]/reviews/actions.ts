@@ -88,6 +88,7 @@ export async function deleteReview(
     if (role !== 'admin') {
       const review = await prisma.review.findFirst({
         where: {
+          // ユーザーが押したレビューと一致するか＆投稿者と現在のユーザーが一致するかで検索している
           id: reviewId,
           userId: userId,
         },
