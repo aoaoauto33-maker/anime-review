@@ -1,11 +1,14 @@
 'use client'
 
 import Link from 'next/link'
+// useRouter...この処理が実行されたら移動
 import { useRouter } from 'next/navigation'
 import { useAtomValue } from 'jotai'
 import { userIdAtom, roleAtom } from '@/store/user'
+// レビューを削除する関数を持ってきている
 import { deleteReview } from '@/app/animes/[id]/episodes/[episodeId]/reviews/actions'
 
+// 
 type Props = {
   id: string
   episodeId: string

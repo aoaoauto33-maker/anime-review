@@ -10,6 +10,7 @@ type Anime = {
   image_url: string
   description: string | null
   release_year: number
+  // そのアニメのジャンルが複数の可能性もあるので配列
   taggings: {
     genreId: number
     animeId: number
@@ -18,6 +19,7 @@ type Anime = {
       name: string
     }
   }[]
+  // 一つのアニメに対してエピソードは複数あるので配列
   episodes: {
     id: number
     episode_number: number
@@ -27,6 +29,7 @@ type Anime = {
   }[]
 }
 
+// animes/[id]/page.tsxから渡されたpropsを受け取るための型
 type Props = {
   anime: Anime
   totalRating: number

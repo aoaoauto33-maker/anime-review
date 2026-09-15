@@ -1,9 +1,11 @@
 'use client'
 
 import Link from 'next/link'
+// useAtomValue...Atomの値を読み取るときに使う
 import { useAtomValue } from 'jotai'
 import { roleAtom } from '@/store/user'
 
+// アニメ一件分のデータの型
 type Anime = {
   id: number
   name: string
@@ -12,11 +14,13 @@ type Anime = {
   release_year: number
 }
 
+// Animeのデータを配列にまとめる型(animes/page.tsxから貰ってきたprops)
 type Props = {
   animes: Anime[]
 }
 
 export default function AnimeList({ animes }: Props) {
+  // user.tsから持ってきたroleAtomを読み取り専用で使う
   const role = useAtomValue(roleAtom)
 
   return (
