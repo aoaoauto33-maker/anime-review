@@ -1,3 +1,4 @@
+// レビューに関するprisma操作(サーバー)
 'use server'
 
 import { prisma } from '@/lib/prisma'
@@ -18,7 +19,6 @@ export async function createReview(
         comment,
       },
     })
-
     return {
       success: true,
       message: 'レビューを投稿しました',
@@ -30,6 +30,8 @@ export async function createReview(
     }
   }
 }
+
+
 
 // レビュー編集
 export async function updateReview(
@@ -46,14 +48,12 @@ export async function updateReview(
         userId: userId,
       },
     })
-
     if (!review) {
       return {
         success: false,
         message: 'このレビューを編集する権限がありません',
       }
     }
-
     // レビューを更新
     await prisma.review.update({
       where: {
@@ -64,7 +64,6 @@ export async function updateReview(
         comment,
       },
     })
-
     return {
       success: true,
       message: 'レビューを編集しました',
@@ -76,6 +75,8 @@ export async function updateReview(
     }
   }
 }
+
+
 
 // レビュー削除
 export async function deleteReview(

@@ -1,4 +1,4 @@
-// アニメ詳細ページ
+// アニメ詳細ページ(ルーティング)
 
 import { prisma } from '@/lib/prisma'
 import AnimeDetail from '@/components/AnimeDetail'

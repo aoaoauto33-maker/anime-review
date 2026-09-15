@@ -1,3 +1,5 @@
+// レビュー投稿ページ(ルーティング)
+
 import ReviewForm from '@/components/ReviewForm'
 
 type Props = {

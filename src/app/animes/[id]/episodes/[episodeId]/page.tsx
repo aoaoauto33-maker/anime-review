@@ -1,4 +1,4 @@
-// エピソード詳細ページ
+// エピソード詳細ページ(ルーティング)
 import { prisma } from '@/lib/prisma'
 import EpisodeDetail from '@/components/EpisodeDetail'
 

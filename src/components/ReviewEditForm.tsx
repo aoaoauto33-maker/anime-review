@@ -1,3 +1,4 @@
+// レビュー編集ページ
 'use client'
 
 import { useState } from 'react'
@@ -7,6 +8,7 @@ import { useAtomValue } from 'jotai'
 import { userIdAtom } from '@/store/user'
 import { updateReview } from '@/app/animes/[id]/episodes/[episodeId]/reviews/actions'
 
+// animes/[id]/episodes/[episodeId]/reviews/[reviewId]/edit/page.tsxから受け取るpropsの型
 type Props = {
   id: number
   episodeId: number
@@ -28,7 +30,6 @@ export default function ReviewEditForm({
   const [comment, setComment] = useState(initialComment)
   const [message, setMessage] = useState('')
   const router = useRouter()
-
   const userId = useAtomValue(userIdAtom)
 
   const handleSubmit = async () => {
@@ -36,22 +37,22 @@ export default function ReviewEditForm({
       setMessage('ユーザー情報がありません')
       return
     }
-
     if (userId !== reviewUserId) {
       setMessage('このレビューを編集する権限がありません')
       return
     }
-
     const result = await updateReview(
+      // propsで受け取った値
       reviewId,
+      // Atomに保存されてるuserId
       userId,
+      // ユーザーが入力した値
       rating,
       comment,
     )
-
     if (result.success) {
-      router.push(`/animes/${id}/episodes/${episodeId}`)
       // 更新成功したらエピソード詳細画面に戻る
+      router.push(`/animes/${id}/episodes/${episodeId}`)
     } else {
       setMessage(result.message)
     }

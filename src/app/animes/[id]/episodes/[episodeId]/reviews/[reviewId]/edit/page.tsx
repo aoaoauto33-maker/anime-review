@@ -1,3 +1,5 @@
+// レビュー編集ページ(ルーティング)
+
 import { prisma } from '@/lib/prisma'
 import ReviewEditForm from '@/components/ReviewEditForm'
 

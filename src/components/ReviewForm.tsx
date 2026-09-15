@@ -1,3 +1,5 @@
+// レビュー投稿ページ
+
 'use client'
 
 import { useState } from 'react'
@@ -6,7 +8,6 @@ import Link from 'next/link'
 import { useAtomValue } from 'jotai'
 import { userIdAtom } from '@/store/user'
 import { createReview } from '@/app/animes/[id]/episodes/[episodeId]/reviews/actions'
-// reviews/actions.tsで登録したレビュー投稿をimport
 
 type Props = {
   id: number
@@ -18,7 +19,6 @@ export default function ReviewForm({ id, episodeId }: Props) {
   const [comment, setComment] = useState('')
   const [message, setMessage] = useState('')
   const router = useRouter()
-
   const userId = useAtomValue(userIdAtom)
 
   const handleSubmit = async () => {
@@ -26,10 +26,9 @@ export default function ReviewForm({ id, episodeId }: Props) {
       setMessage('ユーザー情報がありません')
       return
     }
-
     const result = await createReview(userId, episodeId, rating, comment)
-    // createReviewに入力した値を送ってる
-    // サーバー側の操作なのでawaitで待ってあげる
+    // createReviewを呼び出して入力した値を入れてる
+    // userIdはAtomから持ってきた値、episodeIdは受け取ったprops
 
     if (result.success) {
       router.push(`/animes/${id}/episodes/${episodeId}`)
