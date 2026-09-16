@@ -9,9 +9,15 @@ export async function login(name: string) {
     },
   })
 
+  // Atomの方で
+  // export const userIdAtom = atom<number | null>(null)
+  // export const roleAtom = atom<string | null>(null)
+  // と定義しているのだから、失敗verにはnullを返してあげる必要がある
   if (!user) {
     return {
       success: false,
+      userId: null,
+      role: null,
     }
   }
 
