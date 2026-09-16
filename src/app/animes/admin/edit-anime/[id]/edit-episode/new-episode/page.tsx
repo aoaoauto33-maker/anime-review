@@ -1,3 +1,5 @@
+// エピソード登録画面(ルーティング＆クライアント)
+// ルーティングとクライアントをまとめたのは、この画面にこれ以上機能が増えないと思ったから
 'use client'
 
 import { useState } from 'react'
@@ -18,6 +20,7 @@ export default function NewEpisodePage() {
   const [message, setMessage] = useState('')
 
   const handleSubmit = async () => {
+    // バリデーション
     if (!episodeNumber || !title || !releaseDate) {
       setMessage('話数、タイトル、公開日を入力してください')
       return

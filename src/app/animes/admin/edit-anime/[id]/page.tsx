@@ -1,3 +1,5 @@
+// アニメ編集画面(ルーティング＆クライアント)
+// ルーティングとクライアントをまとめたのは、この画面にこれ以上機能が増えないと思ったから
 'use client'
 
 import { useEffect, useState } from 'react'
@@ -6,16 +8,24 @@ import Link from 'next/link'
 import { getAnime, updateAnime } from '@/app/animes/admin/actions'
 
 export default function EditAnimePage() {
-  const params = useParams()
-  const router = useRouter()
-
-  const id = params.id as string
-
   const [name, setName] = useState('')
   const [description, setDescription] = useState('')
   const [releaseYear, setReleaseYear] = useState('')
   const [message, setMessage] = useState('')
 
+  const router = useRouter()
+  // useParams...URLの動的な部分(動的ルートの値)を取得する
+  // ClientComponentとして動かしていて、URLの[id]を取得したいからuseParams()を使っている
+  const params = useParams()
+  // useParams()から取得したparams.idは、TypeScriptから見ると型がはっきりしないからas stringを使う
+  const id = params.id as string
+
+
+  // actions.tsから呼び出してアニメ情報を取得してそれをStateに保存する
+  // 依存配列が[id]なのでidが変わるたびに実行する
+  // なぜuseEffectなのか？ => このファイルはルーティングとクライアントがまとまっている
+  // ので、画面表示をした後にDB処理をするという設計にしたいから
+  // ルーティングとクライアントを分けた場合はuseEffectは使わなくてもいい
   useEffect(() => {
     const getAnimeData = async () => {
       const anime = await getAnime(Number(id))
@@ -29,9 +39,10 @@ export default function EditAnimePage() {
       setDescription(anime.description ?? '')
       setReleaseYear(String(anime.release_year))
     }
-
     getAnimeData()
   }, [id])
+
+
 
   const handleSubmit = async () => {
     const result = await updateAnime(

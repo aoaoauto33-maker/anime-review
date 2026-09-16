@@ -1,3 +1,5 @@
+// エピソード編集画面(ルーティング＆クライアント)
+// ルーティングとクライアントをまとめたのは、この画面にこれ以上機能が増えないと思ったから
 'use client'
 
 import { useEffect, useState } from 'react'

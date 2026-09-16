@@ -1,3 +1,4 @@
+// ログインに関するprisma操作
 'use server'
 
 import { prisma } from '@/lib/prisma'
