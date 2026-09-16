@@ -42,23 +42,27 @@ export async function createAnime(
   }
 }
 
-// リクエスト削除
-export async function deleteRequest(requestId: number) {
+
+// リクエストを登録済みに変更
+export async function markRequestAdded(requestId: number) {
   try {
-    await prisma.request.delete({
+    await prisma.request.update({
       where: {
         id: requestId,
+      },
+      data: {
+        status: 'added',
       },
     })
 
     return {
       success: true,
-      message: 'リクエストを削除しました',
+      message: 'リクエストを登録済みに変更しました',
     }
   } catch {
     return {
       success: false,
-      message: 'リクエストの削除に失敗しました',
+      message: 'リクエストの更新に失敗しました',
     }
   }
 }
@@ -176,27 +180,3 @@ export async function createEpisode(
   }
 }
 
-
-// リクエストを登録済みに変更
-export async function markRequestAdded(requestId: number) {
-  try {
-    await prisma.request.update({
-      where: {
-        id: requestId,
-      },
-      data: {
-        status: 'added',
-      },
-    })
-
-    return {
-      success: true,
-      message: 'リクエストを登録済みに変更しました',
-    }
-  } catch {
-    return {
-      success: false,
-      message: 'リクエストの更新に失敗しました',
-    }
-  }
-}

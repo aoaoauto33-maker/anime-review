@@ -35,7 +35,7 @@ export default function AnimeList({ animes }: Props) {
         <div className="mb-6">
           <Link
             className="inline-block rounded bg-blue-600 px-4 py-2 !text-white hover:bg-blue-700"
-            href="/animes/admin/new-anime"
+            href="/animes/admin/new-anime?from=animes"
           >
             新規アニメを登録する
           </Link>
