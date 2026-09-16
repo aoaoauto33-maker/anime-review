@@ -23,6 +23,8 @@ export default function ReviewEditForm({
   episodeId,
   reviewId,
   reviewUserId,
+  // これは分割代入の「リネーム（別名付け）」
+  // もらってきたものに別名をつけているだけ
   rating: initialRating,
   comment: initialComment,
 }: Props) {

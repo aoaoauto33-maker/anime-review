@@ -1,5 +1,7 @@
 // アニメ一覧ページ
+// JotaiのHookであるuseAtomValueを使っているため、Client Componentにする必要がある
 'use client'
+
 
 import Link from 'next/link'
 // useAtomValue...Atomの値を読み取るときに使う
@@ -32,8 +34,12 @@ export default function AnimeList({ animes }: Props) {
       <h1>アニメ一覧</h1>
 
       {role === 'admin' && (
+        // margin-bottom-6 その要素の外側の下に余白を作る、h1が余白を作ってるからmtはいらない
         <div className="mb-6">
           <Link
+          // inline-block...ボタンっぽくしてる rounded...角を丸くする bg-blue-600...背景を青にする
+          // px-4...左右に内側の余白をつける py-2...上下に内側の余白をつける
+          // !text-white...文字を白にする hover:bg-blue-700...マウスを少し乗せたとき、背景を少し濃い青にする
             className="inline-block rounded bg-blue-600 px-4 py-2 !text-white hover:bg-blue-700"
             href="/animes/admin/new-anime?from=animes"
           >
@@ -42,9 +48,12 @@ export default function AnimeList({ animes }: Props) {
         </div>
       )}
 
+      {/* grid...Gridレイアウトを使う grid-cols-5...横方向に5列作る gap-2...8px間を開ける */}
       <div className="grid grid-cols-5 gap-2">
         {animes.map((anime) => (
-          <div key={anime.id} className="card p-1 !mb-0">
+          // p-1...paddingを4pxにする 
+          <div key={anime.id} className="card p-1 ">
+            {/* m-o...<p> の外側の余白を全部0にする trancate...文字が長すぎる場合に「...」をつける*/}
             <p className="m-0 truncate">
               <Link
                 className="link"

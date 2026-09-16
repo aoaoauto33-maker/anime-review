@@ -14,6 +14,7 @@ body {
 
 h1 {
   font-size: 1.8rem;
+  /* 文字の太さ */
   font-weight: bold;
   color: #1e3a8a;
   margin-top: 0;
@@ -48,7 +49,9 @@ p {
 
 .card {
   background-color: white;
+  /* solid...実線 */
   border: 1px solid #cbd5e1;
+  /* 数字が大きいほど角が丸くなる */
   border-radius: 5px;
 }
 
@@ -62,6 +65,7 @@ p {
   text-decoration: none;
 }
 
+/* hover...マウスカーソルをその要素の上に乗せたときに適用される設定 */
 .link:hover {
   text-decoration: underline;
 }

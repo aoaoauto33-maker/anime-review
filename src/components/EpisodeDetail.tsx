@@ -47,6 +47,8 @@ export default function EpisodeDetail({
   const role = useAtomValue(roleAtom)
 
   // importしたactions.tsの関数を呼び出す
+  // ブラウザ上のクリックをきっかけに実行する処理なのでこっちに書くしかない
+  // client componentではprisma操作をかけないのでそのためにactions.tsを活用する
   const handleDelete = async (reviewId: number) => {
     const result = await deleteReview(
       // どのreviewIdを削除するかはクリックしたときに初めてわかる
@@ -58,6 +60,8 @@ export default function EpisodeDetail({
 
     if (result.success) {
       // router.refresh()...今表示しているページのデータをもう一度取得して、画面を更新する
+      // EpisodeDetailPageが再実行される
+      // 現在のルートに関係するServer Componentも再実行して、最新のサーバーデータを取り直す
       router.refresh()
     } else {
       alert(result.message)
@@ -65,6 +69,7 @@ export default function EpisodeDetail({
   }
 
   return (
+    // max-w-4xl  → 幅が4xlを超えないようにする
     <main className="max-w-4xl">
       <h1>{episode.anime.name}</h1>
 

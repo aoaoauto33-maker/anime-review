@@ -46,6 +46,7 @@ export default function ReviewForm({ id, episodeId }: Props) {
           <div>
             <p className="font-bold">評価</p>
             <select
+              // border...枠線を付ける slate...色の系統(青みのあるグレー) 300...色の濃さ
               className="rounded border border-slate-300 px-3 py-2"
               value={rating}
               onChange={(e) => setRating(Number(e.target.value))}
