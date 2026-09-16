@@ -23,6 +23,7 @@ export default function EditEpisodePage() {
   const [releaseDate, setReleaseDate] = useState('')
   const [message, setMessage] = useState('')
 
+  // 画面表示した後にこの処理を実行して、DBから返ってきたデータを反映させたいのでuseEffectを使う
   useEffect(() => {
     const getEpisodeData = async () => {
       const episode = await getEpisode(Number(episodeId))

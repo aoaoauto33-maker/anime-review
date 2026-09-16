@@ -11,6 +11,7 @@ export default function NewEpisodePage() {
   const params = useParams()
   const router = useRouter()
 
+  // アニメID
   const id = params.id as string
 
   const [episodeNumber, setEpisodeNumber] = useState('')
@@ -19,6 +20,9 @@ export default function NewEpisodePage() {
   const [releaseDate, setReleaseDate] = useState('')
   const [message, setMessage] = useState('')
 
+  // 今回はuseEffectは使わない
+  // 既存データを「取得して画面にセット」する → useEffect が必要になることがある
+  // 新規データを「入力してDBに登録」するだけ → useEffect は基本不要
   const handleSubmit = async () => {
     // バリデーション
     if (!episodeNumber || !title || !releaseDate) {
