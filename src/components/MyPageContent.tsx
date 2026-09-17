@@ -38,6 +38,7 @@ export default function MyPageContent() {
   const [requests, setRequests] = useState<Request[]>([])
 
   // userId が取得できたら、そのユーザーのレビューとリクエストをDBから取得する
+  // userIdを元にprisma操作をするのだが、そのuserIdがAtomからなのでReact側でやるしかない
   useEffect(() => {
     if (!userId) return
 

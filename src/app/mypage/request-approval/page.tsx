@@ -1,6 +1,5 @@
 // リクエスト管理画面(ルーティング＆クライアント)
 // ルーティングとクライアントをまとめたのは、この画面にこれ以上機能が増えないと思ったから
-// あと途中でuse serverにしてたりするから
 import Link from 'next/link'
 // actions.tsからさまざまなリクエスト操作の関数をimport
 import {
@@ -19,6 +18,7 @@ type Props = {
   }>
 }
 
+// サーバー側でもStateなどReact機能を使う必要がないなら画面表示を担当してもいい
 export default async function RequestApprovalPage({
   searchParams,
 }: Props) {
@@ -123,6 +123,9 @@ export default async function RequestApprovalPage({
                       </button>
                     </form>
 
+                      {/* fromを使ってるのはサーバー側でDBを変更する処理だから */}
+                      {/* form の action に Server Action を指定することで、その処理だけをサーバー側で実行できる */}
+                      {/* onClickはイベントハンドラーでクライアント側なので使えない */}
                     <form
                       action={async () => {
                         'use server'

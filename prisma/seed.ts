@@ -2,6 +2,7 @@
 
 import 'dotenv/config';
 // 副作用インポート:何も取り出さない
+// dotenv/configを読み込んだときに実行される処理そのものが欲しい
 import { PrismaPg } from '@prisma/adapter-pg';
 // 前インストールしたやつ、PrismaとPostgreSQLをつなぐためのアダプター
 import { PrismaClient } from '@/generated/prisma/client';
