@@ -53,9 +53,6 @@ export default function EpisodeDetail({
     const result = await deleteReview(
       // どのreviewIdを削除するかはクリックしたときに初めてわかる
       reviewId,
-      userId!,
-      role!,
-      // !...nullは絶対入りません！と教えている
     )
 
     if (result.success) {

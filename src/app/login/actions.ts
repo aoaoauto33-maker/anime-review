@@ -2,6 +2,7 @@
 'use server'
 
 import { prisma } from '@/lib/prisma'
+import { cookies } from 'next/headers'
 
 export async function login(name: string) {
   const user = await prisma.user.findFirst({
@@ -21,6 +22,16 @@ export async function login(name: string) {
       role: null,
     }
   }
+
+  // Cookieは非同期なのでawaitを使う必要がある
+  // userが存在する場合、Jotaiに返す前にCookieに保存する
+  // cookieStoreは「Cookieを操作するためのものを取得した」だけ
+  const cookieStore = await cookies()
+
+  // CookieにuserIdを保存する(roleは保存しちゃダメ)
+  // Cookieに保存する値は文字列として扱う
+  cookieStore.set('userId', user.id.toString())
+
 
   return {
     success: true,

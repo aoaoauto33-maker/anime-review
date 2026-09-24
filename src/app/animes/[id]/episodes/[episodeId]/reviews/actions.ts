@@ -2,6 +2,7 @@
 'use server'
 
 import { prisma } from '@/lib/prisma'
+import { cookies } from 'next/headers'
 
 // レビュー登録
 export async function createReview(
@@ -79,19 +80,45 @@ export async function updateReview(
 
 
 // レビュー削除
+// Jotaiは権限判定に使わず、サーバー側でCookie → ユーザー特定 → DBのrole確認をする
 export async function deleteReview(
   reviewId: number,
-  userId: number,
-  role?: string,
 ) {
   try {
-    // 一般ユーザーの場合は自分のレビューだけ削除できる
-    if (role !== 'admin') {
+    // 保存してあるCookieの取得 使うときはJotaiみたいに取得する必要がある
+    const cookieStore = await cookies()
+    const userId = Number(cookieStore.get('userId')?.value)
+
+    // CookieのuserIdからユーザー情報を取得(ここでroleを取得できる)
+    const user = await prisma.user.findUnique({
+       where: {
+        id: userId,
+      },
+    })
+
+    // ユーザーが見つからなかったらそのまま終了
+    if(!user){
+      return{
+        success: false,
+        message: 'ログインしてください'
+      }
+    }
+
+    // 成功の場合、取得したuserのroleからadminを判定
+    if(user?.role === 'admin'){
+        // 管理者ならどのレビューでも削除できる
+        await prisma.review.delete({
+          where: {
+            id: reviewId,
+          },
+        })
+    }else{
+      // adminじゃない場合はCookieとreviewのuserIdを一致させる必要がある
       const review = await prisma.review.findFirst({
         where: {
-          // ユーザーが押したレビューと一致するか＆投稿者と現在のユーザーが一致するかで検索している
           id: reviewId,
-          userId: userId,
+          // CookieのUserIdとrevuew.userIdが一致するか確認
+          userId: userId
         },
       })
 
@@ -101,15 +128,15 @@ export async function deleteReview(
           message: 'このレビューを削除する権限がありません',
         }
       }
+
+      // 管理者以外はCookieと一致するuserIdを持つレビューだけ消せる
+      await prisma.review.delete({
+        where: {
+          id: reviewId,
+        }
+      })
     }
-
-    // 管理者ならどのレビューでも削除できる
-    await prisma.review.delete({
-      where: {
-        id: reviewId,
-      },
-    })
-
+     
     return {
       success: true,
       message: 'レビューを削除しました',
