@@ -72,3 +72,15 @@ model Session {
 => migrateで履歴と実際にDBにテーブルを作成
 
 次に、実際にログイン時にSessionを作る処理を書いていく
+
+この流れの処理を書く
+ログイン
+ ↓
+Userを検索
+ ↓
+ランダムなsessionIdを生成
+ ↓
+Sessionテーブルに
+「sessionId ↔ userId」を保存
+ ↓
+sessionIdをCookieに保存

@@ -85,24 +85,41 @@ export async function deleteReview(
   reviewId: number,
 ) {
   try {
-    // 保存してあるCookieの取得 使うときはJotaiみたいに取得する必要がある
+    // 保存してあるCookieから取得(使うときはJotaiみたいに取得する必要がある)
     const cookieStore = await cookies()
-    const userId = Number(cookieStore.get('userId')?.value)
+    const sessionId = cookieStore.get('sessionId')?.value
 
-    // CookieのuserIdからユーザー情報を取得(ここでroleを取得できる)
-    const user = await prisma.user.findUnique({
-       where: {
-        id: userId,
+    if(!sessionId){
+      return{
+        success: false,
+        message: 'ログインしてください',
+      }
+    }
+
+    // Cookieから取得したsessionIdでDBにアクセスし、対応するuserIdを取得
+    const session = await prisma.session.findUnique({
+      where: {
+        id: sessionId,
       },
     })
 
-    // ユーザーが見つからなかったらそのまま終了
-    if(!user){
+    // セッションが見つからなかったらそのまま終了
+    if(!session || session.expiresAt < new Date()){
       return{
         success: false,
-        message: 'ログインしてください'
+        message: 'ログインしてください',
       }
     }
+
+    
+    const userId = session.userId
+
+    // sessionから取得したuserIdを使ってuser情報を取得
+    const user = await prisma.user.findUnique({
+      where: {
+        id: userId,
+      }
+    })
 
     // 成功の場合、取得したuserのroleからadminを判定
     if(user?.role === 'admin'){
