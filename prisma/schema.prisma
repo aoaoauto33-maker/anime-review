@@ -25,6 +25,7 @@ model User{
 
   reviews       Review[]
   requests      Request[]
+  sessions      Session[]
 }
 
 model Genre{
@@ -94,4 +95,13 @@ model Request{
   processed_at    DateTime?
 
   user           User      @relation(fields:[userId], references:[id])
+}
+
+model Session {
+  id        String     @id
+  userId    Int        
+  expiresAt DateTime
+  createdAt DateTime   @default(now())
+
+  user      User       @relation(fields:[userId], references: [id], onDelete: Cascade)
 }

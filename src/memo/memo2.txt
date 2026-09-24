@@ -1,0 +1,74 @@
+<課題>
+レビューの削除判定はサーバーで判定しなきゃいけない
+一般の人でもJotaiをいじることができる
+roleの管理の見直し
+
+レビューに文字数制限をかける
+長文だったら...で表示を制限
+
+レビューのactions.tsファイルにレビュー更新の処理が入れられているが、try.catchだとエラー本体を握りつぶしているのでエラーメッセージの固定化を直す
+
+
+
+
+----------------------------
+・Cookieについて
+Cookieにroleをそのまま入れて、それをサーバーが信用する形にはしない
+userIdはとりあえず入れてOK => cookieStore.set('userId', user.id.toString())
+
+やっぱuserIdそのままでは良くない(悪意のあるユーザーがブラウザで改竄できるから)
+    なんでブラウザからCookieをいじれるの？
+    => Cookieの実態は、ブラウザに保存されているデータだから
+    => Cookieをサーバー側で「読む」ことと、Cookieの値をサーバー側だけが「変更できる」ことは別
+
+=> そこでHttpOnlyというものを使う
+cookieStore.set('session', value, {
+  httpOnly: true,
+})
+これでJavaScriptからCookieを直接読むことはできなくなる
+しかし、これだけではユーザーがCookieそのものを完全に改竄できなくなるわけではない
+「Cookieを見られないようにする」
+        ↓
+HttpOnly
+
+「Cookieを勝手に変更しても意味がないようにする」
+        ↓
+署名・セッションなど
+
+
+
+そこで、本格的な認証に必要な「著名・セッション」を理解する必要がある
+ブラウザ
+  ↓
+改ざんしにくいセッション情報
+  ↓
+サーバー
+  ↓
+そのセッションから本当のユーザーを特定
+  ↓
+DB
+
+・これらは有効期限を決めるなどのセッションと一緒に使うと便利なものたち
+(セッションIDも盗まれて使われる可能性があるため)
+HttpOnly、Secure、SameSite
+
+セッションIDは推測しづらいランダムで複雑な値である必要がある
+
+
+
+----------------------------
+<実際にセッションを入れてみる>
+まずはSessionsテーブルを新しく作る
+model Session {
+  id        String     @id
+  userId    Int        
+  expiresAt DateTime
+  createdAt DateTime   @default(now())
+
+  user      User       @relation(fields:[userId], references: [id], onDelete: Cascade)
+}
+「onDelete: Cascade」は親のUserが退会などで削除されたら紐づいているSessionも自動的に削除するもの
+
+=> migrateで履歴と実際にDBにテーブルを作成
+
+次に、実際にログイン時にSessionを作る処理を書いていく
