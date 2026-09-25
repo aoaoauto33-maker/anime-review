@@ -4,6 +4,7 @@
 import Link from 'next/link'
 import { useAtomValue } from 'jotai'
 import { roleAtom } from '@/store/user'
+import Image from 'next/image'
 
 type Anime = {
   id: number
@@ -42,6 +43,15 @@ export default function AnimeDetail({ anime, totalRating }: Props) {
   return (
     <main>
       <h1>{anime.name}</h1>
+
+    <Image
+      src={anime.image_url}
+      alt={anime.name}
+      width={300}
+      height={400}
+      className="mb-8 object-cover"
+    />
+
 
       {/* p-4...カードの内側の余白を16pxにする */}
       <div className="card p-4">
