@@ -9,10 +9,46 @@ roleの管理の見直し
 レビューのactions.tsファイルにレビュー更新の処理が入れられているが、try.catchだとエラー本体を握りつぶしているのでエラーメッセージの固定化を直す
 
 
+<自主追加課題?>
+1.Logout
+SessionテーブルからSessionを削除
+Cookieを削除
+2.ログイン状態の確認処理を共通化
+sessionId → Session → User
+これをレビュー削除以外でも使えるようにする
+3.Cookieの設定
+httpOnly
+secure
+sameSite
+これは今すぐ全部理解しなくてもいい
+4.ログイン成功時のJotaiとの役割整理
+UI表示にはJotai
+本当の認証・権限判定はSession
+
+
+<発表までにやること優先順位>
+1.画像の保存とアニメ詳細画面で表示できるようにする
+クレヨンしんちゃん
+名探偵コナン
+ONE PIECE
+HUNTER×HUNTER
+薬屋のひとりごと
+鬼滅の刃
+進撃の巨人
+SPY×FAMILY
+呪術廻戦
+僕のヒーローアカデミア
+
+2,seed.tsに発表用の初期データを入れる
+3.課題2 文字数制限
+4.課題3 エラー処理の修正
+5.認証の続き
+6.時間があればアドレスとパスワードを追加(ハッシュ化も勉強)
+
 
 
 ----------------------------
-・Cookieについて
+<Cookieについて>
 Cookieにroleをそのまま入れて、それをサーバーが信用する形にはしない
 userIdはとりあえず入れてOK => cookieStore.set('userId', user.id.toString())
 
@@ -29,11 +65,11 @@ cookieStore.set('session', value, {
 しかし、これだけではユーザーがCookieそのものを完全に改竄できなくなるわけではない
 「Cookieを見られないようにする」
         ↓
-HttpOnly
+     HttpOnly
 
 「Cookieを勝手に変更しても意味がないようにする」
         ↓
-署名・セッションなど
+   署名・セッションなど
 
 
 
