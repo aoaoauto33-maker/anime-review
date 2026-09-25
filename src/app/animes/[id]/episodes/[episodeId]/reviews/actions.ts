@@ -11,6 +11,13 @@ export async function createReview(
   rating: number,
   comment: string,
 ) {
+  if (comment && comment.length > 500) {
+    return { 
+      success: false, 
+      message: 'コメントは500文字以内で入力してください。' 
+    }
+  }
+
   try {
     await prisma.review.create({
       data: {
@@ -20,6 +27,7 @@ export async function createReview(
         comment,
       },
     })
+
     return {
       success: true,
       message: 'レビューを投稿しました',
@@ -42,6 +50,12 @@ export async function updateReview(
   comment: string,
 ) {
   try {
+    if (comment && comment.length > 500) {
+      return {
+        success: false,
+        message: 'コメントは500文字以内で入力してください。',
+      }
+    }
     // 自分のレビューか確認
     const review = await prisma.review.findFirst({
       where: {
@@ -111,7 +125,7 @@ export async function deleteReview(
       }
     }
 
-    
+
     const userId = session.userId
 
     // sessionから取得したuserIdを使ってuser情報を取得

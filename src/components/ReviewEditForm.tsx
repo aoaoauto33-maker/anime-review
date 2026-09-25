@@ -89,6 +89,7 @@ export default function ReviewEditForm({
               value={comment}
               onChange={(e) => setComment(e.target.value)}
               placeholder="レビューを入力してください"
+              maxLength={500}
             />
           </div>
 

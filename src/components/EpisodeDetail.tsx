@@ -4,6 +4,7 @@
 import Link from 'next/link'
 // useRouter...この処理が実行されたら移動、link...このリンクをクリックしたら移動
 import { useRouter } from 'next/navigation'
+import { useState } from 'react'
 import { useAtomValue } from 'jotai'
 import { userIdAtom, roleAtom } from '@/store/user'
 // レビューを削除する関数を持ってきている
@@ -46,9 +47,12 @@ export default function EpisodeDetail({
   const userId = useAtomValue(userIdAtom)
   const role = useAtomValue(roleAtom)
 
+  // 現在「全文表示」しているレビューのID
+  const [showFullReviewId, setShowFullReviewId] = useState<number | null>(null)
+
   // importしたactions.tsの関数を呼び出す
-  // ブラウザ上のクリックをきっかけに実行する処理なのでこっちに書くしかない
-  // client componentではprisma操作をかけないのでそのためにactions.tsを活用する
+  // ブラウザ上のクリックをきっかけに実行する処理なのでこっちに書く
+  // client componentではprisma操作をかけないので、そのためにactions.tsを活用する
   const handleDelete = async (reviewId: number) => {
     const result = await deleteReview(
       // どのreviewIdを削除するかはクリックしたときに初めてわかる
@@ -66,7 +70,7 @@ export default function EpisodeDetail({
   }
 
   return (
-    // max-w-4xl  → 幅が4xlを超えないようにする
+    // max-w-4xl → 幅が4xlを超えないようにする
     <main className="max-w-4xl">
       <h1>{episode.anime.name}</h1>
 
@@ -109,7 +113,29 @@ export default function EpisodeDetail({
                   {'☆'.repeat(5 - review.rating)}
                 </p>
 
-                <p>{review.comment}</p>
+                <p
+                  className={
+                    showFullReviewId === review.id ? '' : 'line-clamp-3'
+                  }
+                >
+                  {review.comment}
+                </p>
+
+                {review.comment && review.comment.length > 80 && (
+                  <button
+                    type="button"
+                    className="!border-none !bg-transparent !p-0 !text-blue-600 !shadow-none hover:!bg-transparent"
+                    onClick={() =>
+                      setShowFullReviewId(
+                        showFullReviewId === review.id ? null : review.id,
+                      )
+                    }
+                  >
+                    {showFullReviewId === review.id
+                      ? '閉じる'
+                      : '全文を表示する'}
+                  </button>
+                )}
 
                 {review.userId === userId && (
                   <div className="mt-3 flex gap-3">
@@ -128,16 +154,15 @@ export default function EpisodeDetail({
                   </div>
                 )}
 
-                {role === 'admin' &&
-                  review.userId !== userId && (
-                    <div className="mt-3">
-                      <button
-                        onClick={() => handleDelete(review.id)}
-                      >
-                        削除
-                      </button>
-                    </div>
-                  )}
+                {role === 'admin' && review.userId !== userId && (
+                  <div className="mt-3">
+                    <button
+                      onClick={() => handleDelete(review.id)}
+                    >
+                      削除
+                    </button>
+                  </div>
+                )}
               </div>
             ))}
           </div>
@@ -153,14 +178,14 @@ export default function EpisodeDetail({
         </div>
 
         <div className="mt-4">
-        <Link
-          className="link"
-          href={`/animes/${id}`}
-        >
-          アニメ詳細に戻る
-        </Link>
+          <Link
+            className="link"
+            href={`/animes/${id}`}
+          >
+            アニメ詳細に戻る
+          </Link>
+        </div>
       </div>
-     </div>
     </main>
   )
 }
