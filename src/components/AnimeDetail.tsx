@@ -41,19 +41,18 @@ export default function AnimeDetail({ anime, totalRating }: Props) {
   const role = useAtomValue(roleAtom)
 
   return (
-    <main>
+    <main className="max-w-4xl">
       <h1>{anime.name}</h1>
 
-    <Image
-      src={anime.image_url}
-      alt={anime.name}
-      width={300}
-      height={400}
-      className="mb-8 object-cover"
-      // unoptimized
-    />
-
-
+      {anime.image_url && (
+        <Image
+          src={anime.image_url}
+          alt={anime.name}
+          width={300}
+          height={400}
+          className="mb-8 object-cover"
+        />
+      )}
 
       {/* p-4...カードの内側の余白を16pxにする */}
       <div className="card p-4">

@@ -38,7 +38,7 @@ model Genre{
 model Anime{
   id            Int         @id @default(autoincrement())
   name          String      @unique
-  image_url     String      @default("default_anime.png")
+  image_url     String      @default("/animes/default_anime.jpg")
   description   String?      
   release_year  Int
 
