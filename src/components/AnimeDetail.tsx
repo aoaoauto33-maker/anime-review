@@ -50,7 +50,9 @@ export default function AnimeDetail({ anime, totalRating }: Props) {
       width={300}
       height={400}
       className="mb-8 object-cover"
+      // unoptimized
     />
+
 
 
       {/* p-4...カードの内側の余白を16pxにする */}
