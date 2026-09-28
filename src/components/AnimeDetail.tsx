@@ -56,13 +56,17 @@ export default function AnimeDetail({ anime, totalRating }: Props) {
 
       {/* p-4...カードの内側の余白を16pxにする */}
       <div className="card p-4">
-        <h2>総合評価</h2>
-        <p>{totalRating}点 / 100点</p>
+        <h2>作品情報</h2>
+        <h3>総合評価</h3>
+        <p >{totalRating}点 / 100点</p>
 
-        <p>{anime.description}</p>
+        <h3>公開年</h3>
         <p>{anime.release_year}年</p>
 
-        <h2>ジャンル</h2>
+        <h3>あらすじ</h3>
+        <p>{anime.description}</p>
+
+        <h3>ジャンル</h3>
         {/* flex...横一列に並べる flex-wrap...横に入りきらなければ折り返す*/}
         <div className="flex flex-wrap gap-2">
           {anime.taggings.map((tagging) => (
