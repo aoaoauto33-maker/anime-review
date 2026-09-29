@@ -29,7 +29,7 @@ async function main(){
     // ユーザーを作成
     const user1 = await prisma.user.create({
         data: { 
-            name: '青木梢恵',
+            name: '青木',
             age: 22,
             gender: 'female',
             role: 'admin',
@@ -38,7 +38,7 @@ async function main(){
 
     const user2 = await prisma.user.create({
         data: { 
-            name: '関谷絵梨',
+            name: '関谷',
             age: 18,
             gender: 'female',
             role: 'user',
@@ -47,7 +47,7 @@ async function main(){
 
     const user3 = await prisma.user.create({
         data: { 
-            name: '竹内玲奈',
+            name: '竹内',
             age: 2,
             gender: 'female',
             role: 'user',
@@ -56,7 +56,7 @@ async function main(){
 
     const user4 = await prisma.user.create({
         data: { 
-            name: '増田侑奈',
+            name: '増田',
             age: 20,
             gender: 'female',
             role: 'user',
@@ -224,12 +224,12 @@ async function main(){
     });
 
     const anime5 = await prisma.anime.create({
-        data: {
-            name: '薬屋のひとりごと',
-            image_url: '/animes/kusuriya.jpg',
-            description: '後宮を舞台に薬師の猫猫がさまざまな事件の謎を解いていく物語',
-            release_year: 2023,
-        },
+    data: {
+        name: '宇宙戦艦ヤマト',
+        image_url: '/animes/yamato.jpg',
+        description: '宇宙戦艦ヤマトが宇宙を舞台にさまざまな困難に立ち向かう物語',
+        release_year: 1974,
+    },
     });
 
     const anime6 = await prisma.anime.create({
@@ -252,28 +252,28 @@ async function main(){
 
     const anime8 = await prisma.anime.create({
         data: {
-            name: 'SPY×FAMILY',
-            image_url: '/animes/spy-family.jpg',
-            description: 'スパイの父、殺し屋の母、超能力者の娘による仮初めの家族の日常を描いた物語',
-            release_year: 2022,
+            name: '機動戦士ガンダム',
+            image_url: '/animes/gundam.jpg',
+            description: '宇宙世紀を舞台に、少年アムロ・レイがモビルスーツに乗り、戦争に巻き込まれていく物語',
+            release_year: 1979,
         },
     });
 
     const anime9 = await prisma.anime.create({
         data: {
-            name: '呪術廻戦',
-            image_url: '/animes/jujutsu.jpg',
-            description: '呪いをめぐる戦いに身を投じる虎杖悠仁たちの物語',
-            release_year: 2020,
+            name: 'ドラゴンボール',
+            image_url: '/animes/dragonball.jpg',
+            description: '孫悟空たちがドラゴンボールを求めて冒険し、さまざまな強敵と戦いながら成長していく物語',
+            release_year: 1986,
         },
     });
 
     const anime10 = await prisma.anime.create({
         data: {
-            name: '僕のヒーローアカデミア',
-            image_url: '/animes/hero-aca.jpg',
-            description: '個性と呼ばれる特殊能力を持つ人々の世界で、ヒーローを目指す少年の物語',
-            release_year: 2016,
+            name: 'ルパン三世',
+            image_url: '/animes/lupin.jpg',
+            description: '怪盗ルパン三世と仲間たちが、世界各地で華麗な盗みや冒険を繰り広げる物語',
+            release_year: 1971,
         },
     });
 
@@ -352,24 +352,10 @@ async function main(){
         },
     });
 
-    // 薬屋のひとりごと：ミステリー、歴史・時代劇、サスペンス
+    // 宇宙戦艦ヤマト：SF
     await prisma.tagging.create({
         data: {
-            genreId: genre4.id,
-            animeId: anime5.id,
-        },
-    });
-
-    await prisma.tagging.create({
-        data: {
-            genreId: genre9.id,
-            animeId: anime5.id,
-        },
-    });
-
-    await prisma.tagging.create({
-        data: {
-            genreId: genre8.id,
+            genreId: genre10.id,
             animeId: anime5.id,
         },
     });
@@ -418,10 +404,10 @@ async function main(){
         },
     });
 
-    // SPY×FAMILY：コメディ、アクション、日常
+    // 機動戦士ガンダム：SF、アクション、バトル
     await prisma.tagging.create({
         data: {
-            genreId: genre2.id,
+            genreId: genre10.id,
             animeId: anime8.id,
         },
     });
@@ -435,12 +421,12 @@ async function main(){
 
     await prisma.tagging.create({
         data: {
-            genreId: genre7.id,
+            genreId: genre5.id,
             animeId: anime8.id,
         },
     });
 
-    // 呪術廻戦：アクション、バトル、ファンタジー
+    // ドラゴンボール：アクション、バトル、ファンタジー
     await prisma.tagging.create({
         data: {
             genreId: genre1.id,
@@ -462,7 +448,7 @@ async function main(){
         },
     });
 
-    // 僕のヒーローアカデミア：アクション、バトル、SF
+    // ルパン三世：アクション、コメディ、サスペンス
     await prisma.tagging.create({
         data: {
             genreId: genre1.id,
@@ -472,14 +458,14 @@ async function main(){
 
     await prisma.tagging.create({
         data: {
-            genreId: genre5.id,
+            genreId: genre2.id,
             animeId: anime10.id,
         },
     });
 
     await prisma.tagging.create({
         data: {
-            genreId: genre10.id,
+            genreId: genre8.id,
             animeId: anime10.id,
         },
     });
@@ -968,16 +954,15 @@ async function main(){
             release_date: new Date('2011-12-18'),
         },
     });
-
-
-    // 薬屋のひとりごとのエピソードを作成
+    
+    // 宇宙戦艦ヤマトのエピソードを作成
     const episode49 = await prisma.episode.create({
         data: {
             animeId: anime5.id,
             episode_number: 1,
-            title: '猫猫',
-            description: '花街で薬師として働いていた猫猫が人さらいに遭い、後宮で働くことになる',
-            release_date: new Date('2023-10-21'),
+            title: 'SOS地球!! 甦れ宇宙戦艦ヤマト',
+            description: '放射能汚染によって滅亡の危機に瀕した地球を救うため、宇宙戦艦ヤマトが旅立つ',
+            release_date: new Date('1974-10-06'),
         },
     });
 
@@ -985,9 +970,9 @@ async function main(){
         data: {
             animeId: anime5.id,
             episode_number: 2,
-            title: '無愛想な薬師',
-            description: '猫猫が後宮で働きながら、薬や毒に関する知識を活かしていく',
-            release_date: new Date('2023-10-28'),
+            title: '急げヤマト!! 地球は病んでいる',
+            description: 'ヤマトは地球を救うため、イスカンダルを目指して宇宙へ進む',
+            release_date: new Date('1974-10-13'),
         },
     });
 
@@ -995,9 +980,9 @@ async function main(){
         data: {
             animeId: anime5.id,
             episode_number: 3,
-            title: '幽霊騒ぎ',
-            description: '後宮で起こる不可解な出来事について猫猫が調べる',
-            release_date: new Date('2023-11-04'),
+            title: 'ヤマト発進',
+            description: '古代進たちはヤマトに乗り込み、地球を救うための長い航海を開始する',
+            release_date: new Date('1974-10-20'),
         },
     });
 
@@ -1005,9 +990,9 @@ async function main(){
         data: {
             animeId: anime5.id,
             episode_number: 4,
-            title: '恫喝',
-            description: '後宮での人間関係をめぐる問題に猫猫が巻き込まれる',
-            release_date: new Date('2023-11-11'),
+            title: '銀河の果てへ',
+            description: 'ヤマトは宇宙を進みながら、さまざまな危険や敵との戦いに遭遇する',
+            release_date: new Date('1974-10-27'),
         },
     });
 
@@ -1015,9 +1000,9 @@ async function main(){
         data: {
             animeId: anime5.id,
             episode_number: 5,
-            title: '暗殺計画',
-            description: '皇族をめぐる危険な事件の兆候を猫猫が察知する',
-            release_date: new Date('2023-11-18'),
+            title: '波動砲',
+            description: 'ヤマトの強力な兵器である波動砲の力が、航海の中で重要な役割を果たす',
+            release_date: new Date('1974-11-03'),
         },
     });
 
@@ -1025,9 +1010,9 @@ async function main(){
         data: {
             animeId: anime5.id,
             episode_number: 6,
-            title: '園遊会',
-            description: '園遊会が開かれ、猫猫が後宮の女性たちと関わることになる',
-            release_date: new Date('2023-11-25'),
+            title: 'ガミラスの攻撃',
+            description: 'ヤマトはガミラスの攻撃を受け、乗組員たちは厳しい戦いを強いられる',
+            release_date: new Date('1974-11-10'),
         },
     });
 
@@ -1035,9 +1020,9 @@ async function main(){
         data: {
             animeId: anime5.id,
             episode_number: 7,
-            title: '里帰り',
-            description: '園遊会の後、猫猫が花街での過去や周囲の人物と向き合う',
-            release_date: new Date('2023-12-02'),
+            title: '宇宙の戦い',
+            description: '地球への帰還を目指すヤマトは、宇宙で新たな敵との戦闘に挑む',
+            release_date: new Date('1974-11-17'),
         },
     });
 
@@ -1045,9 +1030,9 @@ async function main(){
         data: {
             animeId: anime5.id,
             episode_number: 8,
-            title: '蜂蜜',
-            description: '猫猫が蜂蜜をめぐる問題に関わり、後宮の事情を探る',
-            release_date: new Date('2023-12-09'),
+            title: 'イスカンダルを目指して',
+            description: 'ヤマトは放射能除去装置を求め、イスカンダルへの航海を続ける',
+            release_date: new Date('1974-11-24'),
         },
     });
 
@@ -1055,9 +1040,9 @@ async function main(){
         data: {
             animeId: anime5.id,
             episode_number: 9,
-            title: '自殺か他殺か',
-            description: '後宮で起きた事件について猫猫が状況を分析する',
-            release_date: new Date('2023-12-16'),
+            title: 'ガミラス星へ',
+            description: 'ヤマトはガミラスとの戦いを続けながら、目的地へと近づいていく',
+            release_date: new Date('1974-12-01'),
         },
     });
 
@@ -1065,9 +1050,9 @@ async function main(){
         data: {
             animeId: anime5.id,
             episode_number: 10,
-            title: '蜂蜜の謎',
-            description: '事件の手掛かりをもとに猫猫が隠された事情を探る',
-            release_date: new Date('2023-12-23'),
+            title: '決戦',
+            description: 'ヤマトの乗組員たちは地球の未来をかけた重要な戦いに挑む',
+            release_date: new Date('1974-12-08'),
         },
     });
 
@@ -1075,9 +1060,9 @@ async function main(){
         data: {
             animeId: anime5.id,
             episode_number: 11,
-            title: '賢者の書',
-            description: '後宮に関わる人物たちの思惑が複雑に絡み合っていく',
-            release_date: new Date('2024-01-06'),
+            title: 'イスカンダルへの道',
+            description: 'ヤマトは目的地であるイスカンダルへ向かい、最後の航海を続ける',
+            release_date: new Date('1974-12-15'),
         },
     });
 
@@ -1085,12 +1070,11 @@ async function main(){
         data: {
             animeId: anime5.id,
             episode_number: 12,
-            title: '宦官',
-            description: '猫猫が後宮で起こる新たな問題に関わることになる',
-            release_date: new Date('2024-01-13'),
+            title: '地球への帰還',
+            description: '使命を果たすため、ヤマトの乗組員たちは地球への帰還を目指す',
+            release_date: new Date('1974-12-22'),
         },
     });
-
 
     // 鬼滅の刃のエピソードを作成
     const episode61 = await prisma.episode.create({
@@ -1334,15 +1318,14 @@ async function main(){
         },
     });
 
-
-    // SPY×FAMILYのエピソードを作成
+    // 機動戦士ガンダムのエピソードを作成
     const episode85 = await prisma.episode.create({
         data: {
             animeId: anime8.id,
             episode_number: 1,
-            title: 'オペレーション〈梟ストリクス〉',
-            description: 'スパイのロイドが任務のためにアーニャを引き取り、偽装家族を作る',
-            release_date: new Date('2022-04-09'),
+            title: 'ガンダム大地に立つ!!',
+            description: 'サイド7でジオン軍の襲撃が始まり、少年アムロ・レイは偶然ガンダムに乗り込むことになる',
+            release_date: new Date('1979-04-07'),
         },
     });
 
@@ -1350,9 +1333,9 @@ async function main(){
         data: {
             animeId: anime8.id,
             episode_number: 2,
-            title: '妻役を確保せよ',
-            description: 'ロイドが任務のため妻役を探し、ヨルと偽装結婚する',
-            release_date: new Date('2022-04-16'),
+            title: 'ガンダム破壊命令',
+            description: 'ホワイトベースはジオン軍の追撃を受けながら、地球へ向けて航行を続ける',
+            release_date: new Date('1979-04-14'),
         },
     });
 
@@ -1360,9 +1343,9 @@ async function main(){
         data: {
             animeId: anime8.id,
             episode_number: 3,
-            title: '受験対策をせよ',
-            description: 'フォージャー家がイーデン校の面接試験に向けて準備する',
-            release_date: new Date('2022-04-23'),
+            title: '敵の補給艦を叩け！',
+            description: 'ホワイトベースはジオン軍の補給部隊を発見し、攻撃を仕掛ける',
+            release_date: new Date('1979-04-21'),
         },
     });
 
@@ -1370,9 +1353,9 @@ async function main(){
         data: {
             animeId: anime8.id,
             episode_number: 4,
-            title: '名門校面接試験',
-            description: 'アーニャのイーデン校入学をかけてフォージャー家が面接試験に挑む',
-            release_date: new Date('2022-04-30'),
+            title: 'ルナツー脱出作戦',
+            description: 'ホワイトベースの乗組員たちはルナツーを脱出し、地球へ向かう',
+            release_date: new Date('1979-04-28'),
         },
     });
 
@@ -1380,9 +1363,9 @@ async function main(){
         data: {
             animeId: anime8.id,
             episode_number: 5,
-            title: '合否の行方',
-            description: 'イーデン校の合否を待ちながら、フォージャー家が家族としての時間を過ごす',
-            release_date: new Date('2022-05-07'),
+            title: '大気圏突入',
+            description: 'ホワイトベースは地球への大気圏突入を試みるが、シャアの攻撃を受ける',
+            release_date: new Date('1979-05-05'),
         },
     });
 
@@ -1390,9 +1373,9 @@ async function main(){
         data: {
             animeId: anime8.id,
             episode_number: 6,
-            title: 'ナカヨシ作戦',
-            description: 'アーニャがイーデン校に入学し、友達を作るために行動する',
-            release_date: new Date('2022-05-14'),
+            title: 'ガルマ出撃す',
+            description: '地球に降りたホワイトベースは、ジオン軍のガルマ・ザビと戦うことになる',
+            release_date: new Date('1979-05-12'),
         },
     });
 
@@ -1400,9 +1383,9 @@ async function main(){
         data: {
             animeId: anime8.id,
             episode_number: 7,
-            title: '標的の次男',
-            description: 'アーニャがダミアンと関わりながら、学校生活を送る',
-            release_date: new Date('2022-05-21'),
+            title: 'コアファイター脱出せよ',
+            description: 'アムロたちは敵の攻撃を受けながら、ホワイトベースを守るために戦う',
+            release_date: new Date('1979-05-19'),
         },
     });
 
@@ -1410,9 +1393,9 @@ async function main(){
         data: {
             animeId: anime8.id,
             episode_number: 8,
-            title: '対秘密警察偽装作戦',
-            description: 'ロイドとヨルが互いの正体を隠しながら、家族として行動する',
-            release_date: new Date('2022-05-28'),
+            title: '戦場は荒野',
+            description: '地球の荒野を舞台に、ホワイトベース隊とジオン軍の戦闘が繰り広げられる',
+            release_date: new Date('1979-05-26'),
         },
     });
 
@@ -1420,9 +1403,9 @@ async function main(){
         data: {
             animeId: anime8.id,
             episode_number: 9,
-            title: 'ラブラブを見せつけよ',
-            description: 'ロイドとヨルが偽装夫婦として周囲に仲の良さを見せようとする',
-            release_date: new Date('2022-06-04'),
+            title: '翔べ！ガンダム',
+            description: 'アムロはガンダムのパイロットとして戦い続けながら、少しずつ成長していく',
+            release_date: new Date('1979-06-02'),
         },
     });
 
@@ -1430,9 +1413,9 @@ async function main(){
         data: {
             animeId: anime8.id,
             episode_number: 10,
-            title: 'ドッジボール大作戦',
-            description: 'アーニャたちが学校のドッジボール大会で活躍しようとする',
-            release_date: new Date('2022-06-11'),
+            title: 'ガルマ散る',
+            description: 'ガルマ・ザビをめぐる戦いが激化し、シャアの思惑も明らかになっていく',
+            release_date: new Date('1979-06-09'),
         },
     });
 
@@ -1440,9 +1423,9 @@ async function main(){
         data: {
             animeId: anime8.id,
             episode_number: 11,
-            title: '〈星〉',
-            description: 'アーニャが人命救助によって初めてのステラを獲得する',
-            release_date: new Date('2022-06-18'),
+            title: 'イセリナ、恋のあと',
+            description: 'ガルマを失ったイセリナがホワイトベース隊に復讐を挑む',
+            release_date: new Date('1979-06-16'),
         },
     });
 
@@ -1450,21 +1433,20 @@ async function main(){
         data: {
             animeId: anime8.id,
             episode_number: 12,
-            title: 'ペンギンパーク',
-            description: 'フォージャー家が水族館へ出かけ、ロイドが新たな任務に挑む',
-            release_date: new Date('2022-06-25'),
+            title: 'ジオンの脅威',
+            description: 'ホワイトベース隊は新たな戦いに備えながら、地球での旅を続けていく',
+            release_date: new Date('1979-06-23'),
         },
     });
 
-
-    // 呪術廻戦のエピソードを作成
+    // ドラゴンボールのエピソードを作成
     const episode97 = await prisma.episode.create({
         data: {
             animeId: anime9.id,
             episode_number: 1,
-            title: '両面宿儺',
-            description: '虎杖悠仁が呪いの危険に巻き込まれ、特級呪物の両面宿儺を取り込む',
-            release_date: new Date('2020-10-03'),
+            title: 'ブルマと孫悟空',
+            description: '山奥で暮らしていた孫悟空がブルマと出会い、ドラゴンボールを探す旅に出ることになる',
+            release_date: new Date('1986-02-26'),
         },
     });
 
@@ -1472,9 +1454,9 @@ async function main(){
         data: {
             animeId: anime9.id,
             episode_number: 2,
-            title: '自分のために',
-            description: '虎杖が東京都立呪術高等専門学校へ入学し、呪術師としての道を歩み始める',
-            release_date: new Date('2020-10-10'),
+            title: 'あらららー！ タマがない！',
+            description: '悟空とブルマはドラゴンボールを求めて旅を続け、さまざまな出来事に遭遇する',
+            release_date: new Date('1986-03-05'),
         },
     });
 
@@ -1482,9 +1464,9 @@ async function main(){
         data: {
             animeId: anime9.id,
             episode_number: 3,
-            title: '鉄骨娘',
-            description: '虎杖と伏黒が釘崎野薔薇と合流し、初めての任務に向かう',
-            release_date: new Date('2020-10-17'),
+            title: '亀仙人の海ガメ',
+            description: '悟空たちは海ガメを助けたことをきっかけに亀仙人と出会う',
+            release_date: new Date('1986-03-12'),
         },
     });
 
@@ -1492,9 +1474,9 @@ async function main(){
         data: {
             animeId: anime9.id,
             episode_number: 4,
-            title: '呪胎戴天',
-            description: '少年院で発生した呪胎の調査に虎杖たちが向かう',
-            release_date: new Date('2020-10-24'),
+            title: '人さらい妖怪ウーロン',
+            description: '悟空たちは村人を困らせている変身妖怪ウーロンと出会う',
+            release_date: new Date('1986-03-19'),
         },
     });
 
@@ -1502,9 +1484,9 @@ async function main(){
         data: {
             animeId: anime9.id,
             episode_number: 5,
-            title: '呪胎戴天－弐－',
-            description: '少年院で特級呪霊と戦い、虎杖が宿儺の力と向き合う',
-            release_date: new Date('2020-10-31'),
+            title: '強敵ヤムチャ登場',
+            description: '砂漠を旅する悟空たちの前に、盗賊ヤムチャが現れて戦いを挑む',
+            release_date: new Date('1986-03-26'),
         },
     });
 
@@ -1512,9 +1494,9 @@ async function main(){
         data: {
             animeId: anime9.id,
             episode_number: 6,
-            title: '雨後',
-            description: '虎杖の生存をめぐって呪術界が動き始め、伏黒たちは訓練を続ける',
-            release_date: new Date('2020-11-07'),
+            title: '真夜中の少女ブルマ',
+            description: '悟空たちはドラゴンボールを探しながら旅を続け、ヤムチャたちとの戦いに巻き込まれる',
+            release_date: new Date('1986-04-02'),
         },
     });
 
@@ -1522,9 +1504,9 @@ async function main(){
         data: {
             animeId: anime9.id,
             episode_number: 7,
-            title: '急襲',
-            description: '五条悟が特級呪霊の漏瑚と戦い、その圧倒的な実力を見せる',
-            release_date: new Date('2020-11-14'),
+            title: 'フライパン山の牛魔王',
+            description: '悟空たちはフライパン山を訪れ、牛魔王と出会ってドラゴンボールを探すことになる',
+            release_date: new Date('1986-04-09'),
         },
     });
 
@@ -1532,9 +1514,9 @@ async function main(){
         data: {
             animeId: anime9.id,
             episode_number: 8,
-            title: '退屈',
-            description: '京都校の東堂たちが登場し、虎杖たちとの関係が動き始める',
-            release_date: new Date('2020-11-21'),
+            title: '亀仙人のかめはめ波',
+            description: '悟空は亀仙人からかめはめ波を教わり、その驚異的な力を目の当たりにする',
+            release_date: new Date('1986-04-16'),
         },
     });
 
@@ -1542,9 +1524,9 @@ async function main(){
         data: {
             animeId: anime9.id,
             episode_number: 9,
-            title: '幼魚と逆罰',
-            description: '吉野順平を中心に新たな事件が始まり、真人の存在が浮かび上がる',
-            release_date: new Date('2020-11-28'),
+            title: 'うさぎ団参上',
+            description: '悟空たちの前にうさぎ団が現れ、街を騒がせる事件に巻き込まれる',
+            release_date: new Date('1986-04-23'),
         },
     });
 
@@ -1552,9 +1534,9 @@ async function main(){
         data: {
             animeId: anime9.id,
             episode_number: 10,
-            title: '無為転変',
-            description: '虎杖が順平と関わる中で、真人の術式による事件が起こる',
-            release_date: new Date('2020-12-05'),
+            title: 'ドラゴンボールを守れ！',
+            description: '悟空たちは集めたドラゴンボールを守りながら、さらなる冒険を続ける',
+            release_date: new Date('1986-04-30'),
         },
     });
 
@@ -1562,9 +1544,9 @@ async function main(){
         data: {
             animeId: anime9.id,
             episode_number: 11,
-            title: '固陋蠢愚',
-            description: '虎杖が真人との戦いに挑み、順平をめぐる事件の真相に迫る',
-            release_date: new Date('2020-12-12'),
+            title: '危険がいっぱい！',
+            description: 'ドラゴンボールを求める悟空たちは新たな敵や困難に立ち向かう',
+            release_date: new Date('1986-05-07'),
         },
     });
 
@@ -1572,20 +1554,21 @@ async function main(){
         data: {
             animeId: anime9.id,
             episode_number: 12,
-            title: 'いつかの君へ',
-            description: '虎杖が真人と対峙し、順平との出来事を通して呪いの残酷さを知る',
-            release_date: new Date('2020-12-19'),
+            title: 'オヤブンの恐怖',
+            description: '悟空たちはドラゴンボールをめぐる騒動に巻き込まれ、強敵との戦いに挑む',
+            release_date: new Date('1986-05-14'),
         },
     });
 
-    // 僕のヒーローアカデミアのエピソードを作成
+
+    // ルパン三世のエピソードを作成
     const episode109 = await prisma.episode.create({
         data: {
             animeId: anime10.id,
             episode_number: 1,
-            title: '緑谷出久：オリジン',
-            description: '無個性の緑谷出久がオールマイトと出会い、ヒーローを目指すきっかけを得る',
-            release_date: new Date('2016-04-03'),
+            title: 'ルパン三世颯爽登場',
+            description: '怪盗ルパン三世が華麗な盗みを繰り広げ、次元大介や銭形警部たちとの関わりが始まる',
+            release_date: new Date('1971-10-24'),
         },
     });
 
@@ -1593,9 +1576,9 @@ async function main(){
         data: {
             animeId: anime10.id,
             episode_number: 2,
-            title: 'ヒーローの条件',
-            description: '出久がオールマイトから個性を受け継ぐための特訓を始める',
-            release_date: new Date('2016-04-10'),
+            title: '魔術師と呼ばれた男',
+            description: 'ルパンは巧妙な罠を仕掛ける敵と対決し、仲間たちと協力して危機を乗り越える',
+            release_date: new Date('1971-10-31'),
         },
     });
 
@@ -1603,9 +1586,9 @@ async function main(){
         data: {
             animeId: anime10.id,
             episode_number: 3,
-            title: 'うなれ筋肉',
-            description: '出久が雄英高校の入試に向けて身体を鍛え、実技試験に挑む',
-            release_date: new Date('2016-04-17'),
+            title: 'さらば愛しき魔女',
+            description: 'ルパンは美しい女性をめぐる事件に巻き込まれ、危険な計画に立ち向かう',
+            release_date: new Date('1971-11-07'),
         },
     });
 
@@ -1613,9 +1596,9 @@ async function main(){
         data: {
             animeId: anime10.id,
             episode_number: 4,
-            title: 'スタートライン',
-            description: '雄英高校に入学した出久たちが、ヒーローとしての本格的な学校生活を始める',
-            release_date: new Date('2016-04-24'),
+            title: '脱獄のチャンスは一度',
+            description: 'ルパンは巧妙な方法で危険な場所からの脱出を試み、銭形警部との追跡劇を繰り広げる',
+            release_date: new Date('1971-11-14'),
         },
     });
 
@@ -1623,9 +1606,9 @@ async function main(){
         data: {
             animeId: anime10.id,
             episode_number: 5,
-            title: '今 僕に出来ることを',
-            description: '出久たちが個性把握テストに挑み、自分の力と向き合う',
-            release_date: new Date('2016-05-01'),
+            title: '十三代五ェ門登場',
+            description: 'ルパンの前に剣豪・石川五ェ門が現れ、二人は激しい戦いを繰り広げる',
+            release_date: new Date('1971-11-21'),
         },
     });
 
@@ -1633,9 +1616,9 @@ async function main(){
         data: {
             animeId: anime10.id,
             episode_number: 6,
-            title: '猛れクソナード',
-            description: '爆豪が出久に強い敵意を向け、二人の関係が大きく動き始める',
-            release_date: new Date('2016-05-08'),
+            title: '雨の午後はヤバイゼ',
+            description: 'ルパンたちは大きな財宝を狙うため、危険な計画を実行することになる',
+            release_date: new Date('1971-11-28'),
         },
     });
 
@@ -1643,9 +1626,9 @@ async function main(){
         data: {
             animeId: anime10.id,
             episode_number: 7,
-            title: 'デクvsかっちゃん',
-            description: '出久と爆豪が実戦形式の授業で対決し、それぞれの成長を見せる',
-            release_date: new Date('2016-05-15'),
+            title: '狼は狼を呼ぶ',
+            description: 'ルパンは宿敵との対決に挑み、華麗な盗みの技術を駆使して難局を切り抜ける',
+            release_date: new Date('1971-12-05'),
         },
     });
 
@@ -1653,9 +1636,9 @@ async function main(){
         data: {
             animeId: anime10.id,
             episode_number: 8,
-            title: 'スタートライン、爆豪の。',
-            description: '出久との戦いを終えた爆豪が、自分自身の弱さと向き合う',
-            release_date: new Date('2016-05-22'),
+            title: '全員集合トランプ作戦',
+            description: 'ルパンたちはトランプを使った大胆な作戦を立て、巨大な財宝を狙う',
+            release_date: new Date('1971-12-12'),
         },
     });
 
@@ -1663,9 +1646,9 @@ async function main(){
         data: {
             animeId: anime10.id,
             episode_number: 9,
-            title: 'いいぞガンバレ飯田くん！',
-            description: '雄英高校の生徒たちがそれぞれの目標を持ってヒーローとして成長していく',
-            release_date: new Date('2016-05-29'),
+            title: '殺し屋はブルースを歌う',
+            description: 'ルパンは凄腕の殺し屋と対峙し、危険な戦いに巻き込まれていく',
+            release_date: new Date('1971-12-19'),
         },
     });
 
@@ -1673,9 +1656,9 @@ async function main(){
         data: {
             animeId: anime10.id,
             episode_number: 10,
-            title: '未知との遭遇',
-            description: '雄英高校の生徒たちがUSJで救助訓練を行う中、ヴィランが襲撃する',
-            release_date: new Date('2016-06-05'),
+            title: 'ニセ札つくりを狙え！',
+            description: 'ルパンたちは巧妙な偽札作りをめぐる事件に挑み、敵の計画を阻止しようとする',
+            release_date: new Date('1971-12-26'),
         },
     });
 
@@ -1683,9 +1666,9 @@ async function main(){
         data: {
             animeId: anime10.id,
             episode_number: 11,
-            title: 'ゲームオーバー',
-            description: 'USJに侵入したヴィランたちと生徒たちが戦い、オールマイトも現場へ駆けつける',
-            release_date: new Date('2016-06-12'),
+            title: '7番目の橋が落ちるとき',
+            description: 'ルパンは危険な罠が仕掛けられた街で、財宝を手に入れるための作戦を開始する',
+            release_date: new Date('1972-01-02'),
         },
     });
 
@@ -1693,11 +1676,13 @@ async function main(){
         data: {
             animeId: anime10.id,
             episode_number: 12,
-            title: 'オールマイト',
-            description: 'オールマイトが脳無と激突し、出久たちも仲間を守るために戦う',
-            release_date: new Date('2016-06-19'),
+            title: '誰が最後に笑ったか',
+            description: 'ルパンたちは巧妙な計画を実行し、銭形警部との最後の追跡劇を繰り広げる',
+            release_date: new Date('1972-01-09'),
         },
     });
+
+
 
     // レビューを作成
     // クレヨンしんちゃんのレビューを作成
@@ -3285,191 +3270,119 @@ async function main(){
         },
     });
 
-    // 薬屋のひとりごとのレビューを作成
+    // 宇宙戦艦ヤマトのレビューを作成
 
     // 第1話
     await prisma.review.create({
         data: {
-            userId: user1.id,
+            userId: user7.id,
             episodeId: episode49.id,
             rating: 5,
-            comment: '猫猫の観察力が鋭くて面白い。後宮という舞台設定も独特で引き込まれた。',
+            comment: '地球の危機から始まる展開に引き込まれた。ヤマトの出発も印象的だった。',
         },
     });
 
     await prisma.review.create({
         data: {
-            userId: user2.id,
+            userId: user9.id,
             episodeId: episode49.id,
             rating: 4,
-            comment: '薬の知識を使って問題を解決していく展開が新鮮だった。',
-        },
-    });
-
-    await prisma.review.create({
-        data: {
-            userId: user5.id,
-            episodeId: episode49.id,
-            rating: 3,
-            comment: '雰囲気は好きだけど、最初は登場人物が多くて少し分かりにくかった。',
-        },
-    });
-
-    await prisma.review.create({
-        data: {
-            userId: user8.id,
-            episodeId: episode49.id,
-            rating: 5,
-            comment: '猫猫の淡々とした態度と周囲との温度差が面白い。続きが気になる。',
+            comment: '地球を救うために宇宙へ旅立つという設定が壮大で面白かった。',
         },
     });
 
     // 第2話
     await prisma.review.create({
         data: {
-            userId: user3.id,
-            episodeId: episode50.id,
-            rating: 4,
-            comment: '小さな違和感から問題を見抜いていくところが面白かった。',
-        },
-    });
-
-    await prisma.review.create({
-        data: {
-            userId: user4.id,
+            userId: user11.id,
             episodeId: episode50.id,
             rating: 5,
-            comment: '猫猫が自分から目立とうとしないのに事件を解決してしまうところが好き。',
+            comment: 'ヤマトが本格的に宇宙へ進み始め、これからの旅が楽しみになった。',
         },
     });
 
     await prisma.review.create({
         data: {
-            userId: user6.id,
+            userId: user10.id,
             episodeId: episode50.id,
-            rating: 2,
-            comment: '謎解きは面白いけど、今回は説明が少し多くてテンポが遅く感じた。',
+            rating: 4,
+            comment: '地球を救うという目的が分かりやすく、物語に入り込みやすかった。',
         },
     });
 
     // 第3話
     await prisma.review.create({
         data: {
-            userId: user1.id,
+            userId: user5.id,
             episodeId: episode51.id,
             rating: 5,
-            comment: '薬の知識が事件解決につながる流れが面白い。猫猫の推理も納得できた。',
+            comment: 'ヤマトの発進シーンが迫力があって印象に残った。',
         },
     });
 
     await prisma.review.create({
         data: {
-            userId: user7.id,
+            userId: user3.id,
             episodeId: episode51.id,
             rating: 4,
-            comment: '後宮の人間関係が少しずつ見えてきて、物語に深みが出てきた。',
-        },
-    });
-
-    await prisma.review.create({
-        data: {
-            userId: user9.id,
-            episodeId: episode51.id,
-            rating: 3,
-            comment: '話は面白かったけど、事件の内容が少し地味に感じた。',
+            comment: 'いよいよ本格的な宇宙旅行が始まり、物語が動き出した感じがした。',
         },
     });
 
     // 第4話
     await prisma.review.create({
         data: {
-            userId: user2.id,
-            episodeId: episode52.id,
-            rating: 5,
-            comment: '猫猫が証拠を見つけていく過程が面白い。知識をひけらかさないところもいい。',
-        },
-    });
-
-    await prisma.review.create({
-        data: {
-            userId: user5.id,
-            episodeId: episode52.id,
-            rating: 5,
-            comment: '事件の背景が分かってくるにつれて面白くなった。',
-        },
-    });
-
-    await prisma.review.create({
-        data: {
-            userId: user10.id,
-            episodeId: episode52.id,
-            rating: 3,
-            comment: '悪くないけど、もう少し意外な展開があるとよかった。',
-        },
-    });
-
-    await prisma.review.create({
-        data: {
-            userId: user11.id,
-            episodeId: episode52.id,
-            rating: 5,
-            comment: '猫猫の冷静な判断がかっこよかった。最後の真相にも納得できた。',
-        },
-    });
-
-    // 第5話
-    await prisma.review.create({
-        data: {
             userId: user1.id,
-            episodeId: episode53.id,
-            rating: 5,
-            comment: '事件の謎が少しずつつながっていく感じがよかった。続きが気になる。',
-        },
-    });
-
-    await prisma.review.create({
-        data: {
-            userId: user3.id,
-            episodeId: episode53.id,
-            rating: 5,
-            comment: '猫猫の薬師としての知識がしっかり活かされていて面白かった。',
-        },
-    });
-
-    await prisma.review.create({
-        data: {
-            userId: user8.id,
-            episodeId: episode53.id,
-            rating: 2,
-            comment: '今回は話の展開が遅く感じて、少し退屈だった。',
-        },
-    });
-
-    // 第6話
-    await prisma.review.create({
-        data: {
-            userId: user2.id,
-            episodeId: episode54.id,
-            rating: 5,
-            comment: '人の行動から薬の影響を考えていくところが面白い。推理ものとして楽しめた。',
-        },
-    });
-
-    await prisma.review.create({
-        data: {
-            userId: user4.id,
-            episodeId: episode54.id,
-            rating: 5,
-            comment: '猫猫の知識が事件を解く鍵になるのが気持ちいい。',
+            episodeId: episode52.id,
+            rating: 4,
+            comment: '宇宙を進む中で少しずつ危険が増えてきて、緊張感が出てきた。',
         },
     });
 
     await prisma.review.create({
         data: {
             userId: user6.id,
+            episodeId: episode52.id,
+            rating: 5,
+            comment: '広大な宇宙を舞台にした展開が面白く、世界観を楽しめた。',
+        },
+    });
+
+    await prisma.review.create({
+        data: {
+            userId: user3.id,
+            episodeId: episode52.id,
+            rating: 4,
+            comment: 'ヤマトの旅が簡単ではないことが分かり、続きが気になった。',
+        },
+    });
+
+    // 第5話
+    await prisma.review.create({
+        data: {
+            userId: user7.id,
+            episodeId: episode53.id,
+            rating: 5,
+            comment: '波動砲の登場がとても印象的だった。ヤマトの強さがよく分かる回だった。',
+        },
+    });
+
+    await prisma.review.create({
+        data: {
+            userId: user2.id,
+            episodeId: episode53.id,
+            rating: 4,
+            comment: 'ヤマトならではの兵器が登場して、SFらしさを強く感じた。',
+        },
+    });
+
+    // 第6話
+    await prisma.review.create({
+        data: {
+            userId: user8.id,
             episodeId: episode54.id,
-            rating: 3,
-            comment: '内容は面白いけど、少し話が難しくて一度では理解しにくかった。',
+            rating: 5,
+            comment: 'ガミラスとの戦いが本格化して、戦闘シーンを楽しめた。',
         },
     });
 
@@ -3477,18 +3390,18 @@ async function main(){
         data: {
             userId: user9.id,
             episodeId: episode54.id,
-            rating: 5,
-            comment: '真相に近づいていく緊張感がよかった。最後まで集中して見られた。',
+            rating: 4,
+            comment: '敵との戦いだけでなく、乗組員たちの緊張感も伝わってきて面白かった。',
         },
     });
 
     // 第7話
     await prisma.review.create({
         data: {
-            userId: user1.id,
+            userId: user10.id,
             episodeId: episode55.id,
-            rating: 5,
-            comment: '猫猫が周囲の人たちを観察しているだけでも面白い。細かい伏線も気になる。',
+            rating: 4,
+            comment: '宇宙での戦闘が続き、ヤマトの旅が簡単ではないことがよく分かった。',
         },
     });
 
@@ -3496,82 +3409,46 @@ async function main(){
         data: {
             userId: user5.id,
             episodeId: episode55.id,
-            rating: 4,
-            comment: '後宮の複雑な人間関係が見えてきて、事件以外の部分も楽しめた。',
-        },
-    });
-
-    await prisma.review.create({
-        data: {
-            userId: user7.id,
-            episodeId: episode55.id,
-            rating: 3,
-            comment: '雰囲気は好きだけど、今回は少し動きが少なかった。',
+            rating: 5,
+            comment: '戦闘シーンに迫力があり、ヤマトの乗組員たちの活躍も楽しめた。',
         },
     });
 
     // 第8話
     await prisma.review.create({
         data: {
-            userId: user3.id,
+            userId: user6.id,
             episodeId: episode56.id,
             rating: 5,
-            comment: '猫猫が自分の知識を使って問題を解決するところが相変わらず面白い。',
+            comment: 'イスカンダルという目的地がより重要になり、旅の目的がはっきりしてきた。',
         },
     });
 
     await prisma.review.create({
         data: {
-            userId: user4.id,
+            userId: user9.id,
             episodeId: episode56.id,
-            rating: 5,
-            comment: '謎の答えが分かったときに、それまでの出来事がつながる感じがよかった。',
-        },
-    });
-
-    await prisma.review.create({
-        data: {
-            userId: user10.id,
-            episodeId: episode56.id,
-            rating: 2,
-            comment: '今回は話が少し分かりにくかった。もう少し説明がほしかった。',
-        },
-    });
-
-    await prisma.review.create({
-        data: {
-            userId: user11.id,
-            episodeId: episode56.id,
-            rating: 5,
-            comment: '後宮ならではの問題を扱っていて、この作品らしさが出ていた。',
+            rating: 4,
+            comment: '地球を救うためにイスカンダルを目指すという設定が面白い。',
         },
     });
 
     // 第9話
     await prisma.review.create({
         data: {
-            userId: user1.id,
+            userId: user6.id,
             episodeId: episode57.id,
             rating: 5,
-            comment: '事件の背景にある人間関係が分かってくるのが面白かった。',
+            comment: 'ガミラスとの戦いが続き、物語の緊張感もさらに増してきた。',
         },
     });
 
     await prisma.review.create({
         data: {
-            userId: user2.id,
-            episodeId: episode57.id,
-            rating: 5,
-            comment: '猫猫の推理が鋭くて気持ちいい。何気ない情報から答えを出すのがすごい。',
-        },
-    });
-
-    await prisma.review.create({
-        data: {
-            userId: user8.id,
+            userId: user11.id,
             episodeId: episode57.id,
             rating: 4,
-            comment: '推理は面白いけど、今回は少し地味な印象だった。',
+            comment: '宇宙での戦闘と物語の展開のバランスがよく、楽しんで見ることができた。',
         },
     });
 
@@ -3581,25 +3458,7 @@ async function main(){
             userId: user3.id,
             episodeId: episode58.id,
             rating: 5,
-            comment: '事件の真相が明らかになっていく展開が面白かった。伏線もきれいにつながった。',
-        },
-    });
-
-    await prisma.review.create({
-        data: {
-            userId: user5.id,
-            episodeId: episode58.id,
-            rating: 5,
-            comment: '猫猫の知識と観察力がしっかり活かされていて満足できた。',
-        },
-    });
-
-    await prisma.review.create({
-        data: {
-            userId: user6.id,
-            episodeId: episode58.id,
-            rating: 4,
-            comment: '面白かったけど、事件の内容が少し重たく感じた。',
+            comment: '重要な戦いということで緊張感があり、最後まで目が離せなかった。',
         },
     });
 
@@ -3607,46 +3466,55 @@ async function main(){
         data: {
             userId: user9.id,
             episodeId: episode58.id,
+            rating: 4,
+            comment: 'ヤマトの乗組員たちが協力して戦う姿が印象に残った。',
+        },
+    });
+
+    await prisma.review.create({
+        data: {
+            userId: user10.id,
+            episodeId: episode58.id,
             rating: 5,
-            comment: '最後の推理がよかった。猫猫が事件を解いていく過程をもっと見たくなった。',
+            comment: '戦闘シーンに迫力があり、物語も大きく動いたように感じた。',
         },
     });
 
     // 第11話
     await prisma.review.create({
         data: {
-            userId: user1.id,
+            userId: user11.id,
             episodeId: episode59.id,
             rating: 5,
-            comment: '猫猫と周囲の人物との距離感が少しずつ変わってきているのが面白い。',
+            comment: 'イスカンダルへの到着が近づいてきて、ここまでの旅を振り返ると感慨深かった。',
         },
     });
 
     await prisma.review.create({
         data: {
-            userId: user4.id,
+            userId: user3.id,
             episodeId: episode59.id,
-            rating: 5,
-            comment: '事件だけでなくキャラクター同士のやり取りも楽しめるようになってきた。',
-        },
-    });
-
-    await prisma.review.create({
-        data: {
-            userId: user7.id,
-            episodeId: episode59.id,
-            rating: 3,
-            comment: '今回は個人的にあまり盛り上がらなかった。展開が少し遅く感じた。',
+            rating: 4,
+            comment: '長い旅を続けてきたヤマトが目的地に近づいていく展開が良かった。',
         },
     });
 
     // 第12話
     await prisma.review.create({
         data: {
-            userId: user2.id,
+            userId: user1.id,
             episodeId: episode60.id,
             rating: 5,
-            comment: '最後まで見て、これまでの出来事がつながっていく感じがよかった。',
+            comment: 'ここまでの旅を経て地球へ戻ろうとする展開に達成感を感じた。',
+        },
+    });
+
+    await prisma.review.create({
+        data: {
+            userId: user7.id,
+            episodeId: episode60.id,
+            rating: 5,
+            comment: 'ヤマトの長い旅が一区切りつき、最後まで楽しむことができた。',
         },
     });
 
@@ -3654,26 +3522,8 @@ async function main(){
         data: {
             userId: user3.id,
             episodeId: episode60.id,
-            rating: 5,
-            comment: '猫猫の推理力がしっかり活かされていて、最後まで楽しめた。',
-        },
-    });
-
-    await prisma.review.create({
-        data: {
-            userId: user8.id,
-            episodeId: episode60.id,
             rating: 4,
-            comment: '話はまとまっていたけど、もう少し大きな展開がほしかった。',
-        },
-    });
-
-    await prisma.review.create({
-        data: {
-            userId: user10.id,
-            episodeId: episode60.id,
-            rating: 5,
-            comment: '後宮という特殊な舞台を活かした事件が面白い。続きも見たくなった。',
+            comment: '地球への帰還に向かう展開が印象的で、最後まで見届けたくなった。',
         },
     });
 
@@ -4461,15 +4311,15 @@ async function main(){
         },
     });
 
-    // SPY×FAMILYのレビューを作成
+    // 機動戦士ガンダムのレビューを作成
 
     // 第1話
     await prisma.review.create({
         data: {
-            userId: user1.id,
+            userId: user11.id,
             episodeId: episode85.id,
             rating: 5,
-            comment: 'スパイと殺し屋と超能力者が家族になる設定が面白い。テンポもよかった。',
+            comment: 'アムロがガンダムに乗り込む展開が印象的だった。最初から緊張感があって面白い。',
         },
     });
 
@@ -4478,156 +4328,93 @@ async function main(){
             userId: user2.id,
             episodeId: episode85.id,
             rating: 4,
-            comment: 'それぞれが秘密を抱えているのに普通の家族として生活しているのが面白かった。',
-        },
-    });
-
-    await prisma.review.create({
-        data: {
-            userId: user6.id,
-            episodeId: episode85.id,
-            rating: 3,
-            comment: '設定は面白いけど、最初は少し展開が急に感じた。',
-        },
-    });
-
-    await prisma.review.create({
-        data: {
-            userId: user8.id,
-            episodeId: episode85.id,
-            rating: 5,
-            comment: 'アーニャの反応がかわいくて、重い設定なのに楽しく見られた。',
+            comment: '戦争に巻き込まれていく少年たちの姿が描かれていて、物語に引き込まれた。',
         },
     });
 
     // 第2話
     await prisma.review.create({
         data: {
-            userId: user3.id,
-            episodeId: episode86.id,
-            rating: 5,
-            comment: 'ヨルの戦闘能力が想像以上で驚いた。家族とのギャップも面白い。',
-        },
-    });
-
-    await prisma.review.create({
-        data: {
-            userId: user4.id,
-            episodeId: episode86.id,
-            rating: 4,
-            comment: 'それぞれの正体を知らないまま家族が成立しているところが楽しい。',
-        },
-    });
-
-    await prisma.review.create({
-        data: {
-            userId: user9.id,
-            episodeId: episode86.id,
-            rating: 3,
-            comment: '面白いけど、ヨルの行動が少し現実離れしすぎていると感じた。',
-        },
-    });
-
-    // 第3話
-    await prisma.review.create({
-        data: {
             userId: user1.id,
-            episodeId: episode87.id,
-            rating: 4,
-            comment: '家族として少しずつ距離が近づいていく感じがよかった。',
-        },
-    });
-
-    await prisma.review.create({
-        data: {
-            userId: user5.id,
-            episodeId: episode87.id,
+            episodeId: episode86.id,
             rating: 5,
-            comment: 'アーニャの表情が面白くて何度も笑った。気軽に見られる回だった。',
-        },
-    });
-
-    await prisma.review.create({
-        data: {
-            userId: user10.id,
-            episodeId: episode87.id,
-            rating: 3,
-            comment: 'コメディ中心で楽しいけど、今回は少し話の進みが遅く感じた。',
-        },
-    });
-
-    // 第4話
-    await prisma.review.create({
-        data: {
-            userId: user2.id,
-            episodeId: episode88.id,
-            rating: 5,
-            comment: 'アーニャが頑張っている姿がかわいかった。家族のやり取りも面白い。',
-        },
-    });
-
-    await prisma.review.create({
-        data: {
-            userId: user4.id,
-            episodeId: episode88.id,
-            rating: 4,
-            comment: 'ロイドが完璧に見えて意外と苦労しているところが面白かった。',
-        },
-    });
-
-    await prisma.review.create({
-        data: {
-            userId: user7.id,
-            episodeId: episode88.id,
-            rating: 4,
-            comment: '面白いけど、コメディが中心なので好みは分かれそうだと思った。',
-        },
-    });
-
-    await prisma.review.create({
-        data: {
-            userId: user11.id,
-            episodeId: episode88.id,
-            rating: 5,
-            comment: '家族それぞれの勘違いがうまく噛み合っていて笑えた。',
-        },
-    });
-
-    // 第5話
-    await prisma.review.create({
-        data: {
-            userId: user3.id,
-            episodeId: episode89.id,
-            rating: 5,
-            comment: 'アーニャとロイドのやり取りが特に面白かった。二人の関係が好き。',
-        },
-    });
-
-    await prisma.review.create({
-        data: {
-            userId: user6.id,
-            episodeId: episode89.id,
-            rating: 4,
-            comment: 'テンポがよくて見やすかった。短い話でもしっかり楽しめた。',
+            comment: 'ホワイトベースが追われながら戦う展開が面白かった。ガンダムの戦闘も迫力がある。',
         },
     });
 
     await prisma.review.create({
         data: {
             userId: user8.id,
+            episodeId: episode86.id,
+            rating: 4,
+            comment: '敵から逃げながら戦い続ける緊張感があり、続きが気になった。',
+        },
+    });
+
+    // 第3話
+    await prisma.review.create({
+        data: {
+            userId: user9.id,
+            episodeId: episode87.id,
+            rating: 4,
+            comment: '敵の補給部隊を狙うという作戦が面白かった。戦闘の駆け引きも楽しめた。',
+        },
+    });
+
+    await prisma.review.create({
+        data: {
+            userId: user10.id,
+            episodeId: episode87.id,
+            rating: 5,
+            comment: 'ガンダムだけでなくホワイトベース全体で戦うところが印象に残った。',
+        },
+    });
+
+    // 第4話
+    await prisma.review.create({
+        data: {
+            userId: user5.id,
+            episodeId: episode88.id,
+            rating: 4,
+            comment: 'ルナツーから脱出する展開に緊張感があり、テンポよく楽しめた。',
+        },
+    });
+
+    await prisma.review.create({
+        data: {
+            userId: user6.id,
+            episodeId: episode88.id,
+            rating: 5,
+            comment: '乗組員たちが協力して困難を乗り越えるところが面白かった。',
+        },
+    });
+
+    // 第5話
+    await prisma.review.create({
+        data: {
+            userId: user7.id,
             episodeId: episode89.id,
-            rating: 2,
-            comment: '今回は少しギャグが多すぎて、個人的にはあまりハマらなかった。',
+            rating: 5,
+            comment: '大気圏突入という危険な状況での戦闘が迫力満点だった。',
+        },
+    });
+
+    await prisma.review.create({
+        data: {
+            userId: user9.id,
+            episodeId: episode89.id,
+            rating: 4,
+            comment: '宇宙から地球へ降りる場面が印象的で、緊張感のある回だった。',
         },
     });
 
     // 第6話
     await prisma.review.create({
         data: {
-            userId: user1.id,
+            userId: user7.id,
             episodeId: episode90.id,
             rating: 5,
-            comment: '学校でのアーニャの行動が面白かった。周りのキャラクターも魅力的。',
+            comment: 'ガルマ・ザビが登場して、ジオン側の人物にも興味が湧いてきた。',
         },
     });
 
@@ -4636,53 +4423,26 @@ async function main(){
             userId: user4.id,
             episodeId: episode90.id,
             rating: 4,
-            comment: 'アーニャが一生懸命なのが伝わってきて応援したくなった。',
-        },
-    });
-
-    await prisma.review.create({
-        data: {
-            userId: user9.id,
-            episodeId: episode90.id,
-            rating: 3,
-            comment: '楽しい回だったけど、もう少しストーリーが進んでほしいとも感じた。',
-        },
-    });
-
-    await prisma.review.create({
-        data: {
-            userId: user10.id,
-            episodeId: episode90.id,
-            rating: 5,
-            comment: '学校での人間関係が少しずつ広がっていて面白い。',
+            comment: '地球での戦闘が始まり、宇宙とは違った雰囲気を楽しめた。',
         },
     });
 
     // 第7話
     await prisma.review.create({
         data: {
-            userId: user2.id,
-            episodeId: episode91.id,
-            rating: 5,
-            comment: 'アーニャの頑張りがかわいくてよかった。周囲とのやり取りも面白い。',
-        },
-    });
-
-    await prisma.review.create({
-        data: {
-            userId: user5.id,
+            userId: user8.id,
             episodeId: episode91.id,
             rating: 4,
-            comment: '家族だけではなく学校のキャラクターも増えて、さらに楽しくなってきた。',
+            comment: 'アムロたちが戦いを続けながら成長していく様子が面白かった。',
         },
     });
 
     await prisma.review.create({
         data: {
-            userId: user7.id,
+            userId: user10.id,
             episodeId: episode91.id,
-            rating: 3,
-            comment: 'キャラクターは好きだけど、今回は少し話が単調に感じた。',
+            rating: 5,
+            comment: '戦闘シーンに迫力があり、ガンダムの活躍を楽しめた。',
         },
     });
 
@@ -4692,44 +4452,26 @@ async function main(){
             userId: user1.id,
             episodeId: episode92.id,
             rating: 5,
-            comment: 'ロイドのスパイとしての能力と父親としての行動の差が面白かった。',
+            comment: '荒野を舞台にした戦闘が印象的だった。地球での戦争らしさも感じられた。',
         },
     });
 
     await prisma.review.create({
         data: {
-            userId: user3.id,
-            episodeId: episode92.id,
-            rating: 5,
-            comment: 'アーニャの超能力が話を動かしているところが面白かった。',
-        },
-    });
-
-    await prisma.review.create({
-        data: {
-            userId: user11.id,
-            episodeId: episode92.id,
-            rating: 3,
-            comment: '今回は少しギャグの展開が読めてしまって、そこまで楽しめなかった。',
-        },
-    });
-
-    await prisma.review.create({
-        data: {
-            userId: user6.id,
+            userId: user8.id,
             episodeId: episode92.id,
             rating: 4,
-            comment: '家族全員の秘密がうまく絡んでいて、この作品らしい展開だった。',
+            comment: '敵との戦いが激しくなってきて、物語の緊張感が増している。',
         },
     });
 
     // 第9話
     await prisma.review.create({
         data: {
-            userId: user2.id,
+            userId: user5.id,
             episodeId: episode93.id,
             rating: 5,
-            comment: 'ヨルの天然なところが面白かった。普段とのギャップが魅力的。',
+            comment: 'アムロの成長が感じられる回だった。ガンダムの戦闘もかっこよかった。',
         },
     });
 
@@ -4738,139 +4480,86 @@ async function main(){
             userId: user4.id,
             episodeId: episode93.id,
             rating: 4,
-            comment: '家族のために頑張る姿が見られて、コメディだけではない良さを感じた。',
-        },
-    });
-
-    await prisma.review.create({
-        data: {
-            userId: user8.id,
-            episodeId: episode93.id,
-            rating: 3,
-            comment: '面白い部分は多かったけど、少し話が散らかっているように感じた。',
+            comment: 'アムロが少しずつパイロットとして成長していくところが面白い。',
         },
     });
 
     // 第10話
     await prisma.review.create({
         data: {
-            userId: user1.id,
-            episodeId: episode94.id,
-            rating: 5,
-            comment: 'アーニャと周囲のキャラクターとの関係が面白くて楽しめた。',
-        },
-    });
-
-    await prisma.review.create({
-        data: {
-            userId: user5.id,
-            episodeId: episode94.id,
-            rating: 5,
-            comment: 'キャラクター同士の勘違いがうまく重なっていて笑えた。',
-        },
-    });
-
-    await prisma.review.create({
-        data: {
-            userId: user9.id,
-            episodeId: episode94.id,
-            rating: 3,
-            comment: 'ギャグ中心なのはいいけど、今回は少し笑いどころが少なかった。',
-        },
-    });
-
-    await prisma.review.create({
-        data: {
             userId: user10.id,
             episodeId: episode94.id,
             rating: 5,
-            comment: 'テンポがよくて最後まで飽きずに見られた。',
-        },
-    });
-
-    // 第11話
-    await prisma.review.create({
-        data: {
-            userId: user3.id,
-            episodeId: episode95.id,
-            rating: 5,
-            comment: '家族としての絆が少しずつできているのが感じられてよかった。',
-        },
-    });
-
-    await prisma.review.create({
-        data: {
-            userId: user6.id,
-            episodeId: episode95.id,
-            rating: 4,
-            comment: 'ロイドとヨルの関係が少しずつ変わっている感じがして面白かった。',
-        },
-    });
-
-    await prisma.review.create({
-        data: {
-            userId: user7.id,
-            episodeId: episode95.id,
-            rating: 4,
-            comment: '楽しいけど、もう少し大きな事件が起きてもよかったと思う。',
-        },
-    });
-
-    // 第12話
-    await prisma.review.create({
-        data: {
-            userId: user2.id,
-            episodeId: episode96.id,
-            rating: 5,
-            comment: '最後までアーニャがかわいかった。家族3人の関係性もよかった。',
-        },
-    });
-
-    await prisma.review.create({
-        data: {
-            userId: user4.id,
-            episodeId: episode96.id,
-            rating: 4,
-            comment: 'それぞれが秘密を抱えているからこそのすれ違いが面白かった。',
-        },
-    });
-
-    await prisma.review.create({
-        data: {
-            userId: user8.id,
-            episodeId: episode96.id,
-            rating: 4,
-            comment: '全体的には楽しめたけど、今回は少しゆっくりした展開だった。',
+            comment: 'ガルマをめぐる展開が衝撃的だった。シャアの存在感も強く感じた。',
         },
     });
 
     await prisma.review.create({
         data: {
             userId: user11.id,
-            episodeId: episode96.id,
+            episodeId: episode94.id,
             rating: 5,
-            comment: 'コメディと家族の温かさが両方あって、この作品らしい回だった。',
+            comment: '物語が大きく動く重要な回で、最後まで目が離せなかった。',
+        }
+    });
+
+    await prisma.review.create({
+        data: {
+            userId: user3.id,
+            episodeId: episode94.id,
+            rating: 4,
+            comment: 'ガルマとシャアの関係が気になった。今後の展開が楽しみになった。',
         },
     });
 
-    // 呪術廻戦のレビューを作成
+    // 第11話
+    await prisma.review.create({
+        data: {
+            userId: user1.id,
+            episodeId: episode95.id,
+            rating: 4,
+            comment: 'ガルマを失ったイセリナの行動が印象に残った。戦争の悲しさも感じた。',
+        },
+    });
+
+    await prisma.review.create({
+        data: {
+            userId: user4.id,
+            episodeId: episode95.id,
+            rating: 5,
+            comment: '戦闘だけでなく登場人物の感情もしっかり描かれていて面白かった。',
+        },
+    });
+
+    // 第12話
+    await prisma.review.create({
+        data: {
+            userId: user6.id,
+            episodeId: episode96.id,
+            rating: 5,
+            comment: 'ここまでの戦いを経て、アムロたちがさらに成長しているのが感じられた。',
+        },
+    });
+
+    await prisma.review.create({
+        data: {
+            userId: user9.id,
+            episodeId: episode96.id,
+            rating: 4,
+            comment: '新しい戦いへの展開が気になり、これからの物語にも期待できる回だった。',
+        },
+    });
+
+
+    // ドラゴンボールのレビューを作成
 
     // 第1話
     await prisma.review.create({
         data: {
-            userId: user1.id,
+            userId: user7.id,
             episodeId: episode97.id,
             rating: 5,
-            comment: '呪術という独特な世界観に引き込まれた。戦闘シーンも迫力があった。',
-        },
-    });
-
-    await prisma.review.create({
-        data: {
-            userId: user2.id,
-            episodeId: episode97.id,
-            rating: 3,
-            comment: 'キャラクターの能力がそれぞれ違っていて面白い。続きが気になる。',
+            comment: '悟空とブルマの出会いから始まる冒険が面白かった。ドラゴンボールを探す旅にワクワクした。',
         },
     });
 
@@ -4878,55 +4567,37 @@ async function main(){
         data: {
             userId: user6.id,
             episodeId: episode97.id,
-            rating: 3,
-            comment: '設定は面白いけど、最初は専門用語が少し多くて分かりにくかった。',
-        },
-    });
-
-    await prisma.review.create({
-        data: {
-            userId: user8.id,
-            episodeId: episode97.id,
             rating: 4,
-            comment: 'バトルだけでなくキャラクター同士の会話も面白くて、すぐに続きが見たくなった。',
+            comment: '悟空の純粋で元気な性格が印象的だった。これからどんな冒険になるのか楽しみ。',
         },
     });
 
     // 第2話
     await prisma.review.create({
         data: {
-            userId: user3.id,
-            episodeId: episode98.id,
-            rating: 5,
-            comment: '虎杖の行動力がすごい。呪いを相手に戦う設定もかなり面白い。',
-        },
-    });
-
-    await prisma.review.create({
-        data: {
-            userId: user4.id,
+            userId: user1.id,
             episodeId: episode98.id,
             rating: 4,
-            comment: '伏黒の考え方が分かってきて、キャラクターに興味が出てきた。',
+            comment: '悟空とブルマのやり取りが面白く、二人の旅が少しずつ進んでいくのが楽しかった。',
         },
     });
 
     await prisma.review.create({
         data: {
-            userId: user9.id,
+            userId: user10.id,
             episodeId: episode98.id,
-            rating: 1,
-            comment: '戦闘は迫力があるけど、展開が少し急に感じた。',
+            rating: 5,
+            comment: 'テンポがよくて見やすかった。ドラゴンボールを集めるという目的も分かりやすい。',
         },
     });
 
     // 第3話
     await prisma.review.create({
         data: {
-            userId: user1.id,
+            userId: user7.id,
             episodeId: episode99.id,
-            rating: 3,
-            comment: '新しいキャラクターが登場して、物語の雰囲気がさらに広がった。',
+            rating: 5,
+            comment: '亀仙人が登場して、悟空とのやり取りが面白かった。個性的なキャラクターも魅力的。',
         },
     });
 
@@ -4934,64 +4605,37 @@ async function main(){
         data: {
             userId: user5.id,
             episodeId: episode99.id,
-            rating: 5,
-            comment: 'キャラクター同士の掛け合いが面白かった。戦闘以外の部分も楽しめる。',
-        },
-    });
-
-    await prisma.review.create({
-        data: {
-            userId: user10.id,
-            episodeId: episode99.id,
-            rating: 3,
-            comment: '面白いけど、今回は少し話の進みが遅く感じた。',
+            rating: 4,
+            comment: '海ガメを助ける悟空の優しさが印象に残った。冒険の雰囲気も楽しめた。',
         },
     });
 
     // 第4話
     await prisma.review.create({
         data: {
-            userId: user2.id,
-            episodeId: episode100.id,
-            rating: 5,
-            comment: '戦闘シーンの動きがよくて見応えがあった。術式の使い方も面白い。',
-        },
-    });
-
-    await prisma.review.create({
-        data: {
             userId: user4.id,
             episodeId: episode100.id,
             rating: 4,
-            comment: '敵側の能力も特徴があって、単純な力比べになっていないところがよかった。',
+            comment: 'ウーロンのキャラクターが面白かった。コミカルな展開で楽しく見ることができた。',
         },
     });
 
     await prisma.review.create({
         data: {
-            userId: user7.id,
+            userId: user8.id,
             episodeId: episode100.id,
-            rating: 3,
-            comment: '戦闘はよかったけど、能力の説明が少し複雑だった。',
-        },
-    });
-
-    await prisma.review.create({
-        data: {
-            userId: user11.id,
-            episodeId: episode100.id,
-            rating: 4,
-            comment: 'それぞれの能力をどう使うのか考えながら見られて面白かった。',
+            rating: 5,
+            comment: '悟空たちが村の問題を解決していく展開が面白かった。',
         },
     });
 
     // 第5話
     await prisma.review.create({
         data: {
-            userId: user3.id,
+            userId: user1.id,
             episodeId: episode101.id,
             rating: 5,
-            comment: '虎杖の戦い方が熱くてよかった。勢いのあるバトルで楽しめた。',
+            comment: 'ヤムチャが登場して戦闘シーンも増え、冒険がさらに面白くなってきた。',
         },
     });
 
@@ -5000,109 +4644,55 @@ async function main(){
             userId: user6.id,
             episodeId: episode101.id,
             rating: 4,
-            comment: '仲間との連携がよくて、戦闘の緊張感もかなりあった。',
-        },
-    });
-
-    await prisma.review.create({
-        data: {
-            userId: user8.id,
-            episodeId: episode101.id,
-            rating: 2,
-            comment: '戦闘自体は迫力があるけど、少し長く感じてしまった。',
+            comment: '悟空とヤムチャの戦いが印象的だった。ヤムチャのキャラクターも気になる。',
         },
     });
 
     // 第6話
     await prisma.review.create({
         data: {
-            userId: user1.id,
-            episodeId: episode102.id,
-            rating: 5,
-            comment: 'キャラクターの過去や考え方が見えてきて、さらに好きになった。',
-        },
-    });
-
-    await prisma.review.create({
-        data: {
-            userId: user4.id,
+            userId: user3.id,
             episodeId: episode102.id,
             rating: 4,
-            comment: '戦闘だけではなく、それぞれの信念が描かれているところがよかった。',
+            comment: '悟空たちとヤムチャたちの関係がどうなるのか気になった。',
         },
     });
 
     await prisma.review.create({
         data: {
-            userId: user9.id,
-            episodeId: episode102.id,
-            rating: 3,
-            comment: '内容は面白いけど、少し重い話で気軽には見られなかった。',
-        },
-    });
-
-    await prisma.review.create({
-        data: {
-            userId: user10.id,
+            userId: user11.id,
             episodeId: episode102.id,
             rating: 5,
-            comment: 'キャラクターの感情がしっかり描かれていて印象に残った。',
+            comment: '冒険と戦闘の両方が楽しめて、テンポよく話が進んでいくのが良かった。',
         },
     });
 
     // 第7話
     await prisma.review.create({
         data: {
-            userId: user2.id,
-            episodeId: episode103.id,
-            rating: 5,
-            comment: '予想していなかった展開になって驚いた。ここからの話がかなり気になる。',
-        },
-    });
-
-    await prisma.review.create({
-        data: {
             userId: user5.id,
             episodeId: episode103.id,
-            rating: 3,
-            comment: '敵との戦いが激しくなってきて、緊張感がかなり高まった。',
+            rating: 5,
+            comment: '牛魔王が登場して新しい舞台が広がった感じがして面白かった。',
         },
     });
 
     await prisma.review.create({
         data: {
-            userId: user7.id,
+            userId: user2.id,
             episodeId: episode103.id,
-            rating: 2,
-            comment: '展開が早くて面白いけど、少し理解が追いつかない部分もあった。',
+            rating: 4,
+            comment: 'フライパン山での展開が印象的だった。ドラゴンボール探しも順調に進んでいて楽しい。',
         },
     });
 
     // 第8話
     await prisma.review.create({
         data: {
-            userId: user3.id,
+            userId: user1.id,
             episodeId: episode104.id,
             rating: 5,
-            comment: '戦闘の迫力がすごかった。キャラクターの動きもかっこよかった。',
-        },
-    });
-
-    await prisma.review.create({
-        data: {
-            userId: user6.id,
-            episodeId: episode104.id,
-            rating: 4,
-            comment: 'それぞれの術式の特徴が出ていて、戦い方に個性があった。',
-        },
-    });
-
-    await prisma.review.create({
-        data: {
-            userId: user11.id,
-            episodeId: episode104.id,
-            rating: 1,
-            comment: '戦闘はすごいけど、能力の仕組みが複雑で少し分かりにくかった。',
+            comment: 'かめはめ波が登場する回で、とても印象に残った。悟空の成長も感じられた。',
         },
     });
 
@@ -5111,158 +4701,105 @@ async function main(){
             userId: user8.id,
             episodeId: episode104.id,
             rating: 5,
-            comment: '最後まで緊張感が続いて面白かった。次の展開が気になる。',
+            comment: 'かめはめ波の迫力がすごかった。ドラゴンボールらしい技が登場してワクワクした。',
         },
     });
 
     // 第9話
     await prisma.review.create({
         data: {
-            userId: user1.id,
-            episodeId: episode105.id,
-            rating: 4,
-            comment: '敵側の事情も見えてきて、単純な善悪ではないところが面白い。',
-        },
-    });
-
-    await prisma.review.create({
-        data: {
             userId: user2.id,
             episodeId: episode105.id,
             rating: 4,
-            comment: 'キャラクターの考え方がぶつかる展開がよかった。かなり見応えがあった。',
+            comment: 'うさぎ団の登場でコミカルな展開になっていて面白かった。',
         },
     });
 
     await prisma.review.create({
         data: {
-            userId: user9.id,
+            userId: user6.id,
             episodeId: episode105.id,
-            rating: 3,
-            comment: '話は面白いけど、説明が多くて少しテンポが落ちたように感じた。',
+            rating: 5,
+            comment: '個性的な敵が次々と登場して、悟空たちの冒険がさらに楽しくなってきた。',
         },
     });
 
     // 第10話
     await prisma.review.create({
         data: {
-            userId: user4.id,
+            userId: user9.id,
             episodeId: episode106.id,
             rating: 5,
-            comment: '戦いの中でキャラクターが成長していく感じがあって熱かった。',
-        },
-    });
-
-    await prisma.review.create({
-        data: {
-            userId: user5.id,
-            episodeId: episode106.id,
-            rating: 3,
-            comment: '仲間との連携がよくて、単独の戦闘とは違う面白さがあった。',
-        },
-    });
-
-    await prisma.review.create({
-        data: {
-            userId: user7.id,
-            episodeId: episode106.id,
-            rating: 1,
-            comment: '展開は悪くないけど、今回は少し盛り上がりに欠けるように感じた。',
-        },
-    });
-
-    await prisma.review.create({
-        data: {
-            userId: user10.id,
-            episodeId: episode106.id,
-            rating: 4,
-            comment: '戦闘の駆け引きが面白かった。どうやって勝つのか最後まで分からなかった。',
-        },
-    });
-
-    // 第11話
-    await prisma.review.create({
-        data: {
-            userId: user1.id,
-            episodeId: episode107.id,
-            rating: 4,
-            comment: 'ここまでの出来事が少しずつつながってきて、物語の全体像が見えてきた。',
-        },
-    });
-
-    await prisma.review.create({
-        data: {
-            userId: user3.id,
-            episodeId: episode107.id,
-            rating: 4,
-            comment: 'キャラクターの覚悟が伝わってきてよかった。かなり印象に残る回だった。',
-        },
-    });
-
-    await prisma.review.create({
-        data: {
-            userId: user8.id,
-            episodeId: episode107.id,
-            rating: 3,
-            comment: '内容は濃いけど、少し話が複雑になってきたと感じた。',
-        },
-    });
-
-    // 第12話
-    await prisma.review.create({
-        data: {
-            userId: user2.id,
-            episodeId: episode108.id,
-            rating: 5,
-            comment: '最後まで緊張感があって面白かった。次の話をすぐ見たくなる終わり方だった。',
-        },
-    });
-
-    await prisma.review.create({
-        data: {
-            userId: user4.id,
-            episodeId: episode108.id,
-            rating: 4,
-            comment: 'ここまでの伏線が少し見えてきて、物語がさらに面白くなってきた。',
-        },
-    });
-
-    await prisma.review.create({
-        data: {
-            userId: user6.id,
-            episodeId: episode108.id,
-            rating: 3,
-            comment: '面白いけど、設定が複雑なので何度か見返したくなる内容だった。',
+            comment: 'ドラゴンボールをめぐる争いが激しくなってきて、最後まで楽しめた。',
         },
     });
 
     await prisma.review.create({
         data: {
             userId: user11.id,
-            episodeId: episode108.id,
-            rating: 5,
-            comment: '戦闘とストーリーのバランスがよくて、最後まで楽しめた。',
+            episodeId: episode106.id,
+            rating: 4,
+            comment: '悟空がドラゴンボールを守ろうとする姿がかっこよかった。',
         },
     });
 
-    // 僕のヒーローアカデミアのレビューを作成
+    await prisma.review.create({
+        data: {
+            userId: user6.id,
+            episodeId: episode106.id,
+            rating: 5,
+            comment: '冒険だけでなく戦闘もしっかり楽しめて、面白い回だった。',
+        },
+    });
+
+    // 第11話
+    await prisma.review.create({
+        data: {
+            userId: user5.id,
+            episodeId: episode107.id,
+            rating: 4,
+            comment: '新しい敵との戦いが始まり、悟空がどう戦うのか気になった。',
+        },
+    });
+
+    await prisma.review.create({
+        data: {
+            userId: user7.id,
+            episodeId: episode107.id,
+            rating: 5,
+            comment: '悟空の強さが少しずつ分かってきて、これからの成長が楽しみになった。',
+        },
+    });
+
+    // 第12話
+    await prisma.review.create({
+        data: {
+            userId: user1.id,
+            episodeId: episode108.id,
+            rating: 5,
+            comment: '強敵との戦いが迫力があって面白かった。悟空の活躍をもっと見たくなった。',
+        },
+    });
+
+    await prisma.review.create({
+        data: {
+            userId: user7.id,
+            episodeId: episode108.id,
+            rating: 4,
+            comment: 'ドラゴンボールをめぐる冒険が盛り上がってきて、続きが気になる展開だった。',
+        },
+    });
+
+ 
+    // ルパン三世のレビューを作成
 
     // 第1話
     await prisma.review.create({
         data: {
-            userId: user1.id,
+            userId: user5.id,
             episodeId: episode109.id,
             rating: 5,
-            comment: 'デクがヒーローを目指す理由がしっかり描かれていて、最初から引き込まれた。',
-        },
-    });
-
-    await prisma.review.create({
-        data: {
-            userId: user2.id,
-            episodeId: episode109.id,
-            rating: 4,
-            comment: '個性という設定が面白い。ヒーローを目指す世界観にも興味が出た。',
+            comment: 'ルパンの華麗な盗みの技術が印象的で、最初から楽しめた。',
         },
     });
 
@@ -5270,64 +4807,37 @@ async function main(){
         data: {
             userId: user6.id,
             episodeId: episode109.id,
-            rating: 3,
-            comment: '設定は面白いけど、最初は少し説明が多いように感じた。',
-        },
-    });
-
-    await prisma.review.create({
-        data: {
-            userId: user8.id,
-            episodeId: episode109.id,
-            rating: 5,
-            comment: 'デクの一生懸命さが伝わってきて応援したくなった。',
+            rating: 4,
+            comment: 'ルパンのキャラクターが魅力的で、テンポよく楽しめた。',
         },
     });
 
     // 第2話
     await prisma.review.create({
         data: {
-            userId: user3.id,
+            userId: user7.id,
+            episodeId: episode110.id,
+            rating: 5,
+            comment: '敵との駆け引きが面白く、ルパンの頭の良さがよく分かる話だった。',
+        },
+    });
+
+    await prisma.review.create({
+        data: {
+            userId: user8.id,
             episodeId: episode110.id,
             rating: 4,
-            comment: 'オールマイトが登場して一気に物語が動いた感じがした。とても熱い。',
-        },
-    });
-
-    await prisma.review.create({
-        data: {
-            userId: user4.id,
-            episodeId: episode110.id,
-            rating: 3,
-            comment: 'デクとオールマイトの関係が始まるところがよかった。',
-        },
-    });
-
-    await prisma.review.create({
-        data: {
-            userId: user9.id,
-            episodeId: episode110.id,
-            rating: 2,
-            comment: '展開が少し都合よく感じてしまって、そこまで入り込めなかった。',
+            comment: '緊張感のある展開が続いて、最後まで飽きずに見ることができた。',
         },
     });
 
     // 第3話
     await prisma.review.create({
         data: {
-            userId: user1.id,
+            userId: user9.id,
             episodeId: episode111.id,
             rating: 4,
-            comment: 'デクがヒーローになるために努力する姿がよかった。成長が楽しみ。',
-        },
-    });
-
-    await prisma.review.create({
-        data: {
-            userId: user5.id,
-            episodeId: episode111.id,
-            rating: 5,
-            comment: 'オールマイトの指導とデクの努力が熱かった。応援したくなる回だった。',
+            comment: 'ルパンと女性キャラクターのやり取りが面白く、印象に残った。',
         },
     });
 
@@ -5335,64 +4845,46 @@ async function main(){
         data: {
             userId: user10.id,
             episodeId: episode111.id,
-            rating: 2,
-            comment: '面白いけど、努力の過程が少し長く感じた。',
+            rating: 5,
+            comment: '危険な状況でも余裕を見せるルパンがかっこよかった。',
         },
     });
 
     // 第4話
     await prisma.review.create({
         data: {
-            userId: user2.id,
-            episodeId: episode112.id,
-            rating: 5,
-            comment: '雄英高校での生活が始まって、新しいキャラクターがたくさん出てきて面白い。',
-        },
-    });
-
-    await prisma.review.create({
-        data: {
-            userId: user4.id,
-            episodeId: episode112.id,
-            rating: 4,
-            comment: 'クラスメイトそれぞれの個性が分かってきて楽しかった。',
-        },
-    });
-
-    await prisma.review.create({
-        data: {
-            userId: user7.id,
-            episodeId: episode112.id,
-            rating: 3,
-            comment: 'キャラクターが多くて少し覚えにくかったけど、設定は面白い。',
-        },
-    });
-
-    await prisma.review.create({
-        data: {
             userId: user11.id,
             episodeId: episode112.id,
+            rating: 5,
+            comment: '脱出するための作戦がよく考えられていて面白かった。',
+        },
+    });
+
+    await prisma.review.create({
+        data: {
+            userId: user5.id,
+            episodeId: episode112.id,
             rating: 4,
-            comment: 'ヒーロー科の授業が普通の学校とは違っていて面白かった。',
+            comment: '銭形警部との追いかけっこが面白く、テンポの良い話だった。',
         },
     });
 
     // 第5話
     await prisma.review.create({
         data: {
-            userId: user3.id,
+            userId: user6.id,
             episodeId: episode113.id,
             rating: 5,
-            comment: '個性を使った戦闘が迫力あってよかった。デクの成長も感じられた。',
+            comment: '五ェ門が登場して、ルパンとの戦いがとても迫力があった。',
         },
     });
 
     await prisma.review.create({
         data: {
-            userId: user6.id,
+            userId: user7.id,
             episodeId: episode113.id,
-            rating: 3,
-            comment: 'それぞれの個性の使い方に工夫があって面白い。',
+            rating: 4,
+            comment: '五ェ門の剣技がかっこよく、今後の活躍も気になった。',
         },
     });
 
@@ -5400,36 +4892,18 @@ async function main(){
         data: {
             userId: user8.id,
             episodeId: episode113.id,
-            rating: 2,
-            comment: '戦闘は面白いけど、少し展開が分かりやすかった。',
+            rating: 5,
+            comment: 'ルパンと五ェ門の関係が面白く、印象に残るエピソードだった。',
         },
     });
 
     // 第6話
     await prisma.review.create({
         data: {
-            userId: user1.id,
-            episodeId: episode114.id,
-            rating: 5,
-            comment: 'クラスメイト同士の関係が見えてきて面白かった。キャラクターが魅力的。',
-        },
-    });
-
-    await prisma.review.create({
-        data: {
-            userId: user4.id,
-            episodeId: episode114.id,
-            rating: 3,
-            comment: 'デクだけではなく周りのキャラクターにも見せ場があってよかった。',
-        },
-    });
-
-    await prisma.review.create({
-        data: {
             userId: user9.id,
             episodeId: episode114.id,
-            rating: 3,
-            comment: 'キャラクターはいいけど、少し話が散らかっているように感じた。',
+            rating: 4,
+            comment: '財宝を狙うルパンたちの作戦が面白く、最後まで楽しめた。',
         },
     });
 
@@ -5438,17 +4912,17 @@ async function main(){
             userId: user10.id,
             episodeId: episode114.id,
             rating: 5,
-            comment: 'それぞれの個性が戦闘でどう活かされるのか見ていて楽しかった。',
+            comment: '危険な状況でも冷静に行動するルパンがかっこよかった。',
         },
     });
 
     // 第7話
     await prisma.review.create({
         data: {
-            userId: user2.id,
+            userId: user11.id,
             episodeId: episode115.id,
             rating: 5,
-            comment: '本格的な戦闘になってかなり熱かった。キャラクターの成長も感じた。',
+            comment: '敵との対決が熱く、ルパンの機転の利かせ方が面白かった。',
         },
     });
 
@@ -5457,44 +4931,26 @@ async function main(){
             userId: user5.id,
             episodeId: episode115.id,
             rating: 4,
-            comment: '個性の相性を考えながら戦っていて、ただの力比べではないところが面白い。',
-        },
-    });
-
-    await prisma.review.create({
-        data: {
-            userId: user7.id,
-            episodeId: episode115.id,
-            rating: 3,
-            comment: '戦闘は迫力があるけど、少し長く感じてしまった。',
+            comment: 'アクションシーンが多く、ルパンらしい展開を楽しめた。',
         },
     });
 
     // 第8話
     await prisma.review.create({
         data: {
-            userId: user3.id,
-            episodeId: episode116.id,
-            rating: 5,
-            comment: 'デクが自分の力をどう使うか考えているところがよかった。',
-        },
-    });
-
-    await prisma.review.create({
-        data: {
             userId: user6.id,
             episodeId: episode116.id,
-            rating: 4,
-            comment: '戦闘中の判断が面白かった。個性の弱点を考えるのも楽しい。',
+            rating: 5,
+            comment: '大胆な作戦を実行するところが面白く、見応えがあった。',
         },
     });
 
     await prisma.review.create({
         data: {
-            userId: user11.id,
+            userId: user7.id,
             episodeId: episode116.id,
-            rating: 1,
-            comment: '戦闘はよかったけど、少し説明が多くてテンポが落ちたように感じた。',
+            rating: 4,
+            comment: '仲間と協力して作戦を進める展開が楽しかった。',
         },
     });
 
@@ -5503,45 +4959,36 @@ async function main(){
             userId: user8.id,
             episodeId: episode116.id,
             rating: 5,
-            comment: 'それぞれが自分の力を工夫して使っていて、見応えのある戦闘だった。',
+            comment: 'ルパンたちのチームワークが良く、最後まで楽しめた。',
         },
     });
 
     // 第9話
     await prisma.review.create({
         data: {
-            userId: user1.id,
-            episodeId: episode117.id,
-            rating: 3,
-            comment: 'ヒーローになるための厳しさも描かれていて、単なる学園ものではないと感じた。',
-        },
-    });
-
-    await prisma.review.create({
-        data: {
-            userId: user2.id,
-            episodeId: episode117.id,
-            rating: 4,
-            comment: 'キャラクターそれぞれの考え方が分かってきて、さらに面白くなった。',
-        },
-    });
-
-    await prisma.review.create({
-        data: {
             userId: user9.id,
             episodeId: episode117.id,
-            rating: 3,
-            comment: '話は面白いけど、今回は少し説明が多かった。',
+            rating: 4,
+            comment: '殺し屋との対決に緊張感があり、普段とは違う雰囲気を楽しめた。',
+        },
+    });
+
+    await prisma.review.create({
+        data: {
+            userId: user10.id,
+            episodeId: episode117.id,
+            rating: 5,
+            comment: '危険な相手との戦いが迫力があって面白かった。',
         },
     });
 
     // 第10話
     await prisma.review.create({
         data: {
-            userId: user4.id,
+            userId: user11.id,
             episodeId: episode118.id,
             rating: 5,
-            comment: '敵が登場して一気に緊張感が上がった。今までとは違う雰囲気で面白い。',
+            comment: '偽札をめぐる展開が面白く、ルパンの作戦も見応えがあった。',
         },
     });
 
@@ -5550,92 +4997,57 @@ async function main(){
             userId: user5.id,
             episodeId: episode118.id,
             rating: 4,
-            comment: 'ヒーローと敵の関係が少しずつ見えてきて、今後の展開が気になる。',
-        },
-    });
-
-    await prisma.review.create({
-        data: {
-            userId: user7.id,
-            episodeId: episode118.id,
-            rating: 2,
-            comment: '敵側の話が少し長くて、今回はテンポが遅く感じた。',
-        },
-    });
-
-    await prisma.review.create({
-        data: {
-            userId: user10.id,
-            episodeId: episode118.id,
-            rating: 5,
-            comment: 'これから大きな事件が起きそうな雰囲気があってワクワクした。',
+            comment: '事件の展開が分かりやすく、テンポよく楽しめた。',
         },
     });
 
     // 第11話
     await prisma.review.create({
         data: {
-            userId: user1.id,
+            userId: user6.id,
             episodeId: episode119.id,
             rating: 5,
-            comment: 'ヒーローとして戦う覚悟が伝わってきて熱かった。',
+            comment: '危険な罠をどう切り抜けるのかが気になって最後まで楽しめた。',
         },
     });
 
     await prisma.review.create({
         data: {
-            userId: user3.id,
+            userId: user7.id,
             episodeId: episode119.id,
             rating: 4,
-            comment: '仲間との協力がよく描かれていて、クラス全体の成長を感じた。',
-        },
-    });
-
-    await prisma.review.create({
-        data: {
-            userId: user8.id,
-            episodeId: episode119.id,
-            rating: 3,
-            comment: '面白いけど、もう少し一人ひとりの活躍を見たかった。',
+            comment: 'ルパンと銭形警部の追跡が面白く、緊張感のある話だった。',
         },
     });
 
     // 第12話
     await prisma.review.create({
         data: {
-            userId: user2.id,
+            userId: user8.id,
             episodeId: episode120.id,
             rating: 5,
-            comment: '最後まで熱い展開で楽しめた。デクの成長を感じられる回だった。',
+            comment: '最後までルパンらしい展開で、楽しく見ることができた。',
         },
     });
 
     await prisma.review.create({
         data: {
-            userId: user4.id,
+            userId: user9.id,
             episodeId: episode120.id,
             rating: 4,
-            comment: 'ヒーローとしての考え方が少しずつ変わってきているのがよかった。',
+            comment: '最後の展開が面白く、ルパンと銭形のやり取りも楽しめた。',
         },
     });
 
     await prisma.review.create({
         data: {
-            userId: user6.id,
-            episodeId: episode120.id,
-            rating: 3,
-            comment: '全体的には面白いけど、少し都合よく進む部分もあると感じた。',
-        },
-    });
-
-    await prisma.review.create({
-        data: {
-            userId: user11.id,
+            userId: user10.id,
             episodeId: episode120.id,
             rating: 5,
-            comment: '戦闘とストーリーのバランスがよくて、最後まで飽きずに見られた。',
+            comment: 'ルパンの魅力が詰まったエピソードで、最後まで楽しめた。',
         },
     });
+
 
 
      console.log('Seed data created successfully');

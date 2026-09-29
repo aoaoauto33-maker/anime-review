@@ -115,6 +115,7 @@ export default function EpisodeDetail({
 
                 <p
                   className={
+                    // 全文表示されてるレビューのIDと今のレビューのIDが同じなら全文表示される
                     showFullReviewId === review.id ? '' : 'line-clamp-3'
                   }
                 >
